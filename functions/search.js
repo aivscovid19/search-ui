@@ -18,7 +18,8 @@ exports.handler = function(event, context, callback) {
         body: body
       });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       callback(null, {
         statusCode: 500,
         body: "An error occurred"
