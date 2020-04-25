@@ -66,8 +66,6 @@ export default function App() {
                       sectionTitle: "Results",
                       titleField: "title",
                       urlField: "link",
-                      shouldTrackClickThrough: true,
-                      clickThroughTags: ["test"]
                     }}
                     autocompleteSuggestions={true}
                   />
