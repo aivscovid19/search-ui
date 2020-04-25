@@ -75,7 +75,7 @@ export default function App() {
                   <Results
                     resultView={
                       ({ result }) => {
-                        const linkField = result.link.raw ? 'link' : 'pdf_link';
+                        const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
                         return <Result
                           titleField="title"
                           urlField={linkField}
