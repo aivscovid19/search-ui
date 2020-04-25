@@ -70,6 +70,7 @@ export default function buildRequest(state) {
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
     _source: ["id", "title", "abstract", "full_body", "front", "source", "meta", "doi", "keywords", "link", "pdf_link"],
     aggs: {
+      source: { terms: { field: 'source.keyword', size: 30 } },
     //   states: { terms: { field: "states.keyword", size: 30 } },
     //   world_heritage_site: {
     //     terms: { field: "world_heritage_site" }

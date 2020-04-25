@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   ErrorBoundary,
+  Facet,
   Paging,
   PagingInfo,
   Result,
@@ -70,6 +71,11 @@ export default function App() {
                     }}
                     autocompleteSuggestions={true}
                   />
+                }
+                sideContent={
+                  <div>
+                    <Facet field='source' label='Source' isFilterable={true} />
+                  </div>
                 }
                 bodyContent={
                   <Results
