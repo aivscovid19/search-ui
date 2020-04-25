@@ -45,7 +45,7 @@ const config = {
     const responseJsonWithDisjunctiveFacetCounts = await applyDisjunctiveFaceting(
       responseJson,
       state,
-      ["visitors", "states"]
+      []
     );
     return buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
   }
