@@ -65,8 +65,6 @@ export default function buildRequest(state) {
       number_of_fragments: 1,
       fields: {
         title: {},
-        abstract: {},
-        full_body: {},
       }
     },
     //https://www.elastic.co/guide/en/elasticsearch/reference/7.x/search-request-source-filtering.html#search-request-source-filtering
