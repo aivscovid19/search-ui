@@ -45,20 +45,11 @@ function getRangeFacet(aggregations, fieldName) {
 }
 
 export default function buildStateFacets(aggregations) {
-  const states = getValueFacet(aggregations, "states");
-  const world_heritage_site = getValueFacet(
-    aggregations,
-    "world_heritage_site"
-  );
-  const visitors = getRangeFacet(aggregations, "visitors");
-  const acres = getRangeFacet(aggregations, "acres");
+  const source = getValueFacet(aggregations, "source");
 
-  const facets = {
-    ...(states && { states }),
-    ...(world_heritage_site && { world_heritage_site }),
-    ...(visitors && { visitors }),
-    ...(acres && { acres })
-  };
+;  const facets = {
+    ...(source && { source }),
+  }
 
   if (Object.keys(facets).length > 0) {
     return facets;

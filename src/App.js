@@ -2,8 +2,10 @@ import React from "react";
 
 import {
   ErrorBoundary,
+  Facet,
   Paging,
   PagingInfo,
+  Result,
   Results,
   ResultsPerPage,
   SearchBox,
@@ -44,7 +46,7 @@ const config = {
     const responseJsonWithDisjunctiveFacetCounts = await applyDisjunctiveFaceting(
       responseJson,
       state,
-      ["visitors", "states"]
+      []
     );
     return buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
   }
@@ -66,17 +68,27 @@ export default function App() {
                       sectionTitle: "Results",
                       titleField: "title",
                       urlField: "link",
-                      shouldTrackClickThrough: true,
-                      clickThroughTags: ["test"]
                     }}
                     autocompleteSuggestions={true}
                   />
                 }
+                sideContent={
+                  <div>
+                    <Facet field='source' label='Source' isFilterable={true} />
+                  </div>
+                }
                 bodyContent={
                   <Results
-                    titleField="title"
-                    urlField="link"
-                    shouldTrackClickThrough={true}
+                    resultView={
+                      ({ result }) => {
+                        const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
+                        return <Result
+                          titleField="title"
+                          urlField={linkField}
+                          result={result}
+                        />
+                      }
+                    }
                   />
                 }
                 bodyHeader={

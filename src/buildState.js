@@ -1,3 +1,5 @@
+import buildStateFacets from "./buildStateFacets";
+
 function buildTotalPages(resultsPerPage, totalResults) {
   if (!resultsPerPage) return 0;
   if (totalResults === 0) return 1;
@@ -61,12 +63,12 @@ export default function buildState(response, resultsPerPage) {
   const results = buildResults(response.hits.hits);
   const totalResults = buildTotalResults(response.hits);
   const totalPages = buildTotalPages(resultsPerPage, totalResults);
-  // const facets = buildStateFacets(response.aggregations);
+  const facets = buildStateFacets(response.aggregations);
 
   return {
     results,
     totalPages,
     totalResults,
-    // ...(facets && { facets })
+    ...(facets && { facets })
   };
 }
