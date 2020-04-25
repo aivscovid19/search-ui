@@ -4,6 +4,7 @@ import {
   ErrorBoundary,
   Paging,
   PagingInfo,
+  Result,
   Results,
   ResultsPerPage,
   SearchBox,
@@ -72,9 +73,16 @@ export default function App() {
                 }
                 bodyContent={
                   <Results
-                    titleField="title"
-                    urlField="link"
-                    shouldTrackClickThrough={true}
+                    resultView={
+                      ({ result }) => {
+                        const linkField = result.link.raw ? 'link' : 'pdf_link';
+                        return <Result
+                          titleField="title"
+                          urlField={linkField}
+                          result={result}
+                        />
+                      }
+                    }
                   />
                 }
                 bodyHeader={
