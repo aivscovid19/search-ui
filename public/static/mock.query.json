@@ -1,0 +1,905 @@
+{
+    "took": 1508,
+    "timed_out": false,
+    "_shards": {
+        "total": 2,
+        "successful": 2,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": {
+            "value": 10000,
+            "relation": "gte"
+        },
+        "max_score": 37.829613,
+        "hits": [
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "yokg1HEB5IQbnr7JZgrV",
+                "_score": 37.829613,
+                "_source": {
+                    "keywords": [
+                        "COVID-19",
+                        "coronavirus",
+                        "SARS-CoV-2",
+                        "isolation",
+                        "pneumonia"
+                    ],
+                    "subject": "Original Article",
+                    "correspondence": "mghan@korea.kr",
+                    "pmc": "7045880",
+                    "financing": "Conflicts of InterestThe authors have no conflicts of interest to declare.",
+                    "id": "db25adad-4a6e-4cfe-81d8-185f7d691d0a",
+                    "abstract": "ObjectivesFollowing reports of patients with unexplained pneumonia at the end of December 2019 in Wuhan, China, the causative agent was identified as coronavirus (SARS-CoV-2), and the 2019 novel coronavirus disease was named COVID-19 by the World Health Organization. Putative patients with COVID-19 have been identified in South Korea, and attempts have been made to isolate the pathogen from these patients.MethodsUpper and lower respiratory tract secretion samples from putative patients with COVID-19 were inoculated onto cells to isolate the virus. Full genome sequencing and electron microscopy were used to identify the virus.ResultsThe virus replicated in Vero cells and cytopathic effects were observed. Full genome sequencing showed that the virus genome exhibited sequence homology of more than 99.9% with SARS-CoV-2 which was isolated from patients from other countries, for instance China. Sequence homology of SARS-CoV-2 with SARS-CoV, and MERS-CoV was 77.5% and 50%, respectively. Coronavirus-specific morphology was observed by electron microscopy in virus-infected Vero cells.ConclusionSARS-CoV-2 was isolated from putative patients with unexplained pneumonia and intermittent coughing and fever. The isolated virus was named BetaCoV/Korea/KCDC03/2020.",
+                    "type": "research-article",
+                    "title": "Identification of Coronavirus Isolated from a Patient in Korea with COVID-19",
+                    "authors": [
+                        "Jeong-Min Kim",
+                        "Yoon-Seok Chung",
+                        "Hye Jun Jo",
+                        "Nam-Joo Lee",
+                        "Mi Seon Kim",
+                        "Sang Hee Woo",
+                        "Sehee Park",
+                        "Jee Woong Kim",
+                        "Heui Man Kim",
+                        "Myung-Guk Han"
+                    ],
+                    "doi": "10.24171/j.phrp.2020.11.1.02"
+                },
+                "highlight": {
+                    "title": [
+                        "Identification of <em>Coronavirus</em> <em>Isolated</em> from a <em>Patient</em> in Korea with COVID-19"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "vocc1HEB5IQbnr7JGFYn",
+                "_score": 37.49418,
+                "_source": {
+                    "keywords": [
+                        "Coronavirus infections",
+                        "Middle East respiratory syndrome coronavirus",
+                        "Coronavirus",
+                        "Korea",
+                        "Disease outbreaks"
+                    ],
+                    "subject": "Review",
+                    "correspondence": "mdohmd@snu.ac.kr",
+                    "pmc": "5840604",
+                    "financing": "No potential conflict of interest relevant to this article was reported.",
+                    "id": "ccddb2c4-1bf7-4f14-a860-0a57c5503a29",
+                    "abstract": "Middle East Respiratory Syndrome coronavirus (MERS-CoV) was first isolated from a patient with severe pneumonia in 2012. The 2015 Korea outbreak of MERSCoV involved 186 cases, including 38 fatalities. A total of 83% of transmission events were due to five superspreaders, and 44% of the 186 MERS cases were the patients who had been exposed in nosocomial transmission at 16 hospitals. The epidemic lasted for 2 months and the government quarantined 16,993 individuals for 14 days to control the outbreak. This outbreak provides a unique opportunity to fill the gap in our knowledge of MERS-CoV infection. Therefore, in this paper, we review the literature on epidemiology, virology, clinical features, and prevention of MERS-CoV, which were acquired from the 2015 Korea outbreak of MERSCoV.",
+                    "type": "review-article",
+                    "title": "Middle East respiratory syndrome: what we learned from the 2015 outbreak in the Republic of Korea",
+                    "authors": [
+                        "Myoung-don Oh",
+                        "Wan Beom Park",
+                        "Sang-Won Park",
+                        "Pyoeng Gyun Choe",
+                        "Ji Hwan Bang",
+                        "Kyoung-Ho Song",
+                        "Eu Suk Kim",
+                        "Hong Bin Kim",
+                        "Nam Joong Kim"
+                    ],
+                    "doi": "10.3904/kjim.2018.031"
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "JV0E1HEBrCd70lfOzpd3",
+                "_score": 37.270813,
+                "_source": {
+                    "keywords": [
+                        "Acute flaccid paralysis",
+                        "child",
+                        "coronavirus 229E",
+                        "coronavirus OC43"
+                    ],
+                    "subject": "Case Report",
+                    "correspondence": "wolf_6079@hotmail.com",
+                    "pmc": "4611905",
+                    "id": "b9332f36-f1d2-4286-83d4-9259383283ff",
+                    "abstract": "Acute flaccid paralysis (AFP) is a life-threatening clinical entity characterized by weakness in the whole body muscles often accompanied by respiratory and bulbar paralysis. The most common cause is Gullian&#8211;Barre syndrome, but infections, spinal cord diseases, neuromuscular diseases such as myasthenia gravis, drugs and toxins, periodic hypokalemic paralysis, electrolyte disturbances, and botulism should be considered as in the differential diagnosis. Human coronaviruses (HCoVs) cause common cold, upper and lower respiratory tract disease, but in the literature presentation with the lower respiratory tract infection and AFP has not been reported previously. In this study, pediatric case admitted with lower respiratory tract infection and AFP, who detected for HCoV 229E and OC43 co-infection by the real-time polymerase chain reaction, has been reported for the first time.",
+                    "type": "case-report",
+                    "title": "A rare cause of acute flaccid paralysis: Human coronaviruses",
+                    "authors": [
+                        "Cokyaman Turgay",
+                        "Tekin Emine",
+                        "Koken Ozlem",
+                        "S. Paksu Muhammet",
+                        "A. Tasdemir Haydar"
+                    ],
+                    "doi": "10.4103/1817-1745.165716"
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "9nIn1HEBrCd70lfOHX3E",
+                "_score": 37.270813,
+                "_source": {
+                    "keywords": [
+                        "bovine coronavirus",
+                        "equine coronavirus",
+                        "horses",
+                        "vaccine"
+                    ],
+                    "correspondence": "nemoto_manabu@equinst.go.jp",
+                    "subject": "Virology",
+                    "pmc": "5709570",
+                    "abstract": "A vaccine for equine coronavirus (ECoV) is so far unavailable. Bovine coronavirus (BCoV) is antigenically related to ECoV; it is therefore possible that BCoV vaccine will induce antibodies against ECoV in horses. This study\ninvestigated antibody response to ECoV in horses inoculated with BCoV vaccine. Virus neutralization tests showed that antibody titers against ECoV increased in all six horses tested at 14 days post inoculation, although the\nantibody titers were lower against ECoV than against BCoV. This study showed that BCoV vaccine provides horses with antibodies against ECoV to some extent. It is unclear whether antibodies provided by BCoV vaccine are effective\nagainst ECoV, and therefore ECoV challenge studies are needed to evaluate efficacy of the vaccine in the future.",
+                    "id": "3018407a-6c9a-470b-ab4c-9a3df35daaef",
+                    "type": "research-article",
+                    "title": "Antibody response to equine coronavirus in horses inoculated with a bovine coronavirus vaccine",
+                    "authors": [
+                        "Manabu NEMOTO",
+                        "Toru KANNO",
+                        "Hiroshi BANNAI",
+                        "Koji TSUJIMURA",
+                        "Takashi YAMANAKA",
+                        "Hiroshi KOKADO"
+                    ],
+                    "doi": "10.1292/jvms.17-0414"
+                },
+                "highlight": {
+                    "title": [
+                        "Antibody response to equine <em>coronavirus</em> in <em>horses</em> <em>inoculated</em> with a bovine <em>coronavirus</em> <em>vaccine</em>"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "F2AJ1HEBrCd70lfOBAoB",
+                "_score": 37.1649,
+                "_source": {
+                    "keywords": [
+                        "Coronavirus",
+                        "COVID-19",
+                        "Pneumonia",
+                        "Tertiary Infection",
+                        "Viral Load",
+                        "Real-Time Reverse-Transcriptase Polymerase Chain Reaction"
+                    ],
+                    "subject": "Brief Communication",
+                    "correspondence": "drjoseph@mjh.or.kr",
+                    "pmc": "7025910",
+                    "financing": "Disclosure: The authors have no potential conflicts of interest to disclose.Author Contributions:\nConceptualization: Lim J.Data curation: Kim MJ, Lee B, Shin HY, Seong YM.Formal analysis: Jeon S, Kim MJ, Shin HY, Lee B.Methodology: Lee B.Project administration: Park SJ.Supervision: Lee WJ, Choe KW.Validation: Lee WJ.Writing - original draft: Park SJ.Writing - review & editing: Choe KW, Kang YM.\n",
+                    "id": "048f0c3b-cdb3-49c3-bcfd-fc59ace18b11",
+                    "abstract": "Since mid-December of 2019, coronavirus disease 2019 (COVID-19) has been spreading from Wuhan, China. The confirmed COVID-19 patients in South Korea are those who came from or visited China. As secondary transmissions have occurred and the speed of transmission is accelerating, there are rising concerns about community infections. The 54-year old male is the third patient diagnosed with COVID-19 in Korea. He is a worker for a clothing business and had mild respiratory symptoms and intermittent fever in the beginning of hospitalization, and pneumonia symptoms on chest computerized tomography scan on day 6 of admission. This patient caused one case of secondary transmission and three cases of tertiary transmission. Hereby, we report the clinical findings of the index patient who was the first to cause tertiary transmission outside China. Interestingly, after lopinavir/ritonavir (Kaletra, AbbVie) was administered, &#946;-coronavirus viral loads significantly decreased and no or little coronavirus titers were observed.",
+                    "type": "research-article",
+                    "title": "Case of the Index Patient Who Caused Tertiary Transmission of Coronavirus Disease 2019 in Korea: the Application of Lopinavir/Ritonavir for the Treatment of COVID-19 Pneumonia Monitored by Quantitative RT-PCR",
+                    "authors": [
+                        "Jaegyun Lim",
+                        "Seunghyun Jeon",
+                        "Hyun-Young Shin",
+                        "Moon Jung Kim",
+                        "Yu Min Seong",
+                        "Wang Jun Lee",
+                        "Kang-Won Choe",
+                        "Yu Min Kang",
+                        "Baeckseung Lee",
+                        "Sang-Joon Park"
+                    ],
+                    "doi": "10.3346/jkms.2020.35.e79"
+                },
+                "highlight": {
+                    "title": [
+                        "Case of the Index Patient Who Caused Tertiary Transmission of <em>Coronavirus</em> <em>Disease</em> <em>2019</em> in Korea: the Application of Lopinavir/Ritonavir for the Treatment of COVID-19 Pneumonia Monitored by Quantitative"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "_Iwo1HEB5IQbnr7JvhIJ",
+                "_score": 36.777496,
+                "_source": {
+                    "keywords": [
+                        "coronavirus",
+                        "human",
+                        "HKU1",
+                        "novel"
+                    ],
+                    "correspondence": "pcywoo@hkucc.hku.hk",
+                    "subject": "Review",
+                    "pmc": "3185465",
+                    "abstract": "After human coronaviruses OC43, 229E and NL63, human coronavirus HKU1 (HCoV-HKU1) is the fourth human coronavirus discovered. HCoV-HKU1 is a group 2a coronavirus that is still not cultivable. The G + C contents of HCoV-HKU1 genomes are 32%, the lowest among all known coronaviruses with complete genome sequences available. Among all coronaviruses, HCoV-HKU1 shows the most extreme codon usage bias, attributed most importantly to severe cytosine deamination. All HCoV-HKU1 genomes contain unique tandem copies of a 30-base acidic tandem repeat of unknown function at the N-terminus of nsp3 inside the acidic domain upstream of papain-like protease 1. Three genotypes, A, B and C, of HCoV-HKU1 and homologous recombination among their genomes, are observed. The incidence of HCoV-HKU1 infections is the highest in winter. Similar to other human coronaviruses, HCoV-HKU1 infections have been reported globally, with a median (range) incidence of 0.9 (0 &#8211; 4.4) %. HCoV-HKU1 is associated with both upper and lower respiratory tract infections that are mostly self-limiting. The most common method for diagnosing HCoV-HKU1 infection is RT-PCR or real-time RT-PCR using RNA extracted from respiratory tract samples such as nasopharyngeal aspirates (NPA). Both the pol and nucleocapsid genes have been used as the targets for amplification. Monoclonal antibodies have been generated for direct antigen detection in NPA. For antibody detection, Escherichia coli BL21 and baculovirus-expressed recombinant nucleocapsid of HCoV-HKU1 have been used for IgG and IgM detection in sera of patients and normal individuals, using Western blot and enzyme-linked immunoassay.",
+                    "id": "24b5d2af-4162-4b8f-a594-2b8f2f6d1ddc",
+                    "type": "review-article",
+                    "title": "More and More Coronaviruses: Human Coronavirus HKU1",
+                    "authors": [
+                        "Patrick C. Y. Woo",
+                        "Susanna K. P. Lau",
+                        "Cyril C. Y. Yip",
+                        "Yi Huang",
+                        "Kwok-Yung Yuen"
+                    ],
+                    "doi": "10.3390/v1010057"
+                },
+                "highlight": {
+                    "title": [
+                        "More and More Coronaviruses: Human <em>Coronavirus</em> <em>HKU1</em>"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "GnAj1HEBrCd70lfOCB5_",
+                "_score": 36.61767,
+                "_source": {
+                    "keywords": [
+                        "Coronavirus",
+                        "bat coronavirus",
+                        "coronavirus group 1",
+                        "bats",
+                        "phylogeny of bat coronaviruses",
+                        "wildlife viral surveillance",
+                        "research"
+                    ],
+                    "correspondence": "kathryn.holmes@uchsc.edu",
+                    "subject": "Research",
+                    "pmc": "2857301",
+                    "financing": "Suggested citation for this article: Dominguez SR, O&#8217;Shea TJ, Oko LM, Holmes KV. Detection of group 1 coronaviruses in bats in North America. Emerg Infect Dis [serial on the Internet]. 2007 Sep [date cited]. Available from http://www.cdc.gov/eid/content/13/9/1295.htm",
+                    "abstract": "Bats of 2 species harbor group 1 coronaviruses.",
+                    "id": "5c02bcde-a70a-4bd8-b30b-6380b3e7eccb",
+                    "title": "Detection of Group 1 Coronaviruses in Bats in North America",
+                    "type": "research-article",
+                    "authors": [
+                        "Samuel R. Dominguez",
+                        "Thomas J. O’Shea",
+                        "Lauren M. Oko",
+                        "Kathryn V. Holmes"
+                    ],
+                    "doi": "10.3201/eid1309.070491"
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "MmkY1HEBrCd70lfOsIm7",
+                "_score": 36.602715,
+                "_source": {
+                    "keywords": [],
+                    "correspondence": "amarty@fiu.edu",
+                    "subject": "Editorial",
+                    "pmc": "7049657",
+                    "id": "cb3517f4-8a6f-4540-9a68-739ab5a918f5",
+                    "type": "editorial",
+                    "title": "The novel Coronavirus (SARS-CoV-2) is a one health issue",
+                    "authors": [
+                        "Aileen Maria Marty",
+                        "Malcolm K. Jones"
+                    ],
+                    "doi": "10.1016/j.onehlt.2020.100123"
+                },
+                "highlight": {
+                    "title": [
+                        "The <em>novel</em> <em>Coronavirus</em> (<em>SARS-CoV-2</em>) is a <em>one</em> <em>health</em> issue"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "H4so1HEB5IQbnr7Jmv-0",
+                "_score": 36.601265,
+                "_source": {
+                    "keywords": [
+                        "Coronavirus",
+                        "SARS-CoV-2",
+                        "2019-nCoV",
+                        "COVID-19",
+                        "Viral Load Kinetics"
+                    ],
+                    "subject": "Brief Communication",
+                    "correspondence": "moberrer@nmc.or.kr",
+                    "pmc": "7036338",
+                    "financing": "Disclosure: The authors have no potential conflicts of interest to disclose.Author Contributions:\nConceptualization: Kim JY, Chin BS, Kim YJ.Data curation: Kim JY, Chin BS, Han MG, Kim SY, Ko JH.Formal analysis: Kim JY, Chin BS, Han MG, Kim SY, Ko JH.Methodology: Kim JM, Chung YS, Kim HM, Kim SY, Han MG.Writing - original draft: Kim YJ, Kim JY, Chin BS, Han MG, Ko JH.Writing - review & editing: Kim JY, Ko JH, Kim Y, Kim YJ, Kim JM, Chung YS, Kim HM, Han MG, Kim SY, Chin BS.\n",
+                    "id": "74ae8af8-ed54-4c84-8081-d039195a0e82",
+                    "abstract": "As of February 2020, severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) outbreak started in China in December 2019 has been spreading in many countries in the world. With the numbers of confirmed cases are increasing, information on the epidemiologic investigation and clinical manifestation have been accumulated. However, data on viral load kinetics in confirmed cases are lacking. Here, we present the viral load kinetics of the first two confirmed patients with mild to moderate illnesses in Korea in whom distinct viral load kinetics are shown. This report suggests that viral load kinetics of SARS-CoV-2 may be different from that of previously reported other coronavirus infections such as SARS-CoV.",
+                    "type": "brief-report",
+                    "title": "Viral Load Kinetics of SARS-CoV-2 Infection in First Two Patients in Korea",
+                    "authors": [
+                        "Jin Yong Kim",
+                        "Jae-Hoon Ko",
+                        "Yeonjae Kim",
+                        "Yae-Jean Kim",
+                        "Jeong-Min Kim",
+                        "Yoon-Seok Chung",
+                        "Heui Man Kim",
+                        "Myung-Guk Han",
+                        "So Yeon Kim",
+                        "Bum Sik Chin"
+                    ],
+                    "doi": "10.3346/jkms.2020.35.e86"
+                },
+                "highlight": {
+                    "title": [
+                        "Viral Load Kinetics of <em>SARS-CoV-2</em> <em>Infection</em> in <em>First</em> Two Patients in Korea"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "Clr_03EBrCd70lfO34Ev",
+                "_score": 36.552155,
+                "_source": {
+                    "keywords": [
+                        "Bat",
+                        "Coronavirus"
+                    ],
+                    "subject": "Short Report",
+                    "pmc": "4920988",
+                    "abstract": "BackgroundBats have been implicated as the main reservoir of coronavirus (CoV). Thus the role of these hosts on the evolution and spread of CoVs currently deserve the attention of emerging diseases surveillance programs. On the view of the interest on and importance of CoVs in bats the occurrence and molecular characterization of CoV were conducted in bats from Brazil.FindingsThree hundred five enteric contents of 29 bat species were tested using a panCoV nested RT-PCR. Nine specimens were positive and eight was suitable for RdRp gene sequencing. RdRp gene phylogeny showed that all CoVs strains from this study cluster in Alphacoronavirus genus, with one Molossidae and one Phlyllostomidae-CoV specific groups. Phylogenetic analyses of two S gene sequences showed a large diversity within the Alphacoronavirus genus.ConclusionsThis study indicated a CoV-to-host specificity and draws attention for CoV detection in Cynomops sp, a potential new reservoir. The phylogenetic analyses indicate that diversity of CoV in bats is higher than previously known.",
+                    "id": "e204c532-238e-407e-9556-174b01eee01b",
+                    "type": "research-article",
+                    "authors": [
+                        "Karen Miyuki Asano",
+                        "Aline Santana Hora",
+                        "Karin Côrrea Scheffer",
+                        "Willian Oliveira Fahl",
+                        "Keila Iamamoto",
+                        "Enio Mori",
+                        "Paulo Eduardo Brandão"
+                    ],
+                    "doi": "10.1186/s12985-016-0569-4"
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "NGAK1HEBrCd70lfO_vEb",
+                "_score": 36.333992,
+                "_source": {
+                    "keywords": [
+                        "canine respiratory coronavirus",
+                        "bovine coronavirus",
+                        "human coronavirus OC43",
+                        "attachment receptor",
+                        "entry receptor",
+                        "sialic acids",
+                        "sialic acids",
+                        "coronavirus",
+                        "entry",
+                        "HLA"
+                    ],
+                    "correspondence": "k.a.pyrc@uj.edu.pl",
+                    "subject": "Article",
+                    "pmc": "6521053",
+                    "abstract": "Despite high similarity of canine respiratory coronavirus (CRCoV), bovine coronavirus, (BCoV) and human coronavirus OC43 (HCoV-OC43), these viruses differ in species specificity. For years it was believed that they share receptor specificity, utilizing sialic acids for cell surface attachment, internalization, and entry. Interestingly, careful literature analysis shows that viruses indeed bind to the cell surface via sialic acids, but there is no solid data that these moieties mediate virus entry. In our study, using a number of techniques, we showed that all three viruses are indeed able to bind to sialic acids to a different extent, but these molecules render the cells permissive only for the clinical strain of HCoV-OC43, while for others they serve only as attachment receptors. CRCoV and BCoV appear to employ human leukocyte antigen class I (HLA-1) as the entry receptor. Furthermore, we identified heparan sulfate as an alternative attachment factor, but this may be related to the cell culture adaptation, as in ex vivo conditions, it does not seem to play a significant role. Summarizing, we delineated early events during CRCoV, BCoV, and HCoV-OC43 entry and systematically studied the attachment and entry receptor utilized by these viruses.",
+                    "id": "e64c8198-cb1d-48b5-9055-09a001dc70ea",
+                    "type": "research-article",
+                    "title": "Canine Respiratory Coronavirus, Bovine Coronavirus, and Human Coronavirus OC43: Receptors and Attachment Factors",
+                    "authors": [
+                        "Artur Szczepanski",
+                        "Katarzyna Owczarek",
+                        "Monika Bzowska",
+                        "Katarzyna Gula",
+                        "Inga Drebot",
+                        "Marek Ochman",
+                        "Beata Maksym",
+                        "Zenon Rajfur",
+                        "Judy A Mitchell",
+                        "Krzysztof Pyrc"
+                    ],
+                    "doi": "10.3390/v11040328"
+                },
+                "highlight": {
+                    "title": [
+                        "Canine Respiratory <em>Coronavirus</em>, <em>Bovine</em> <em>Coronavirus</em>, and <em>Human</em> <em>Coronavirus</em> <em>OC43</em>: <em>Receptors</em> and Attachment Factors"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "zYEM1HEB5IQbnr7JpHGl",
+                "_score": 36.232414,
+                "_source": {
+                    "keywords": [
+                        "2019-nCoV",
+                        "Wuhan pneumonia",
+                        "metagenomic next-generation sequencing",
+                        "phylogenetic analyses",
+                        "virus evolution"
+                    ],
+                    "correspondence": "mvlwu@whu.edu.cn",
+                    "subject": "Original Article",
+                    "pmc": "7033720",
+                    "abstract": "ABSTRACTFrom December 2019, an outbreak of unusual pneumonia was reported in Wuhan with many cases linked to Huanan Seafood Market that sells seafood as well as live exotic animals. We investigated two patients who developed acute respiratory syndromes after independent contact history with this market. The two patients shared common clinical features including fever, cough, and multiple ground-glass opacities in the bilateral lung field with patchy infiltration. Here, we highlight the use of a low-input metagenomic next-generation sequencing (mNGS) approach on RNA extracted from bronchoalveolar lavage fluid (BALF). It rapidly identified a novel coronavirus (named 2019-nCoV according to World Health Organization announcement) which was the sole pathogens in the sample with very high abundance level (1.5% and 0.62% of total RNA sequenced). The entire viral genome is 29,881&#8197;nt in length (GenBank MN988668 and MN988669, Sequence Read Archive database Bioproject accession PRJNA601736) and is classified into &#946;-coronavirus genus. Phylogenetic analysis indicates that 2019-nCoV is close to coronaviruses (CoVs) circulating in Rhinolophus (Horseshoe bats), such as 98.7% nucleotide identity to partial RdRp gene of bat coronavirus strain BtCoV/4991 (GenBank KP876546, 370&#8197;nt sequence of RdRp and lack of other genome sequence) and 87.9% nucleotide identity to bat coronavirus strain bat-SL-CoVZC45 and bat-SL-CoVZXC21. Evolutionary analysis based on ORF1a/1b, S, and N genes also suggests 2019-nCoV is more likely a novel CoV independently introduced from animals to humans.",
+                    "id": "3c9c1e63-2ce3-4e4e-8f73-6db09043c78c",
+                    "type": "research-article",
+                    "title": "RNA based mNGS approach identifies a novel human coronavirus from two individual pneumonia cases in 2019 Wuhan outbreak",
+                    "authors": [
+                        "Liangjun Chen",
+                        "Weiyong Liu",
+                        "Qi Zhang",
+                        "Ke Xu",
+                        "Guangming Ye",
+                        "Weichen Wu",
+                        "Ziyong Sun",
+                        "Fang Liu",
+                        "Kailang Wu",
+                        "Bo Zhong",
+                        "Yi Mei",
+                        "Wenxia Zhang",
+                        "Yu Chen",
+                        "Yirong Li",
+                        "Mang Shi",
+                        "Ke Lan",
+                        "Yingle Liu"
+                    ],
+                    "doi": "10.1080/22221751.2020.1725399"
+                },
+                "highlight": {
+                    "title": [
+                        "RNA based mNGS approach identifies a <em>novel</em> human <em>coronavirus</em> from <em>two</em> <em>individual</em> pneumonia cases in <em>2019</em> Wuhan outbreak"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "Z3El1HEBrCd70lfOurL4",
+                "_score": 36.23002,
+                "_source": {
+                    "keywords": [
+                        "alphacoronavirus",
+                        "biotype",
+                        "canine coronavirus",
+                        "clade",
+                        "classification",
+                        "coronavirus",
+                        "feline coronavirus",
+                        "serotype",
+                        "transmissible gastroenteritis virus"
+                    ],
+                    "subject": "Research Article",
+                    "correspondence": "gary.whittaker@cornell.edu",
+                    "pmc": "5750389",
+                    "financing": "This paper was submitted via the mSphereDirect&#8482; pathway.",
+                    "id": "e208e6f9-0770-4a95-9174-1213019f8db0",
+                    "abstract": "Our work focuses on improving the classification of the Alphacoronavirus genus. The Alphacoronavirus 1 species groups viruses of veterinary importance that infect distinct mammalian hosts and includes canine and feline coronaviruses and transmissible gastroenteritis virus. It is the prototype species of the Alphacoronavirus genus; however, it encompasses biologically distinct viruses. To better characterize this prototypical species, we performed phylogenetic analyses based on the sequences of the spike protein, one of the main determinants of tropism and pathogenesis, and reveal the existence of two subgroups or clades that fit with previously established serotype demarcations. We propose a new clade designation to better classify Alphacoronavirus 1 members.",
+                    "type": "research-article",
+                    "title": "Improving Virus Taxonomy by Recontextualizing Sequence-Based Classification with Biologically Relevant Data: the Case of the ",
+                    "authors": [
+                        "Gary R. Whittaker",
+                        "Nicole M. André",
+                        "Jean Kaoru Millet"
+                    ],
+                    "doi": "10.1128/mSphereDirect.00463-17"
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "pGQR1HEBrCd70lfOG_Ow",
+                "_score": 36.09075,
+                "_source": {
+                    "keywords": [
+                        "camel",
+                        "cohort",
+                        "coronavirus",
+                        "dromedary",
+                        "immunity",
+                        "MERS coronavirus",
+                        "reinfection"
+                    ],
+                    "correspondence": "malik@hku.hk",
+                    "subject": "Original Article",
+                    "pmc": "5520318",
+                    "abstract": "Two herds of dromedary camels were longitudinally sampled with nasal and rectal swabs and serum, between September 2014 and May 2015, and the samples were tested for Middle East Respiratory Syndrome (MERS) coronavirus RNA and antibodies. Evidence of MERS-CoV infection was confirmed in one herd on the basis of detection of virus RNA in nasal swabs from three camels and significant increases in the antibody titers from three others. The three viruses were genetically identical, thus indicating introduction of a single virus into this herd. There was evidence of reinfection of camels that were previously seropositive, thus suggesting that prior infection does not provide complete immunity from reinfection, a finding that is relevant to camel vaccination strategies as a means to prevent zoonotic transmission.",
+                    "id": "cafccd3a-15fc-4eb7-abcb-4925d4216d87",
+                    "type": "research-article",
+                    "title": "Longitudinal study of Middle East Respiratory Syndrome coronavirus infection in dromedary camel herds in Saudi Arabia, 2014–2015",
+                    "authors": [
+                        "Maged Gomaa Hemida",
+                        "Abdulmohsen Alnaeem",
+                        "Daniel KW Chu",
+                        "Ranawaka APM Perera",
+                        "Samuel MS Chan",
+                        "Faisal Almathen",
+                        "Emily Yau",
+                        "Brian CY Ng",
+                        "Richard J Webby",
+                        "Leo LM Poon",
+                        "Malik Peiris"
+                    ],
+                    "doi": "10.1038/emi.2017.44"
+                },
+                "highlight": {
+                    "title": [
+                        "Longitudinal study of Middle East Respiratory Syndrome <em>coronavirus</em> <em>infection</em> in <em>dromedary</em> camel herds in Saudi Arabia, 2014–2015"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "x3Ak1HEBrCd70lfOJb6J",
+                "_score": 36.09075,
+                "_source": {
+                    "keywords": [
+                        "coronavirus",
+                        "COVID-19, SARS-CoV-2, 2019-nCov",
+                        "Surveillance",
+                        "contact tracing",
+                        "containment",
+                        "France"
+                    ],
+                    "subject": "Outbreaks",
+                    "pmc": "7029452",
+                    "financing": "Conflict of interest: None declared.Authors&#8217; contributions: All authors provided critical feedback on the manuscript.Sibylle Bernard Stoecklin, Bruno Coignard and Daniel Levy-Bruhl wrote the manuscript with input from all authors.Sibylle Bernard Stoecklin, Patrick Rolland, Alexandra Mailles, Christine Campese, Didier Che, Cl&#233;ment Lazarus, Anouk Taba&#239;, Morgane Stempfelet, Bruno Coignard and Daniel Levy-Bruhl contributed to the design and implementation of the surveillance system, as well as the coordination between all parties involved in the surveillance.Patrick Rolland, Yassoungo Silue, Alexandra Mailles, Christine Campese, Anne Simondon, Matthieu Mechain, Laure Meurice, Mathieu Nguyen, Cl&#233;ment Bassi, Estelle Yamani, Scarlett Georges, as well as all members of the investigation team contributed to the investigations and the active surveillance of contacts.Sophie Ismael, Duc Nguyen, Denis Malvy and Fran&#231;ois Xavier Lescure are the clinicians in charge of the three 2019-nCoV cases and contributed to data collection on clinical history, exposure and contacts.Sylvie Behillil and Vincent Enouf contributed to the laboratory confirmation of 2019-nCoV infection in the three imported cases, as well as the testing of samples of possible cases.",
+                    "id": "572291de-fe4a-4c19-80cd-45a1cebd4174",
+                    "abstract": "A novel coronavirus (severe acute respiratory syndrome coronavirus 2, SARS-CoV-2) causing a cluster of respiratory infections (coronavirus disease 2019, COVID-19) in Wuhan, China, was identified on 7 January 2020. The epidemic quickly disseminated from Wuhan and as at 12 February 2020, 45,179 cases have been confirmed in 25 countries, including 1,116 deaths. Strengthened surveillance was implemented in France on 10 January 2020 in order to identify imported cases early and prevent secondary transmission. Three categories of risk exposure and follow-up procedure were defined for contacts. Three cases of COVID-19 were confirmed on 24 January, the first cases in Europe. Contact tracing was immediately initiated. Five contacts were evaluated as at low risk of exposure and 18 at moderate/high risk. As at 12 February 2020, two cases have been discharged and the third one remains symptomatic with a persistent cough, and no secondary transmission has been identified. Effective collaboration between all parties involved in the surveillance and response to emerging threats is required to detect imported cases early and to implement adequate control measures.",
+                    "type": "research-article",
+                    "title": "First cases of coronavirus disease 2019 (COVID-19) in France: surveillance, investigations and control measures, January 2020",
+                    "authors": [
+                        "Sibylle Bernard Stoecklin",
+                        "Patrick Rolland",
+                        "Yassoungo Silue",
+                        "Alexandra Mailles",
+                        "Christine Campese",
+                        "Anne Simondon",
+                        "Matthieu Mechain",
+                        "Laure Meurice",
+                        "Mathieu Nguyen",
+                        "Clément Bassi",
+                        "Estelle Yamani",
+                        "Sylvie Behillil",
+                        "Sophie Ismael",
+                        "Duc Nguyen",
+                        "Denis Malvy",
+                        "François Xavier Lescure",
+                        "Scarlett Georges",
+                        "Clément Lazarus",
+                        "Anouk Tabaï",
+                        "Morgane Stempfelet",
+                        "Vincent Enouf",
+                        "Bruno Coignard",
+                        "Daniel Levy-Bruhl"
+                    ],
+                    "doi": "10.2807/1560-7917.ES.2020.25.6.2000094"
+                },
+                "highlight": {
+                    "title": [
+                        "First cases of <em>coronavirus</em> <em>disease</em> <em>2019</em> (COVID-19) in France: surveillance, investigations and control measures, January 2020"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "z28i1HEBrCd70lfOcIjf",
+                "_score": 36.09075,
+                "_source": {
+                    "keywords": [
+                        "Bibliometric",
+                        "Coronavirus",
+                        "Middle East respiratory syndrome coronavirus",
+                        "MERS-CoV"
+                    ],
+                    "subject": "Research Article",
+                    "pmc": "4897912",
+                    "abstract": "BackgroundMiddle East respiratory syndrome coronavirus (MERS-CoV) is a virus that causes severe viral pneumonia in humans, known to have a high mortality rate and a similarity in clinical symptoms with severe acute respiratory syndrome coronavirus. It was first isolated in Kingdom of Saudi Arabia (KSA) in 2012 and after that, MERS-CoV exhibited outbreaks in several regions of the world. This study aimed to assess the characteristics of publications involving MERS-CoV at global level by using a bibliometric analysis.MethodsScopus database was searched on March 4, 2016 for MERS-CoV publications published between 2012 and 2015. It was performed on the same day in order to avoid the possible bias came from update on the database because the metrics are changing over time. All publication types were considered; however publications as errata were excluded. Analysis parameters include year of publication, publication type, patterns of international collaboration, research institutions, journals, impact factor, h-index, language, and times cited.ResultsA total of 883 MERS-CoV research publications were published across the world. The MERS-CoV-associated publications were originated from 92 countries/territories, indicating the international spread of MERS-CoV research. The USA was the largest contributor, with 319 articles published over 4&#160;years, followed by KSA (113 articles). The total number of citations for these publications has already achieved 8,015, with an average of 9.01 citations per each publication. The h-index for MERS-CoV-associated publications was 48. The USA also have the highest h-index (32), followed by KSA (26) and UK (22). Netherland produced the greatest proportion of publications with international research collaboration (72.7&#160;%) followed by the UK (71&#160;%) and Germany (69.1&#160;%) out of the total number of publications for each country.ConclusionsThere is a rapid increase in research activities related to MERS-CoV from 2012 to 2015. This study demonstrates that the MERS-CoV related literature has grown to be more extensive and global over the past 4&#160;years. The bulk of publications in the field of MERS-CoV research are published by high-income countries such as the USA. Furthermore, the USA, the UK and KSA may have higher quality of articles according to the value of h-index.",
+                    "id": "33d9a5d4-512e-480e-81cf-d725c461443f",
+                    "type": "research-article",
+                    "title": "Global research trends of Middle East respiratory syndrome coronavirus: a bibliometric analysis",
+                    "authors": [
+                        "Sa’ed H. Zyoud"
+                    ],
+                    "doi": "10.1186/s12879-016-1600-5"
+                },
+                "highlight": {
+                    "title": [
+                        "Global research trends of Middle East respiratory syndrome <em>coronavirus</em>: a <em>bibliometric</em> <em>analysis</em>"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "QIAL1HEB5IQbnr7JE9jj",
+                "_score": 36.024326,
+                "_source": {
+                    "keywords": [
+                        "nucleocapsid protein",
+                        "coronavirus assembly",
+                        "coronavirus N",
+                        "intracellular localization",
+                        "protein topology"
+                    ],
+                    "correspondence": "bfielding@uwc.ac.za",
+                    "subject": "Review",
+                    "pmc": "4147684",
+                    "abstract": "The coronavirus nucleocapsid (N) is a structural protein that forms complexes with genomic RNA, interacts with the viral membrane protein during virion assembly and plays a critical role in enhancing the efficiency of virus transcription and assembly. Recent studies have confirmed that N is a multifunctional protein. The aim of this review is to highlight the properties and functions of the N protein, with specific reference to (i) the topology; (ii) the intracellular localization and (iii) the functions of the protein.",
+                    "id": "c6dc69e6-761f-4054-99f9-e204adab49f2",
+                    "type": "review-article",
+                    "title": "The Coronavirus Nucleocapsid Is a Multifunctional Protein",
+                    "authors": [
+                        "Ruth McBride",
+                        "Marjorie van Zyl",
+                        "Burtram C. Fielding"
+                    ],
+                    "doi": "10.3390/v6082991"
+                },
+                "highlight": {
+                    "title": [
+                        "The <em>Coronavirus</em> <em>Nucleocapsid</em> Is a <em>Multifunctional</em> Protein"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "CWYT1HEBrCd70lfO6bO2",
+                "_score": 35.918407,
+                "_source": {
+                    "keywords": [
+                        "group 4 coronavirus",
+                        "SARS coronavirus",
+                        "bat",
+                        "SARS-like coronavirus",
+                        "zoonosis",
+                        "reservoir",
+                        "emerging virus",
+                        "serology",
+                        "dispatch"
+                    ],
+                    "correspondence": "mueller.m.a@gmx.de",
+                    "subject": "Dispatch",
+                    "pmc": "2857293",
+                    "financing": "Suggested citation for this article: M&#252;ller MA, Paweska JT, Leman PA, Drosten C, Grywna K, Kemp A, et al. Coronavirus antibodies in African bat species. Emerg Infect Dis [serial on the Internet]. 2007 Sep [date cited]. Available from http://www.cdc.gov/eid/content/13/9/1367.htm",
+                    "abstract": "Asian bats have been identified as potential reservoir hosts of coronaviruses associated with severe acute respiratory syndrome (SARS-CoV). We detected antibody reactive with SARS-CoV antigen in 47 (6.7%) of 705 bat serum specimens comprising 26 species collected in Africa; thus, African bats may harbor agents related to putative group 4 CoV.",
+                    "id": "3e81ac9b-0937-4cc8-aab6-f37fee6b9ede",
+                    "title": "Coronavirus Antibodies in African Bat Species",
+                    "type": "brief-report",
+                    "authors": [
+                        "Marcel A. Müller",
+                        "Janusz T. Paweska",
+                        "Patricia A. Leman",
+                        "Christian Drosten",
+                        "Klaus Grywna",
+                        "Alan Kemp",
+                        "Leo Braack",
+                        "Karen Sonnenberg",
+                        "Matthias Niedrig",
+                        "Robert Swanepoel"
+                    ],
+                    "doi": "10.3201/eid1309.070342"
+                },
+                "highlight": {
+                    "title": [
+                        "<em>Coronavirus</em> <em>Antibodies</em> in <em>African</em> Bat Species"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "tm0e1HEBrCd70lfOz0Y6",
+                "_score": 35.852657,
+                "_source": {
+                    "keywords": [
+                        "Ferret enteric coronavirus",
+                        "ferret systemic coronavirus",
+                        "coronavirus",
+                        "next-generation sequencing",
+                        "ferret",
+                        "genome",
+                        "viruses",
+                        "enteric infections"
+                    ],
+                    "correspondence": "litc@nih.go.jp",
+                    "subject": "Dispatch",
+                    "pmc": "5572892",
+                    "financing": "Suggested citation for this article: Li T-C, Yoshizaki S, Kataoka M, Doan YH, Ami Y, Suzaki Y, et al. Determination of ferret enteric coronavirus genome in laboratory ferrets. Emerg Infect Dis. 2017 Sep [date cited]. https://doi.org/10.3201/eid2309.160215",
+                    "abstract": "Ferret enteric coronavirus (FRECV) RNA was detected in laboratory ferrets. Analysis of the complete genome sequence of 2 strains, FRCoV4370 and FRCoV063, revealed that FRECV shared 49.9%&#8211;68.9% nucleotide sequence identity with known coronaviruses. These results suggest that FRECV might be classified as a new species in the genus Alphacoronavirus.",
+                    "id": "72c2fbed-28f4-4192-a6f0-9d9d5d212da8",
+                    "type": "brief-report",
+                    "title": "Determination of Ferret Enteric Coronavirus Genome in Laboratory Ferrets",
+                    "authors": [
+                        "Tian-Cheng Li",
+                        "Sayaka Yoshizaki",
+                        "Michiyo Kataoka",
+                        "Yen Hai Doan",
+                        "Yasushi Ami",
+                        "Yuriko Suzaki",
+                        "Tomofumi Nakamura",
+                        "Naokazu Takeda",
+                        "Takaji Wakita"
+                    ],
+                    "doi": "10.3201/eid2309.160215"
+                },
+                "highlight": {
+                    "title": [
+                        "Determination of Ferret Enteric <em>Coronavirus</em> <em>Genome</em> in <em>Laboratory</em> Ferrets"
+                    ]
+                }
+            },
+            {
+                "_index": "ncbi",
+                "_type": "_doc",
+                "_id": "WX0B1HEB5IQbnr7JWg58",
+                "_score": 35.795784,
+                "_source": {
+                    "keywords": [
+                        "hedgehog",
+                        "coronavirus",
+                        "novel species",
+                        "China"
+                    ],
+                    "correspondence": "pcywoo@hku.hk",
+                    "subject": "Article",
+                    "pmc": "6893546",
+                    "abstract": "While dromedaries are the immediate animal source of Middle East Respiratory Syndrome (MERS) epidemic, viruses related to MERS coronavirus (MERS-CoV) have also been found in bats as well as hedgehogs. To elucidate the evolution of MERS-CoV-related viruses and their interspecies transmission pathway, samples were collected from different mammals in China. A novel coronavirus related to MERS-CoV, Erinaceus amurensis hedgehog coronavirus HKU31 (Ea-HedCoV HKU31), was identified from two Amur hedgehogs. Genome analysis supported that Ea-HedCoV HKU31 represents a novel species under Merbecovirus, being most closely related to Erinaceus CoV from European hedgehogs in Germany, with 79.6% genome sequence identity. Compared to other members of Merbecovirus, Ea-HedCoV HKU31 possessed unique non-structural proteins and putative cleavage sites at ORF1ab. Phylogenetic analysis showed that Ea-HedCoV HKU31 and BetaCoV Erinaceus/VMC/DEU/2012 were closely related to NeoCoV and BatCoV PREDICT from African bats in the spike region, suggesting that the latter bat viruses have arisen from recombination between CoVs from hedgehogs and bats. The predicted HKU31 receptor-binding domain (RBD) possessed only one out of 12 critical amino acid residues for binding to human dipeptidyl peptidase 4 (hDPP4), the MERS-CoV receptor. The structural modeling of the HKU31-RBD-hDPP4 binding interphase compared to that of MERS-CoV and Tylonycteris bat CoV HKU4 (Ty-BatCoV HKU4) suggested that HKU31-RBD is unlikely to bind to hDPP4. Our findings support that hedgehogs are an important reservoir of Merbecovirus, with evidence of recombination with viruses from bats. Further investigations in bats, hedgehogs and related animals are warranted to understand the evolution of MERS-CoV-related viruses. ",
+                    "id": "2a312885-a945-454b-a9b3-8a9ab7fc0f33",
+                    "type": "research-article",
+                    "title": "Identification of a Novel Betacoronavirus (",
+                    "authors": [
+                        "Susanna K. P. Lau",
+                        "Hayes K. H. Luk",
+                        "Antonio C. P. Wong",
+                        "Rachel Y. Y. Fan",
+                        "Carol S. F. Lam",
+                        "Kenneth S. M. Li",
+                        "Syed Shakeel Ahmed",
+                        "Franklin W.N. Chow",
+                        "Jian-Piao Cai",
+                        "Xun Zhu",
+                        "Jasper F. W. Chan",
+                        "Terrence C. K. Lau",
+                        "Kaiyuan Cao",
+                        "Mengfeng Li",
+                        "Patrick C. Y. Woo",
+                        "Kwok-Yung Yuen"
+                    ],
+                    "doi": "10.3390/v11110980"
+                },
+                "highlight": {
+                    "title": [
+                        "Identification of a <em>Novel</em> Betacoronavirus ("
+                    ]
+                }
+            }
+        ]
+    },
+    "aggregations": {
+        "type": {
+            "doc_count_error_upper_bound": 0,
+            "sum_other_doc_count": 6,
+            "buckets": [
+                {
+                    "key": "research-article",
+                    "doc_count": 228848
+                },
+                {
+                    "key": "review-article",
+                    "doc_count": 22384
+                },
+                {
+                    "key": "case-report",
+                    "doc_count": 5301
+                },
+                {
+                    "key": "abstract",
+                    "doc_count": 4065
+                },
+                {
+                    "key": "brief-report",
+                    "doc_count": 3780
+                },
+                {
+                    "key": "other",
+                    "doc_count": 2396
+                },
+                {
+                    "key": "letter",
+                    "doc_count": 1036
+                },
+                {
+                    "key": "correction",
+                    "doc_count": 891
+                },
+                {
+                    "key": "editorial",
+                    "doc_count": 866
+                },
+                {
+                    "key": "article-commentary",
+                    "doc_count": 507
+                },
+                {
+                    "key": "protocol",
+                    "doc_count": 483
+                },
+                {
+                    "key": "data-paper",
+                    "doc_count": 423
+                },
+                {
+                    "key": "product-review",
+                    "doc_count": 294
+                },
+                {
+                    "key": "rapid-communication",
+                    "doc_count": 290
+                },
+                {
+                    "key": "systematic-review",
+                    "doc_count": 287
+                },
+                {
+                    "key": "methods-article",
+                    "doc_count": 256
+                },
+                {
+                    "key": "meeting-report",
+                    "doc_count": 227
+                },
+                {
+                    "key": "discussion",
+                    "doc_count": 199
+                },
+                {
+                    "key": "report",
+                    "doc_count": 124
+                },
+                {
+                    "key": "news",
+                    "doc_count": 72
+                },
+                {
+                    "key": "addendum",
+                    "doc_count": 46
+                },
+                {
+                    "key": "book-review",
+                    "doc_count": 42
+                },
+                {
+                    "key": "retraction",
+                    "doc_count": 38
+                },
+                {
+                    "key": "introduction",
+                    "doc_count": 31
+                },
+                {
+                    "key": "calendar",
+                    "doc_count": 22
+                },
+                {
+                    "key": "reply",
+                    "doc_count": 15
+                },
+                {
+                    "key": "announcement",
+                    "doc_count": 10
+                },
+                {
+                    "key": "in-brief",
+                    "doc_count": 7
+                },
+                {
+                    "key": "obituary",
+                    "doc_count": 7
+                },
+                {
+                    "key": "expression-of-concern",
+                    "doc_count": 5
+                }
+            ]
+        }
+    }
+}
