@@ -1,0 +1,15 @@
+#docs {
+	float: right;
+	width: 48%;
+	padding-right: 10px;
+  }
+  
+  #visualization {
+	float: left;
+	width: 50%;
+	height: 100%;
+  }
+  
+  .abstract {
+	padding-bottom: 5px;
+  }
