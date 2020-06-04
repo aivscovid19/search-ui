@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FoamTree Quick Start</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="bioasq_demo.css">
+  </head>
+
+  <body>
+    <input id="search" placeholder="Search term">
+    <span style="font-size: 12px">Size</span>
+    <select name="max" id="max">
+      <option value="50">50</option>
+      <option value="100" selected>100</option>
+      <option value="200">200</option>
+      <option value="500">500</option>
+      <option value="1000">1000</option>
+    </select>
+    <span style="font-size: 12px">Depth</span>
+    <select name="depth" id="depth">
+      <option value="1">1</option>
+      <option value="2" selected>2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <button onclick="updateTree()">
+      search
+    </button>
+    <br>
+    <div id="visualization" style="height: 800px"></div>
+    <div id="docs">
+    </div>
+	<script src="https://get.carrotsearch.com/foamtree/latest/carrotsearch.foamtree.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="bioasq_demo.js"></script>
+  </body>
+</html>
