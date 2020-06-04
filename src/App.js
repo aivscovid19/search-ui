@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 
 import {
   ErrorBoundary,
@@ -8,20 +8,43 @@ import {
   Result,
   Results,
   ResultsPerPage,
-  SearchBox,
   SearchProvider,
   WithSearch
-} from "@elastic/react-search-ui";
-import { Layout } from "@elastic/react-search-ui-views";
-import "@elastic/react-search-ui-views/lib/styles/styles.css";
+} from '@elastic/react-search-ui';
 
-import buildRequest from "./buildRequest";
-import runRequest from "./runRequest";
-import applyDisjunctiveFaceting from "./applyDisjunctiveFaceting";
-import buildState from "./buildState";
+import SearchBox from './components/SearchBox';
+import FoamTree from './components/FoamTree';
+
+import buildRequest from './buildRequest';
+import runRequest from './runRequest';
+import applyDisjunctiveFaceting from './applyDisjunctiveFaceting';
+import buildState from './buildState';
+
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles'
+import { blue, indigo } from '@material-ui/core/colors'
+import '@elastic/react-search-ui-views/lib/styles/styles.css';
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: blue[900]
+    },
+    primary: {
+      main: indigo[700]
+    }
+  },
+  typography: {
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '"Lato"',
+      'sans-serif'
+    ].join(',')
+  }
+});
 
 const config = {
-  debug: true,
+  debug: false,
   hasA11yNotifications: true,
   onResultClick: () => {
     /* Not implemented */
@@ -52,57 +75,44 @@ const config = {
   }
 };
 
-export default function App() {
+const App = () => {
   return (
-    <SearchProvider config={config}>
-      <WithSearch mapContextToProps={({ wasSearched }) => ({ wasSearched })}>
-        {({ wasSearched }) => (
-          <div className="App">
-            <ErrorBoundary>
-              <Layout
-                header={
-                  <SearchBox
-                    autocompleteMinimumCharacters={3}
-                    autocompleteResults={{
-                      linkTarget: "_blank",
-                      sectionTitle: "Results",
-                      titleField: "title",
-                      urlField: "link",
-                    }}
-                    autocompleteSuggestions={true}
-                  />
-                }
-                sideContent={
-                  <div>
-                    <Facet field='source' label='Source' isFilterable={true} />
+    <ThemeProvider theme={theme}>
+      <SearchProvider config={config}>
+        <WithSearch mapContextToProps={(ctx) => {console.log(); return ctx}}>
+          {({ wasSearched, searchTerm, resultSearchTerm }) => {
+            return (
+              <ErrorBoundary>
+                <div style={{ width: '100%', padding: '1rem' }}>
+                  <SearchBox />
+
+                  <div style={{ display: 'flex' }}>
+                    <FoamTree searchTerm={resultSearchTerm} style={{ flex: '1' }} />
+
+                    <div style={{ display: 'flex', flex: '1', flexDirection: 'column' }}>
+                      <Paging />
+                      <Results
+                        resultView={
+                          ({ result }) => {
+                            const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
+                            return <Result
+                              titleField="title"
+                              urlField={linkField}
+                              result={result}
+                            />
+                          }
+                        }
+                      />
+                    </div>
                   </div>
-                }
-                bodyContent={
-                  <Results
-                    resultView={
-                      ({ result }) => {
-                        const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
-                        return <Result
-                          titleField="title"
-                          urlField={linkField}
-                          result={result}
-                        />
-                      }
-                    }
-                  />
-                }
-                bodyHeader={
-                  <React.Fragment>
-                    {wasSearched && <PagingInfo />}
-                    {wasSearched && <ResultsPerPage />}
-                  </React.Fragment>
-                }
-                bodyFooter={<Paging />}
-              />
-            </ErrorBoundary>
-          </div>
-        )}
-      </WithSearch>
-    </SearchProvider>
+                </div>
+              </ErrorBoundary>
+            )
+          }}
+        </WithSearch>
+      </SearchProvider>
+    </ThemeProvider>
   );
-}
+};
+
+export default App;
