@@ -1,108 +1,117 @@
-import React from "react";
+import React, { useState } from 'react';
 
-import {
-  ErrorBoundary,
-  Facet,
-  Paging,
-  PagingInfo,
-  Result,
-  Results,
-  ResultsPerPage,
-  SearchBox,
-  SearchProvider,
-  WithSearch
-} from "@elastic/react-search-ui";
-import { Layout } from "@elastic/react-search-ui-views";
-import "@elastic/react-search-ui-views/lib/styles/styles.css";
+import SearchBox from './components/SearchBox';
+import FoamTree from './components/FoamTree';
 
-import buildRequest from "./buildRequest";
-import runRequest from "./runRequest";
-import applyDisjunctiveFaceting from "./applyDisjunctiveFaceting";
-import buildState from "./buildState";
+import Divider from '@material-ui/core/Divider';
 
-const config = {
-  debug: true,
-  hasA11yNotifications: true,
-  onResultClick: () => {
-    /* Not implemented */
+import { ThemeProvider } from '@material-ui/styles';
+import { createMuiTheme } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
+import { blue, indigo } from '@material-ui/core/colors'
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: blue[900]
+    },
+    primary: {
+      main: indigo[700]
+    }
   },
-  onAutocompleteResultClick: () => {
-    /* Not implemented */
-  },
-  onAutocomplete: async ({ searchTerm }) => {
-    const requestBody = buildRequest({ searchTerm });
-    const json = await runRequest(requestBody);
-    const state = buildState(json);
-    return {
-      autocompletedResults: state.results
-    };
-  },
-  onSearch: async state => {
-    const { resultsPerPage } = state;
-    const requestBody = buildRequest(state);
-    // Note that this could be optimized by running all of these requests
-    // at the same time. Kept simple here for clarity.
-    const responseJson = await runRequest(requestBody);
-    const responseJsonWithDisjunctiveFacetCounts = await applyDisjunctiveFaceting(
-      responseJson,
-      state,
-      []
-    );
-    return buildState(responseJsonWithDisjunctiveFacetCounts, resultsPerPage);
+  typography: {
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '"Lato"',
+      'sans-serif'
+    ].join(',')
   }
+});
+
+const useStyles = makeStyles(theme => ({
+  divider: {
+    marginTop: '1.5rem',
+    marginBottom: '1.5rem',
+    boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
+  },
+}));
+
+const App = () => {
+  const classes = useStyles();
+  const [search, setSearch] = useState('');
+  const [docs, setDocs] = useState([]);
+
+  console.log(docs);
+
+  return (
+    <ThemeProvider theme={theme}>
+      <div style={{ width: '100%', padding: '1rem' }}>
+        <SearchBox onSearch={setSearch} />
+
+        <Divider className={classes.divider} variant="fullWidth" />
+
+        <div style={{ display: 'flex' }}>
+          <FoamTree
+            style={{ flex: '1' }}
+            searchTerm={search}
+            setDocs={setDocs}
+          />
+
+          <div style={{
+            backgroundColor: '#424242',
+            flex: '1',
+            padding: '1rem',
+            height: '650px',
+            overflow: 'scroll'
+          }}>
+            {docs.map((d, i) => (
+              <React.Fragment key={i}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center'
+                }}>
+                  <div style={{
+                    minHeight: '1rem',
+                    minWidth: '1rem',
+                    border: '1px solid #fff',
+                    borderRadius: '0.25rem',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    fontSize: '0.5rem',
+                    color: '#fff'
+                  }}>
+                    {i + 1}
+                  </div>
+                  
+                  <a
+                    href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h4 style={{
+                      marginTop: 0,
+                      marginBottom: 0,
+                      marginLeft: '0.75rem',
+                      fontSize: '1.5rem',
+                      fontWeight: 'bold',
+                      color: '#fff'
+                    }}>
+                      {d.title}
+                    </h4>
+                  </a>
+                </div>
+                
+                <p style={{
+                  color: 'rgba(255, 255, 255, 0.5)'
+                }}>{d.abstract}</p>
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
 };
 
-export default function App() {
-  return (
-    <SearchProvider config={config}>
-      <WithSearch mapContextToProps={({ wasSearched }) => ({ wasSearched })}>
-        {({ wasSearched }) => (
-          <div className="App">
-            <ErrorBoundary>
-              <Layout
-                header={
-                  <SearchBox
-                    autocompleteMinimumCharacters={3}
-                    autocompleteResults={{
-                      linkTarget: "_blank",
-                      sectionTitle: "Results",
-                      titleField: "title",
-                      urlField: "link",
-                    }}
-                    autocompleteSuggestions={true}
-                  />
-                }
-                sideContent={
-                  <div>
-                    <Facet field='source' label='Source' isFilterable={true} />
-                  </div>
-                }
-                bodyContent={
-                  <Results
-                    resultView={
-                      ({ result }) => {
-                        const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
-                        return <Result
-                          titleField="title"
-                          urlField={linkField}
-                          result={result}
-                        />
-                      }
-                    }
-                  />
-                }
-                bodyHeader={
-                  <React.Fragment>
-                    {wasSearched && <PagingInfo />}
-                    {wasSearched && <ResultsPerPage />}
-                  </React.Fragment>
-                }
-                bodyFooter={<Paging />}
-              />
-            </ErrorBoundary>
-          </div>
-        )}
-      </WithSearch>
-    </SearchProvider>
-  );
-}
+export default App;
