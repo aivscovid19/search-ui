@@ -1,60 +1,70 @@
 import React, { useState, useEffect } from 'react';
 
+const fetchData = async (searchTerm) => {
+  const CLOUD_URL = "https://us-central1-for-ivan.cloudfunctions.net/foamtree"
+  
+  const response = await fetch(CLOUD_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      search_term: searchTerm
+    })
+  });
+
+  const groups = await response.json();
+  return groups;
+};
+
+const findDocs = ({ groups, _docs = [] }) => {
+  let docs = [ ..._docs ];
+  groups.forEach(g => docs = [ ...docs, ...findDocs(g) ]);
+  return docs;
+};
+
 const FoamTree = ({
   style = {},
-  searchTerm = ''
+  searchTerm = '',
+  setDocs
 }) => {
-  const [foamtree, setFoamtree] = useState(null)
-  console.log('foamtree');
+  const [foamtree, setFoamtree] = useState(null);
 
   useEffect(() => {
     const { CarrotSearchFoamTree } = window;
 
-    console.log('create tree')
-
     const _foamtree = new CarrotSearchFoamTree({
       id: 'foamtree',
-      maxGroupLevelsDrawn: 1, 
+      maxGroupLevelsDrawn: 1,
     });
-    
-    _foamtree.set({
-      onGroupZoom: function(info) {
-        console.log("onGroupZoom", info);
+
+    _foamtree.set('onGroupClick', (event) => {
+      const { group } = event;
+      if (group && group.unselectable) {
+        event.preventDefault();
+      } else if (group && group.groups) {
+        const docs = findDocs(group);
+        setDocs(docs);
       }
     });
 
-    _foamtree.set("onGroupDoubleClick", function(info) {
-      console.log("onGroupDoubleClick.", info.group);
-    });
-
-    console.log('done creating tree')
-
-    console.log('setting foamtree')
-    setFoamtree(_foamtree)
-    console.log('done setting foamtree')
-  }, []);
+    setFoamtree(_foamtree);
+  }, [setDocs]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const CLOUD_URL = "https://us-central1-for-ivan.cloudfunctions.net/foamtree"
-      
-      const response = await fetch(CLOUD_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          search_term: searchTerm
-        })
-      });
-
-      const groups = await response.json();
-      foamtree.set({ dataObject: { groups }});
+    const fetch = async () => {
+      if (foamtree) {
+        const groups = await fetchData(searchTerm);
+        const docs = findDocs({ groups });
+        
+        foamtree.set({ dataObject: { groups }});
+        setDocs(docs);
+      }
     };
 
-    if (foamtree) fetchData();
-  }, [searchTerm]);
+    fetch();
+  }, [foamtree, searchTerm, setDocs]);
 
   return (
-    <div id="foamtree" style={{ ...style, height: '800px' }}></div>
+    <div id="foamtree" style={{ ...style, height: '650px' }}></div>
   );
 }
 
