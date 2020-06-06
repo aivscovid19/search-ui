@@ -1,35 +1,63 @@
-# Elastcisearch UI for [BioMedBERT2 project][BERT2]
+# AI-VS-COVID19 Search UI 
 
 ## About
 
 This is a UI for [BigMedBioBERT2 project][BERT2] dataset Elasticsearch index.
 
+## Development
+
+### Local
+
+```
+yarn install
+yarn start
+```
+
 ## Deployment
 
-This project is meant to be deployed to Netlify.
-
-A `netlify.toml` file is included with all of the configuration you'll need to deploy it to Netlify.
-
-You'll additionally need to configure `ELASTICSEARCH_HOST` as an environment variable.
-
-## Contributing
-
-### Setup
-
-Just clone the project and run the following in this directory:
-
+Make  sure you have a google cloud account and a google cloud project setup
 ```
-npm install
+gcloud auth login
+```
+```
+gcloud config get-value project
+```
+if you don't have any project configured, then set one
+```
+gcloud config set project  my-google-cloud-project
 ```
 
-### Run
+The **first time** you deploy you need to setup a google bucket and configure
+the default webpage (index.html)
+```
+export GCS_BUCKET=search-$PROJECT_ID
+gsutil mb -b on gs://$GCS_BUCKET
+gsutil web set -m index.html gs://$GCS_BUCKET
+gsutil iam ch allUsers:objectViewer gs://$GCS_BUCKET
+```
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["iam", "ch", "allUsers:objectViewer", "gs://${_GCS_BUCKET}"]
 
-Run the following command, filling in the variables below with your own Elasticsearch credentials and host.
+then add this bucket name to a local `.env` file:
+```
+echo GCS_BUCKET=$GCS_BUCKET >> .env
+```
+To make sure everything works:
+```
+gcloud builds submit . --substitutions=${_GCS_BUCKET}=$GCS_BUCKET
+```
+you only need the above steps the **first time**. 
+
+After the initial setup you can just do:
+```
+yarn deploy
+```
 
 ```
-ELASTICSEARCH_HOST=https://{user}:{password}@{elasticsearch_url} npm start
+yarn build
+gsutil -m rsync -R ./build gs://$GCS_BUCKET
+gsutil setmeta -R -h "Cache-Control: max-age=31536000" gs://$GCS_BUCKET/static/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-[BERT2]: https://github.com/ivankozlovcodes/BioMedBERT2 "BigBioMedBERT2"
+# References
+- [cloudbuild yarn images](https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/yarn/cloudbuild.yaml)

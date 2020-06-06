@@ -1,0 +1,18 @@
+steps:
+  - name: gcr.io/cloud-builders/yarn:node-10.10.0
+    args: ["install", "--production=true", "--silent", "--ignore-engines"]
+  - name: gcr.io/cloud-builders/yarn:node-10.10.0
+    args: ["build"]
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["-m", "rsync", "-r", "-c", "-d", "./build", "gs://${_GCS_BUCKET}"]
+
+  - name: gcr.io/cloud-builders/gsutil
+    args:
+      [
+        "setmeta",
+        "-R",
+        "-h",
+        "Cache-Control: max-age=31536000",
+        "gs://${_GCS_BUCKET}/static/",
+      ]
+timeout: "1600s"
