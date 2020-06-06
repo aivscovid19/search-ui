@@ -15,10 +15,10 @@ import {
 import { Layout } from '@elastic/react-search-ui-views';
 import '@elastic/react-search-ui-views/lib/styles/styles.css';
 
-import buildRequest from '../buildRequest';
-import runRequest from '../runRequest';
+import buildRequest from './buildRequest';
+import runRequest from './runRequest';
 import applyDisjunctiveFaceting from '../applyDisjunctiveFaceting';
-import buildState from '../buildState';
+import buildState from './buildState';
 
 const config = {
   debug: true,

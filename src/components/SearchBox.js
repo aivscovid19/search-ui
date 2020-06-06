@@ -12,9 +12,9 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SearchBox = ({ onSearch }) => {
+const SearchBox = ({ initialValue, onSearch }) => {
   const classes = useStyles();
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState(initialValue)
 
   return (
     <div className={classes.root}>
