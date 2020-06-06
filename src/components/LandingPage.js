@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import TextField from '@material-ui/core/TextField';
 
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -22,6 +23,13 @@ const useStyles = makeStyles(() => ({
 
 const Landing = () => {
   const classes = useStyles();
+  const [searchValue, setSearchValue] = useState('');
+  const history = useHistory();
+
+  const search = (e) => {
+    e.preventDefault();
+    history.push(searchValue);
+  };
 
   return (
     <Container className={classes.main} component="main" maxWidth="xl">
@@ -35,26 +43,30 @@ const Landing = () => {
       </Typography>
       
       <Container maxWidth="xs">
-        <TextField
-          autoFocus
-          fullWidth
-          variant="outlined"
-          margin="normal"
-          label="search"
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-            endAdornment: (
-              <InputAdornment position="end">
-                <MicIcon />
-              </InputAdornment>
-            )
-          }}
-        />
+        <form onSubmit={search}>
+          <TextField
+            autoFocus
+            fullWidth
+            variant="outlined"
+            margin="normal"
+            label="search"
+            size="small"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <MicIcon />
+                </InputAdornment>
+              )
+            }}
+          />
+        </form>
       </Container>
     </Container>
   );
