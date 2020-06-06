@@ -52,6 +52,10 @@ After the initial setup you can just do:
 ```
 yarn deploy
 ```
+the website will be hosted at:
+```
+open https://storage.googleapis.com/${GCS_PROJECT}/index.html
+```
 
 ```
 yarn build
