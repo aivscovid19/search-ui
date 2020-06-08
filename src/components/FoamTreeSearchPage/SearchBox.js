@@ -28,7 +28,7 @@ const SearchBox = ({ value, onChange, onSearch }) => {
     >
       <TextField
         fullWidth
-        label="Search Bar UI"
+        placeholder="search"
         variant="outlined"
         size="small"
         InputLabelProps={{ shrink: true }}

@@ -57,9 +57,9 @@ const Landing = () => {
           <TextField
             autoFocus
             fullWidth
+            placeholder="search"
             variant="outlined"
             margin="normal"
-            label="search"
             size="small"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
@@ -85,7 +85,7 @@ const Landing = () => {
         <Box>
         {QUESTIONS.map((q, i) => (
           <Box key={i} mb={2}>
-            <Card style={{ cursor: 'pointer' }} onClick={() => search(null, q)}>
+            <Card variant="outlined" style={{ cursor: 'pointer' }} onClick={() => search(null, q)}>
               <CardContent>
                 <Typography variant="body2" component="p">
                   {q}

@@ -32,14 +32,12 @@ const FoamTree = ({
   }, [setDocs]);
 
   useEffect(() => {
-    if (foamtree) {
-      foamtree.set({ dataObject: { groups }});
-    }
+    if (foamtree) foamtree.set({ dataObject: { groups }});
   }, [foamtree, groups]);
 
   useEffect(() => {
     const debouncedHandleResize = debounce(() => {
-      foamtree.resize();
+      if (foamtree) foamtree.resize();
     }, 200);
 
     window.addEventListener('resize', debouncedHandleResize);
