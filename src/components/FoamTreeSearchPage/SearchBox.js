@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,30 +12,37 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const SearchBox = ({ initialValue, onSearch }) => {
+const SearchBox = ({ value, onChange, onSearch }) => {
   const classes = useStyles();
-  const [search, setSearch] = useState(initialValue)
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    onSearch(value);
+  };
 
   return (
-    <div className={classes.root}>
+    <form
+      className={classes.root}
+      onSubmit={onSubmit}
+    >
       <TextField
         className="search-bar"
         label="Search Bar UI"
         variant="outlined"
         fullWidth
         InputLabelProps={{ shrink: true }}
-        value={search}
-        onChange={e => setSearch(e.target.value)}
+        value={value}
+        onChange={e => onChange(e.target.value)}
       />
 
       <Button
         variant="contained"
         color="primary"
-        onClick={() => onSearch(search)}
+        type="submit"
       >
         Search
       </Button>
-    </div>
+    </form>
   );
 };
 

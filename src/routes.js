@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, HashRouter, Switch } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
-import FoamTreeSearchPage from './components/FoamTreeSearchPage';
+import FoamTreeSearchPage from './components/FoamTreeSearchPage/';
 
 export default () => (
   <HashRouter>

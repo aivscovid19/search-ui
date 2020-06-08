@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import TextField from '@material-ui/core/TextField';
+
+import QUESTIONS from '../questionSuggestions.json';
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,7 +22,8 @@ const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: '15%'
   }
 }));
 
@@ -26,9 +32,13 @@ const Landing = () => {
   const [searchValue, setSearchValue] = useState('');
   const history = useHistory();
 
-  const search = (e) => {
-    e.preventDefault();
-    history.push(searchValue);
+  const search = (e, overrideSearch) => {
+    if (e)
+      e.preventDefault();
+    if (overrideSearch)
+      history.push(encodeURI(overrideSearch));
+    else
+      history.push(encodeURI(searchValue));
   };
 
   return (
@@ -42,7 +52,7 @@ const Landing = () => {
         Biomedical Research Extensive Archive To Help Everyone
       </Typography>
       
-      <Container maxWidth="xs">
+      <Container maxWidth="sm">
         <form onSubmit={search}>
           <TextField
             autoFocus
@@ -67,6 +77,24 @@ const Landing = () => {
             }}
           />
         </form>
+
+        <Typography component="p" color="textSecondary" variant="overline">
+          Question you can try
+        </Typography>
+
+        <Box>
+        {QUESTIONS.map((q, i) => (
+          <Box key={i} mb={2}>
+            <Card style={{ cursor: 'pointer' }} onClick={() => search(null, q)}>
+              <CardContent>
+                <Typography variant="body2" component="p">
+                  {q}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Box>
+        ))}
+        </Box>
       </Container>
     </Container>
   );
