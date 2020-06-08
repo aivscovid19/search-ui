@@ -6,7 +6,7 @@ export const fetchData = async search_term => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ search_term })
   });
-
+  
   return response.json();
 };
 
