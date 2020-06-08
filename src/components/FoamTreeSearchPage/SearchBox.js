@@ -1,53 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SearchIcon from '@material-ui/icons/Search';
-import MicIcon from '@material-ui/icons/Mic';
 
-import { makeStyles } from '@material-ui/core/styles';
+import QUESTIONS from '../../questionSuggestions.json';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex'
-  },
-}));
-
-const SearchBox = ({ value, onChange, onSearch }) => {
-  const classes = useStyles();
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onSearch(value);
-  };
+const SearchBox = ({ initialValue, onSearch }) => {
+  const [value, setValue] = useState(initialValue);
+  const [inputValue, setInputValue] = useState('');
 
   return (
-    <form
-      className={classes.root}
-      onSubmit={onSubmit}
-    >
-      <TextField
-        fullWidth
-        placeholder="search"
-        variant="outlined"
-        size="small"
-        InputLabelProps={{ shrink: true }}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <SearchIcon />
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <MicIcon />
-            </InputAdornment>
-          )
-        }}
-      />
-    </form>
+    <Autocomplete
+      freeSolo
+      fullWidth
+      placeholder="search"
+      variant="outlined"
+      size="small"
+      options={QUESTIONS}
+      value={value}
+      inputValue={inputValue}
+      onChange={(_, newValue) => {
+        setValue(newValue);
+        if (newValue) onSearch(newValue);
+      }}
+      onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
+      renderInput={params => (
+        <TextField {...params} placeholder="search" variant="outlined" />
+      )}
+    />
   );
 };
 

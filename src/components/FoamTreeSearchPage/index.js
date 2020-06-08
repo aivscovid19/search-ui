@@ -47,7 +47,7 @@ const FoamTreeSearchPage = () => {
   const [docs, setDocs] = useState([]);
 
   const [search, setSearch] = useState(params.search);
-  const [inputValue, setInputValue] = useState(params.search);
+  // const [inputValue, setInputValue] = useState(params.search);
 
   useEffect(() => {
     const fetch = async () => {
@@ -70,8 +70,8 @@ const FoamTreeSearchPage = () => {
         </Typography>
       </Box>
 
-      <SearchBox value={inputValue} onChange={setInputValue} onSearch={setSearch} />
-      <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} />
+      <SearchBox initialValue={params.search} onSearch={setSearch} />
+      {/* <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} /> */}
 
       <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
         <FoamTree
