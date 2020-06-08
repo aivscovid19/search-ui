@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchBox from './SearchBox';
 import QuestionSuggestions from './QuestionSuggestions';
@@ -6,6 +6,7 @@ import FoamTree from './FoamTree';
 import Divider from '@material-ui/core/Divider';
 
 import { useParams } from 'react-router-dom';
+import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -51,21 +52,36 @@ const useStyles = makeStyles(() => ({
 const FoamTreeSearchPage = () => {
   const params = useParams();
   const classes = useStyles();
-  const [search, setSearch] = useState(params.search);
-  const [value, setValue] = useState(params.search);
+
+  const [data, setData] = useState({});
   const [docs, setDocs] = useState([]);
+
+  const [search, setSearch] = useState(params.search);
+  const [inputValue, setInputValue] = useState(params.search);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await fetchData(search);
+      const docs = findDocs({ groups: data });
+      
+      setData(data);
+      setDocs(docs);
+    };
+
+    fetch();
+  }, [search]);
 
   return (
     <div style={{ width: '100%', padding: '1rem' }}>
-      <SearchBox value={value} onChange={setValue} onSearch={setSearch} />
-      <QuestionSuggestions filter={value} onClick={(q) => { setValue(q); setSearch(q); }} />
+      <SearchBox value={inputValue} onChange={setInputValue} onSearch={setSearch} />
+      <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} />
 
       <Divider className={classes.divider} variant="fullWidth" />
 
       <div style={{ display: 'flex' }}>
         <FoamTree
           style={{ flex: '1' }}
-          searchTerm={search}
+          groups={data}
           setDocs={setDocs}
         />
 
