@@ -1,14 +1,15 @@
 import React from 'react';
+
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SearchIcon from '@material-ui/icons/Search';
+import MicIcon from '@material-ui/icons/Mic';
+
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    '& > .search-bar': {
-      marginRight: '1rem'
-    }
+    display: 'flex'
   },
 }));
 
@@ -26,22 +27,26 @@ const SearchBox = ({ value, onChange, onSearch }) => {
       onSubmit={onSubmit}
     >
       <TextField
-        className="search-bar"
+        fullWidth
         label="Search Bar UI"
         variant="outlined"
-        fullWidth
+        size="small"
         InputLabelProps={{ shrink: true }}
         value={value}
         onChange={e => onChange(e.target.value)}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <MicIcon />
+            </InputAdornment>
+          )
+        }}
       />
-
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Search
-      </Button>
     </form>
   );
 };

@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react';
 import SearchBox from './SearchBox';
 import QuestionSuggestions from './QuestionSuggestions';
 import FoamTree from './FoamTree';
-import Divider from '@material-ui/core/Divider';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 import { useParams } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
@@ -15,37 +21,20 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
   },
   searchResults: {
-    backgroundColor: '#424242',
     flex: '1',
+    height: '100%',
     padding: '1rem',
-    height: '650px',
     overflow: 'scroll'
   },
   searchResultsHeader: {
     display: 'flex',
     alignItems: 'center'
   },
-  searchResultsIndex: {
-    minHeight: '1rem',
-    minWidth: '1rem',
-    border: '1px solid #fff',
-    borderRadius: '0.25rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '0.5rem',
-    color: '#fff'
-  },
   searchResultsTitle: {
     marginTop: 0,
     marginBottom: 0,
-    marginLeft: '0.75rem',
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#fff'
-  },
-  searchResultsText: {
-    color: 'rgba(255, 255, 255, 0.5)'
   }
 }));
 
@@ -60,6 +49,7 @@ const FoamTreeSearchPage = () => {
   const [inputValue, setInputValue] = useState(params.search);
 
   useEffect(() => {
+    console.log('fecth');
     const fetch = async () => {
       const data = await fetchData(search);
       const docs = findDocs({ groups: data });
@@ -72,44 +62,65 @@ const FoamTreeSearchPage = () => {
   }, [search]);
 
   return (
-    <div style={{ width: '100%', padding: '1rem' }}>
+    <Box p={3} height="100vh">
+      <CssBaseline />
+      <Box my={2}>
+        <Typography component="h1" variant="h4">
+          BREATHE
+        </Typography>
+      </Box>
+
       <SearchBox value={inputValue} onChange={setInputValue} onSearch={setSearch} />
       <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} />
 
-      <Divider className={classes.divider} variant="fullWidth" />
-
-      <div style={{ display: 'flex' }}>
+      <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
         <FoamTree
-          style={{ flex: '1' }}
+          style={{ flex: '50%' }}
           groups={data}
           setDocs={setDocs}
         />
 
-        <div className={classes.searchResults}>
-          {docs.map((d, i) => (
-            <React.Fragment key={i}>
-              <div className={classes.searchResultsHeader}>
-                <div className={classes.searchResultsIndex}>
-                  {i + 1}
-                </div>
-                
-                <a
-                  href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h4 className={classes.searchResultsTitle}>
-                    {d.title}
-                  </h4>
-                </a>
-              </div>
-              
-              <p className={classes.searchResultsText}>{d.abstract}</p>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-    </div>
+        <Box flex="50%" display="flex" flexDirection="column">
+          <Box mb={1}>
+            <Paper square variant="outlined">
+              <Box p={3}>
+                <Typography component="h4" variant="h5">
+                  {search}
+                </Typography>
+              </Box>
+            </Paper>
+          </Box>
+
+          <div className={classes.searchResults}>
+            {docs.map((d, i) => (
+              <Box key={i} mb={2}>
+                <Card variant="outlined">
+                  <CardContent>
+                    <div className={classes.searchResultsHeader}>
+                      <a
+                        href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <h4 className={classes.searchResultsTitle}>
+                          {d.title}
+                        </h4>
+                      </a>
+                    </div>
+                    
+                    <Box mt={1}>
+                      <Typography component="p" variant="subtitle1" color="textSecondary">
+                        {d.journal}
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </Box>
+            ))}
+          </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

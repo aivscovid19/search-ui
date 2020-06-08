@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import debounce from '../../helpers/debounce';
 import { findDocs } from '../../controllers/dataFetch';
 
 const FoamTree = ({
@@ -36,8 +37,17 @@ const FoamTree = ({
     }
   }, [foamtree, groups]);
 
+  useEffect(() => {
+    const debouncedHandleResize = debounce(() => {
+      foamtree.resize();
+    }, 200);
+
+    window.addEventListener('resize', debouncedHandleResize);
+    return () => window.removeEventListener('resize', debouncedHandleResize);
+  });
+
   return (
-    <div id="foamtree" style={{ ...style, height: '650px' }}></div>
+    <div id="foamtree" style={{ ...style }}></div>
   );
 }
 

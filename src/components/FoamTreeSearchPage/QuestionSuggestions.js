@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -22,6 +22,7 @@ const useStyles = makeStyles({
     display: 'flex',
     minWidth: '35%',
     margin: '1rem',
+    marginBottom: '0',
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
@@ -37,12 +38,15 @@ const useStyles = makeStyles({
 
 const QuestionSuggestions = ({ filter, onClick }) => {
   const classes = useStyles();
-  const regex = new RegExp(filter, 'gi');
-  let questions = [ ...QUESTIONS ];
+  const [questions, setQuestions] = useState([]);
 
-  if (filter) {
-    questions = questions.filter(q => q.match(regex) && q !== filter);
-  }
+  useEffect(() => {
+    const regex = new RegExp(filter, 'gi');
+    
+    setQuestions(
+      QUESTIONS.filter(q => q.match(regex) && q !== filter)
+    );
+  }, [filter]);
 
   return (
     <Box className={classes.questionContainer} component="aside">
