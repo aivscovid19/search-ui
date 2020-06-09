@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchBox from './SearchBox';
 import QuestionSuggestions from './QuestionSuggestions';
 import FoamTree from './FoamTree';
-import Divider from '@material-ui/core/Divider';
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { useParams } from 'react-router-dom';
+import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(() => ({
@@ -14,86 +20,141 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
   },
   searchResults: {
-    backgroundColor: '#424242',
-    flex: '1',
-    padding: '1rem',
-    height: '650px',
+    height: '100%',
     overflow: 'scroll'
   },
   searchResultsHeader: {
     display: 'flex',
     alignItems: 'center'
   },
-  searchResultsIndex: {
-    minHeight: '1rem',
-    minWidth: '1rem',
-    border: '1px solid #fff',
-    borderRadius: '0.25rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: '0.5rem',
-    color: '#fff'
+  searchResultsLink: {
+    textDecorationColor: '#000'
   },
   searchResultsTitle: {
     marginTop: 0,
     marginBottom: 0,
-    marginLeft: '0.75rem',
     fontSize: '1.5rem',
     fontWeight: 'bold',
-    color: '#fff'
-  },
-  searchResultsText: {
-    color: 'rgba(255, 255, 255, 0.5)'
   }
 }));
 
-const FoamTreeSearchPage = () => {
-  const params = useParams();
+const Results = ({ data, docs, setDocs }) => {
+  const MAX_ABSTRACT = 250;
+
   const classes = useStyles();
-  const [search, setSearch] = useState(params.search);
-  const [value, setValue] = useState(params.search);
-  const [docs, setDocs] = useState([]);
+
+  if (docs.length === 0) {
+    return (
+      <Box
+        display="flex"
+        height="85%"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Typography component="h4" variant="h3">
+          NO RESULTS FOR QUERY
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
-    <div style={{ width: '100%', padding: '1rem' }}>
-      <SearchBox value={value} onChange={setValue} onSearch={setSearch} />
-      <QuestionSuggestions filter={value} onClick={(q) => { setValue(q); setSearch(q); }} />
+    <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
+      <FoamTree
+        style={{ flex: '50%' }}
+        groups={data}
+        setDocs={setDocs}
+      />
 
-      <Divider className={classes.divider} variant="fullWidth" />
+      <Box px={2} flex="50%" display="flex" flexDirection="column">
+        <Box mb={1}>
+          <Paper variant="outlined" square>
+            <Box p={1}>
+              <Typography component="p">
+                Top 100 of 451 papers
+              </Typography>
+            </Box>
+          </Paper>
+        </Box>
 
-      <div style={{ display: 'flex' }}>
-        <FoamTree
-          style={{ flex: '1' }}
-          searchTerm={search}
-          setDocs={setDocs}
-        />
-
-        <div className={classes.searchResults}>
+        <Box flex="50%" className={classes.searchResults}>
           {docs.map((d, i) => (
-            <React.Fragment key={i}>
-              <div className={classes.searchResultsHeader}>
-                <div className={classes.searchResultsIndex}>
-                  {i + 1}
-                </div>
-                
-                <a
-                  href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <h4 className={classes.searchResultsTitle}>
-                    {d.title}
-                  </h4>
-                </a>
-              </div>
-              
-              <p className={classes.searchResultsText}>{d.abstract}</p>
-            </React.Fragment>
+            <Box key={i} mb={2}>
+              <Paper variant="outlined" square>
+                <Box p={2}>
+                  <Box className={classes.searchResultsHeader}>
+                    <a
+                      href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={classes.searchResultsLink}
+                    >
+                      <Typography component="h4" variant="h5" color="textPrimary">
+                        {d.title}
+                      </Typography>
+                    </a>
+                  </Box>
+                  
+                  <Box mt={1}>
+                    <Typography component="p" variant="subtitle1" color="primary">
+                      {d.journal}
+                    </Typography>
+
+                    <Typography component="p" variant="subtitle1" color="textPrimary">
+                      {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
+                    </Typography>
+                  </Box>
+                </Box>
+              </Paper>
+            </Box>
           ))}
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+const FoamTreeSearchPage = () => {
+  const params = useParams();
+
+  const [data, setData] = useState({});
+  const [docs, setDocs] = useState([]);
+
+  const [search, setSearch] = useState(params.search);
+  const [loading, setLoading] = useState(true);
+  // const [inputValue, setInputValue] = useState(params.search);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const data = await fetchData(search);
+      const docs = findDocs({ groups: data });
+      
+      setData(data);
+      setDocs(docs);
+      setLoading(false);
+    };
+
+    setLoading(true);
+    fetch();
+  }, [search]);
+
+  return (
+    <>
+      {loading ? <LinearProgress /> : null}
+      <Box p={3} height="100vh">
+        <CssBaseline />
+        <Box my={2}>
+          <Typography component="h1" variant="h4">
+            BREATHE
+          </Typography>
+        </Box>
+
+        <SearchBox initialValue={params.search} onSearch={setSearch} />
+        {/* <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} /> */}
+
+        {!loading ? <Results data={data} docs={docs} setDocs={setDocs} /> : null}
+      </Box>
+    </>
   );
 };
 

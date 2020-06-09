@@ -1,48 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    '& > .search-bar': {
-      marginRight: '1rem'
-    }
-  },
-}));
+import QUESTIONS from '../../questionSuggestions.json';
 
-const SearchBox = ({ value, onChange, onSearch }) => {
-  const classes = useStyles();
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    onSearch(value);
-  };
+const SearchBox = ({ initialValue, onSearch }) => {
+  const [value, setValue] = useState(initialValue);
+  const [inputValue, setInputValue] = useState('');
 
   return (
-    <form
-      className={classes.root}
-      onSubmit={onSubmit}
-    >
-      <TextField
-        className="search-bar"
-        label="Search Bar UI"
-        variant="outlined"
-        fullWidth
-        InputLabelProps={{ shrink: true }}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
-
-      <Button
-        variant="contained"
-        color="primary"
-        type="submit"
-      >
-        Search
-      </Button>
-    </form>
+    <Autocomplete
+      freeSolo
+      fullWidth
+      placeholder="search"
+      variant="outlined"
+      size="small"
+      options={QUESTIONS}
+      value={value}
+      inputValue={inputValue}
+      onChange={(_, newValue) => {
+        setValue(newValue);
+        if (newValue) onSearch(newValue);
+      }}
+      onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
+      renderInput={params => (
+        <TextField {...params} placeholder="search" variant="outlined" />
+      )}
+    />
   );
 };
 

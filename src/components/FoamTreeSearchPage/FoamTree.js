@@ -1,29 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-const fetchData = async (searchTerm) => {
-  const CLOUD_URL = "https://us-central1-for-ivan.cloudfunctions.net/foamtree"
-  
-  const response = await fetch(CLOUD_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      search_term: searchTerm
-    })
-  });
-
-  const groups = await response.json();
-  return groups;
-};
-
-const findDocs = ({ groups, _docs = [] }) => {
-  let docs = [ ..._docs ];
-  groups.forEach(g => docs = [ ...docs, ...findDocs(g) ]);
-  return docs;
-};
+import debounce from '../../helpers/debounce';
+import { findDocs } from '../../controllers/dataFetch';
 
 const FoamTree = ({
   style = {},
-  searchTerm = '',
+  groups = {},
   setDocs
 }) => {
   const [foamtree, setFoamtree] = useState(null);
@@ -50,21 +32,20 @@ const FoamTree = ({
   }, [setDocs]);
 
   useEffect(() => {
-    const fetch = async () => {
-      if (foamtree) {
-        const groups = await fetchData(searchTerm);
-        const docs = findDocs({ groups });
-        
-        foamtree.set({ dataObject: { groups }});
-        setDocs(docs);
-      }
-    };
+    if (foamtree) foamtree.set({ dataObject: { groups }});
+  }, [foamtree, groups]);
 
-    fetch();
-  }, [foamtree, searchTerm, setDocs]);
+  useEffect(() => {
+    const debouncedHandleResize = debounce(() => {
+      if (foamtree) foamtree.resize();
+    }, 200);
+
+    window.addEventListener('resize', debouncedHandleResize);
+    return () => window.removeEventListener('resize', debouncedHandleResize);
+  });
 
   return (
-    <div id="foamtree" style={{ ...style, height: '650px' }}></div>
+    <div id="foamtree" style={{ ...style }}></div>
   );
 }
 
