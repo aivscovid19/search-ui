@@ -3,7 +3,7 @@
   "engines": {
     "yarn": ">=1.0.0 <2.0.0"
   },
-  "homepage": ".",
+  "homepage": "https://aivscovid19.github.io/search-ui",
   "version": "1.3.2",
   "private": true,
   "dependencies": {
@@ -26,7 +26,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "predeploy": "react-scripts build",
-    "deploy": "env-cmd -f .env /usr/bin/env gcloud builds submit . --substitutions=_GCS_BUCKET=${GCS_BUCKET}"
+    "deploy": "gh-pages -d build",
+    "deploy:gcloud": "env-cmd -f .env /usr/bin/env gcloud builds submit . --substitutions=_GCS_BUCKET=${GCS_BUCKET}"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,6 +46,7 @@
   },
   "devDependencies": {
     "encoding": "^0.1.12",
+    "gh-pages": "^3.1.0",
     "node-fetch": "^2.6.0"
   }
 }
