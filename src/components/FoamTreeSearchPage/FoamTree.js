@@ -6,9 +6,12 @@ import { findDocs } from '../../controllers/dataFetch';
 const FoamTree = ({
   style = {},
   groups = {},
-  setDocs
+  setDocs,
+  setResultCount,
+  resultCount
 }) => {
   const [foamtree, setFoamtree] = useState(null);
+  const [,totalCount] = resultCount;
 
   useEffect(() => {
     const { CarrotSearchFoamTree } = window;
@@ -24,12 +27,13 @@ const FoamTree = ({
         event.preventDefault();
       } else if (group) {
         const docs = (group.groups) ? findDocs(group) : group._docs;
+        setResultCount([docs.length, totalCount]);
         setDocs(docs);
       }
     });
 
     setFoamtree(_foamtree);
-  }, [setDocs]);
+  }, [setDocs, setResultCount, totalCount]);
 
   useEffect(() => {
     if (foamtree) foamtree.set({ dataObject: { groups }});
