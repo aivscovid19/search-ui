@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=/ react-scripts build",
     "predeploy": "react-scripts build",
     "deploy": "gh-pages -d build",
     "deploy:gcloud": "env-cmd -f .env /usr/bin/env gcloud builds submit . --substitutions=_GCS_BUCKET=${GCS_BUCKET}"

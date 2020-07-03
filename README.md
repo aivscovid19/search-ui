@@ -31,7 +31,7 @@ The **first time** you deploy you need to setup a google bucket and configure
 the default webpage (index.html)
 ```
 export GCS_BUCKET=search-$PROJECT_ID
-gsutil mb -b on gs://$GCS_BUCKET
+gsutil mb -b on -c standard gs://$GCS_BUCKET
 gsutil web set -m index.html gs://$GCS_BUCKET
 gsutil iam ch allUsers:objectViewer gs://$GCS_BUCKET
 ```
@@ -44,7 +44,7 @@ echo GCS_BUCKET=$GCS_BUCKET >> .env
 ```
 To make sure everything works:
 ```
-gcloud builds submit . --substitutions=${_GCS_BUCKET}=$GCS_BUCKET
+gcloud builds submit . --substitutions=_GCS_BUCKET=$GCS_BUCKET
 ```
 you only need the above steps the **first time**. 
 
@@ -61,6 +61,11 @@ open https://storage.googleapis.com/${GCS_PROJECT}/index.html
 yarn build
 gsutil -m rsync -R ./build gs://$GCS_BUCKET
 gsutil setmeta -R -h "Cache-Control: max-age=31536000" gs://$GCS_BUCKET/static/
+```
+
+extra:
+```
+gcloud alpha builds triggers create github --repo-owner="ai-vs-covid19" --repo-name="search-ui" --pull-request-pattern="^master$" --build-config="cloudbuild.yaml"
 ```
 
 # References

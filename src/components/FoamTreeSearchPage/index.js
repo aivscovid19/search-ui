@@ -94,7 +94,7 @@ const Results = ({ data, docs, setDocs }) => {
                       </Typography>
                     </a>
                   </Box>
-                  
+
                   <Box mt={1}>
                     <Typography component="p" variant="subtitle1" color="primary">
                       {d.journal}
@@ -127,8 +127,9 @@ const FoamTreeSearchPage = () => {
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchData(search);
-      const docs = findDocs({ groups: data });
-      
+      // console.log(data);
+      const docs = findDocs({ groups: data, _docs: data['reranked'] });
+
       setData(data);
       setDocs(docs);
       setLoading(false);
