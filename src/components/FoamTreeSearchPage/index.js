@@ -10,11 +10,17 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import { Grid, CardActionArea, CardContent, CardActions, Card, Avatar, ListItemAvatar, Divider, List, ListItem, ListItemText } from '@material-ui/core';
+import { green, red } from '@material-ui/core/colors';
+
+
 import { useParams } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   divider: {
     marginBottom: '1.5rem',
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
@@ -35,17 +41,24 @@ const useStyles = makeStyles(() => ({
     marginBottom: 0,
     fontSize: '1.5rem',
     fontWeight: 'bold',
-  }
+  },
+  root: {
+    width: '100%',
+    //maxWidth: '36ch',
+    backgroundColor: theme.palette.background.paper,
+  },
+  inline: {
+    display: 'inline',
+  },
 }));
 
-const Results = ({ data, docs, setDocs }) => {
-  const MAX_ABSTRACT = 250;
+const Results = ({ name, data, docs, setDocs }) => {
 
   const classes = useStyles();
 
   if (docs.length === 0) {
     return (
-      <Box
+      <Paper
         display="flex"
         height="85%"
         justifyContent="center"
@@ -54,71 +67,125 @@ const Results = ({ data, docs, setDocs }) => {
         <Typography component="h4" variant="h3">
           NO RESULTS FOR QUERY
         </Typography>
-      </Box>
+      </Paper>
     );
   }
 
   return (
-    <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
-      <FoamTree
-        style={{ flex: '50%' }}
-        groups={data}
-        setDocs={setDocs}
-      />
+    <Paper className={classes.searchResults}>
+      <List className={classes.root}>
+        {docs.map((doc, i) => (
+          <div key={i}>
+            <Abstract key={`${name}-${i}`} {...doc} ></Abstract>
+            <Divider key={`${name}-div-${i}`} variant="inset" component="li" ></Divider>
+          </div>
+          // <ListItem dense>
+          //   <Box p={2}>
+          //     <Box className={classes.searchResultsHeader}>
+          //       <a
+          //         href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
+          //         target="_blank"
+          //         rel="noopener noreferrer"
+          //         className={classes.searchResultsLink}
+          //       >
+          //         <Typography component="h4" variant="h5" color="textPrimary">
+          //           {d.title}
+          //         </Typography>
+          //       </a>
+          //     </Box>
 
-      <Box px={2} flex="50%" display="flex" flexDirection="column">
-        <Box mb={1}>
-          <Paper variant="outlined" square>
-            <Box p={1}>
-              <Typography component="p">
-                Top 100 of 451 papers
-              </Typography>
-            </Box>
-          </Paper>
-        </Box>
+          //     <Box mt={1}>
+          //       <Typography component="p" variant="subtitle1" color="primary">
+          //         {d.journal}
+          //       </Typography>
 
-        <Box flex="50%" className={classes.searchResults}>
-          {docs.map((d, i) => (
-            <Box key={i} mb={2}>
-              <Paper variant="outlined" square>
-                <Box p={2}>
-                  <Box className={classes.searchResultsHeader}>
-                    <a
-                      href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={classes.searchResultsLink}
-                    >
-                      <Typography component="h4" variant="h5" color="textPrimary">
-                        {d.title}
-                      </Typography>
-                    </a>
-                  </Box>
-
-                  <Box mt={1}>
-                    <Typography component="p" variant="subtitle1" color="primary">
-                      {d.journal}
-                    </Typography>
-
-                    <Typography component="p" variant="subtitle1" color="textPrimary">
-                      {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
-                    </Typography>
-                  </Box>
-                </Box>
-              </Paper>
-            </Box>
-          ))}
-        </Box>
-      </Box>
-    </Box>
+          //       <Typography component="p" variant="subtitle1" color="textPrimary">
+          //       </Typography>
+          //     </Box>
+          //   </Box>
+          // </ListItem>
+        ))}
+      </List>
+    </Paper>
   );
 };
+
+const MAX_ABSTRACT = 512;
+
+function truncate(text) {
+  var text = text === undefined ? "?" : text
+  return (text.length >= MAX_ABSTRACT) ? text.slice(0, MAX_ABSTRACT).trim() + `...` : text
+}
+
+function LinkTitle(props) {
+  const classes = useStyles();
+  return (<a
+    href={`https://pubmed.ncbi.nlm.nih.gov/${props.pmid}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={classes.searchResultsLink}
+  >{props.title}</a>)
+}
+
+function ChangeIndicator(props) {
+  if (props.newpos < props.prevpos) {
+    return (<><KeyboardArrowUpIcon
+      style={{ color: green[500] }} />
+      <Typography type="subheading"
+        style={{ color: green[500] }}
+      >
+        +{props.prevpos - props.newpos}
+      </Typography></>)
+  }
+  if (props.newpos == props.newpos) {
+    return (<Typography type="subheading">
+      +0
+    </Typography>)
+  } else {
+    return (<><KeyboardArrowDownIcon
+      style={{ color: red[500] }} />
+      <Typography type="subheading">
+        -{props.newpos - props.prevpos}
+      </Typography></>)
+  }
+}
+
+function Abstract(props) {
+  const classes = useStyles();
+  const doc = props.doc;
+  return <ListItem alignItems="flex-start">
+    <ListItemAvatar>
+      <Typography variant="caption" display="block" gutterBottom>
+        <ChangeIndicator {...props}>
+        </ChangeIndicator>
+        {String(props.score).slice(0, 5)}
+      </Typography>
+    </ListItemAvatar>
+    <ListItemText
+      primary={parseInt(doc.pmid) !== 0 ? LinkTitle(doc) : doc.title}
+      secondary={
+        <React.Fragment>
+          <Typography
+            component="span"
+            variant="body2"
+            className={classes.inline}
+            color="textPrimary"
+          >
+            {doc.authors}
+          </Typography>
+          <br />
+          {truncate(doc.abstract)}
+        </React.Fragment>}
+    />
+  </ListItem>
+}
 
 const FoamTreeSearchPage = () => {
   const params = useParams();
 
   const [data, setData] = useState({});
-  const [docs, setDocs] = useState([]);
+  const [reranked, setReRanked] = useState([]);
+  const [original, setOriginal] = useState([]);
 
   const [search, setSearch] = useState(params.search);
   const [loading, setLoading] = useState(true);
@@ -128,10 +195,12 @@ const FoamTreeSearchPage = () => {
     const fetch = async () => {
       const data = await fetchData(search);
       // console.log(data);
-      const docs = findDocs({ groups: data, _docs: data['reranked'] });
+      const reranked = data['reranked'];
+      const original = data['original'];
 
       setData(data);
-      setDocs(docs);
+      setOriginal(original);
+      setReRanked(reranked);
       setLoading(false);
     };
 
@@ -141,20 +210,39 @@ const FoamTreeSearchPage = () => {
 
   return (
     <>
-      {loading ? <LinearProgress /> : null}
-      <Box p={3} height="100vh">
+
+      <Paper variant="outlined" elevation={3}>
         <CssBaseline />
-        <Box my={2}>
-          <Typography component="h1" variant="h4">
-            BREATHE
-          </Typography>
-        </Box>
+        <Card variant="outlined">
+          <CardActionArea>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                BREATHE/CORD19
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <SearchBox initialValue={params.search} onSearch={setSearch} />
+            {/* <Button size="small" color="primary">
+            Share
+        </Button>
+          <Button size="small" color="primary">
+            Learn More
+        </Button> */}
+          </CardActions>
+          {loading ? <LinearProgress color="secondary" /> : null}
+        </Card>
 
-        <SearchBox initialValue={params.search} onSearch={setSearch} />
         {/* <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} /> */}
-
-        {!loading ? <Results data={data} docs={docs} setDocs={setDocs} /> : null}
-      </Box>
+        {!loading ? <Results name="reranked" data={data} docs={reranked} setDocs={setReRanked} /> : null}
+        <Grid container>
+          {/* <Grid item xs={6}>
+            {!loading ? <Results name="original" data={data} docs={original} setDocs={setOriginal} /> : null}
+          </Grid> */}
+          <Grid item xs={8}>
+          </Grid>
+        </Grid>
+      </Paper>
     </>
   );
 };
