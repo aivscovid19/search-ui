@@ -137,7 +137,7 @@ function ChangeIndicator(props) {
         +{props.prevpos - props.newpos}
       </Typography></>)
   }
-  if (props.newpos == props.newpos) {
+  if (props.newpos === props.prevpos) {
     return (<Typography type="subheading">
       +0
     </Typography>)
