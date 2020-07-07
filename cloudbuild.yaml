@@ -9,6 +9,7 @@ steps:
   - name: gcr.io/cloud-builders/gsutil
     args:
       [
+        "-m",
         "setmeta",
         "-R",
         "-h",
