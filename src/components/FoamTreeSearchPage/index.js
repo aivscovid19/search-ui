@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import SearchBox from './SearchBox';
-import QuestionSuggestions from './QuestionSuggestions';
 import FoamTree from './FoamTree';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,9 +37,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Results = ({ data, docs, setDocs }) => {
+const Results = ({ count, data, docs, setDocs, setResultCount }) => {
   const MAX_ABSTRACT = 250;
 
+  const [currentCount, totalCount] = count;
   const classes = useStyles();
 
   if (docs.length === 0) {
@@ -64,6 +64,8 @@ const Results = ({ data, docs, setDocs }) => {
         style={{ flex: '50%' }}
         groups={data}
         setDocs={setDocs}
+        setResultCount={setResultCount}
+        resultCount={count}
       />
 
       <Box px={2} flex="50%" display="flex" flexDirection="column">
@@ -71,7 +73,7 @@ const Results = ({ data, docs, setDocs }) => {
           <Paper variant="outlined" square>
             <Box p={1}>
               <Typography component="p">
-                Top 100 of 451 papers
+                Top {currentCount} of {totalCount} papers
               </Typography>
             </Box>
           </Paper>
@@ -117,18 +119,19 @@ const Results = ({ data, docs, setDocs }) => {
 const FoamTreeSearchPage = () => {
   const params = useParams();
 
+  const [resultCount, setResultCount] = useState([0,0]);
   const [data, setData] = useState({});
   const [docs, setDocs] = useState([]);
 
   const [search, setSearch] = useState(params.search);
   const [loading, setLoading] = useState(true);
-  // const [inputValue, setInputValue] = useState(params.search);
 
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchData(search);
       const docs = findDocs({ groups: data });
       
+      setResultCount([docs.length, docs.length]);
       setData(data);
       setDocs(docs);
       setLoading(false);
@@ -150,9 +153,7 @@ const FoamTreeSearchPage = () => {
         </Box>
 
         <SearchBox initialValue={params.search} onSearch={setSearch} />
-        {/* <QuestionSuggestions filter={inputValue} onClick={(q) => { setInputValue(q); setSearch(q); }} /> */}
-
-        {!loading ? <Results data={data} docs={docs} setDocs={setDocs} /> : null}
+        {!loading ? <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} /> : null}
       </Box>
     </>
   );
