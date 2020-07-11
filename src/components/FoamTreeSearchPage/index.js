@@ -240,7 +240,6 @@ function Abstract(props, classes) {
         <React.Fragment>
           <Typography
             component="span"
-            variant="subtitle"
             className={classes.inline}
             color="textPrimary"
           >
@@ -275,7 +274,7 @@ const FoamTreeSearchPage = () => {
   }
 
   const [indexes, setIndexes] = useState({
-    bioasq: createIndex('bioasq', true, false),
+    bioasq: createIndex('bioasq', false, false),
     ncbi: createIndex('ncbi', true, false),
     springer: createIndex('springer'),
     jama: createIndex('jama'),
@@ -303,7 +302,7 @@ const FoamTreeSearchPage = () => {
     setLoading(false);
   };
 
-  useEffect(fetch, [search]);
+  useEffect(() => { fetch() }, [search]);
 
   const marks = [
     {
