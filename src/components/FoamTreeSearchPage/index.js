@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import SearchBox from './SearchBox';
 
@@ -7,13 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import QuestionSuggestions from './QuestionSuggestions';
-import FoamTree from './FoamTree';
+// import QuestionSuggestions from './QuestionSuggestions';
+// import FoamTree from './FoamTree';
 import Slider from '@material-ui/core/Slider';
 
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import { Grid, CardActionArea, CardContent, CardActions, Card, Avatar, ListItemAvatar, Divider, List, ListItem, ListItemText, Button } from '@material-ui/core';
+import { Grid, CardActionArea, CardContent, CardActions, Card, ListItemAvatar, Divider, List, ListItem, ListItemText, Button } from '@material-ui/core';
 import { green, red } from '@material-ui/core/colors';
 
 import FormGroup from '@material-ui/core/FormGroup';
@@ -24,7 +24,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import SearchIcon from '@material-ui/icons/Search';
 
 import { useParams } from 'react-router-dom';
-import { fetchData, findDocs } from '../../controllers/dataFetch';
+import { fetchData } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -120,7 +120,7 @@ const Results = ({ name, data, docs, setDocs }) => {
 const MAX_ABSTRACT = 512;
 
 function truncate(text) {
-  var text = text === undefined ? "?" : text
+  text = text === undefined ? "?" : text
   return (text.length >= MAX_ABSTRACT) ? text.slice(0, MAX_ABSTRACT).trim() + `...` : text
 }
 
@@ -176,12 +176,7 @@ function hexToRGB(hex) {
   } : null;
 }
 
-const THRESHOLD = 0.02
 function formatScore(score) {
-  var relevant = true
-  if (score < THRESHOLD) {
-    relevant = false
-  }
   const color = colorGradient(score, hexToRGB(red[500]), hexToRGB(green[500]))
   const fmtscore = String(score).slice(0, 5)
   return (<Typography variant="caption" style={{ color : color }} >{fmtscore}</Typography>)
@@ -290,7 +285,7 @@ const FoamTreeSearchPage = () => {
     setIndexes({ ...indexes, [event.target.name]: { ...indexes[event.target.name], selected: event.target.checked } });
   }
 
-  const fetch = async () => {
+  const fetchCallback = useCallback( async () => {
     setLoading(true);
     const idx = Object.entries(indexes).filter(([name, obj]) => obj.selected).map(([name, obj]) => obj.index)
 
@@ -300,44 +295,10 @@ const FoamTreeSearchPage = () => {
     setData(data);
     setReRanked(reranked);
     setLoading(false);
-  };
+  }, [search, searchSize, indexes]);
 
-  useEffect(() => { fetch() }, [search]);
+  useEffect(() => { fetchCallback() }, [fetchCallback]);
 
-  const marks = [
-    {
-      value: 10,
-      label: 'Top 10',
-    },
-    {
-      value: 20,
-      label: 'Top 20',
-    },
-    {
-      value: 50,
-      label: 'Top 50',
-    },
-    {
-      value: 100,
-      label: 'Top 100',
-    },
-    {
-      value: 500,
-      label: 'Top 500',
-    },
-    {
-      value: 1000,
-      label: 'Top 1000',
-    },
-  ];
-
-  function valuetext(value) {
-    return `${value}`;
-  }
-
-  function valueLabelFormat(value) {
-    return marks.findIndex((mark) => mark.value === value) + 1;
-  }
 
   function selectAll(event) {
     const updated = Object.entries(indexes).reduce((o, [name, doc]) => {
