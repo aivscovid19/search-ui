@@ -14,4 +14,12 @@ steps:
         "Cache-Control: max-age=31536000",
         "gs://${_GCS_BUCKET}/static/",
       ]
+  - name: gcr.io/cloud-builders/gsutil
+    args:
+      [
+        "setmeta",
+        "-h",
+        "Cache-Control: max-age=180",
+        "gs://${_GCS_BUCKET}/index.html",
+      ]
 timeout: "1600s"
