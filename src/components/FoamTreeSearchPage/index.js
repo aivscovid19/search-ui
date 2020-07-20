@@ -44,7 +44,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount }) => {
 
   const [currentCount, totalCount] = count;
   const classes = useStyles();
-  //Delete below 2 fakse after top score chart will be ready
+  //Delete below 2 fake after top score chart will be ready
   let fakeScore = 1; 
   let fakeRating = data.length - 1; 
   // Two above

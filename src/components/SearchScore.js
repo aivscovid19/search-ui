@@ -13,6 +13,11 @@ export default class SearchScore extends React.Component{
                         : <KeyboardArrowDownIcon/>}
                 </Grid>
                 <Grid item >
+                    <Typography component="p" gutterBottom variant="subtitle2">
+                        {rating}
+                    </Typography>
+                </Grid>
+                <Grid item >
               <Typography  component="p"  gutterBottom variant="subtitle2">
                         Score:
                     </Typography>
@@ -20,11 +25,6 @@ export default class SearchScore extends React.Component{
                     <Grid item >
                     <Typography component="p" gutterBottom>
                         {placement}
-                    </Typography>
-                </Grid>
-                <Grid item >
-                    <Typography component="p" gutterBottom variant="subtitle2">
-                        {rating}
                     </Typography>
                 </Grid>
               </Grid>
