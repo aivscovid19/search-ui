@@ -48,20 +48,20 @@ const Results = ({ count, data, docs, setDocs, setResultCount }) => {
   let fakeScore = 1; 
   let fakeRating = data.length - 1; 
   // Two above
-  // if (docs.length === 0) {
-  //   return (
-  //     <Box
-  //       display="flex"
-  //       height="85%"
-  //       justifyContent="center"
-  //       alignItems="center"
-  //     >
-  //       <Typography component="h4" variant="h3">
-  //         NO RESULTS FOR QUERY
-  //       </Typography>
-  //     </Box>
-  //   );
-  // }
+  if (data.length === 0) {
+    return (
+      <Box
+        display="flex"
+        height="85%"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Typography component="h4" variant="h3">
+          NO RESULTS FOR QUERY
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
     <Box mt={2} display="flex" minHeight="85%" maxHeight="85%" >
