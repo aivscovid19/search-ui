@@ -15,6 +15,8 @@ import { useParams } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { pretifyT5Score } from '../../helpers/score';
+
 const useStyles = makeStyles(() => ({
   divider: {
     marginBottom: '1.5rem',
@@ -45,7 +47,6 @@ const Results = ({ count, data, docs, setDocs, setResultCount }) => {
   const [currentCount, totalCount] = count;
   const classes = useStyles();
   //Delete below 2 fake after top score chart will be ready
-  let fakeScore = 1; 
   let fakeRating = data.length - 1; 
   // Two above
   if (data.length === 0) {
@@ -89,7 +90,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount }) => {
               <Paper variant="outlined" square>
                 <Grid container >
                   <Grid container item  xs alignContent="center">
-                    <SeacrhScore placement={fakeScore++} rating={"+" + fakeRating--}/>
+                    <SeacrhScore placement={pretifyT5Score(d.score)} rating={"+" + fakeRating--}/>
                   </Grid>
                   <Grid item xs={11}>
                 <Box  p={2}>
