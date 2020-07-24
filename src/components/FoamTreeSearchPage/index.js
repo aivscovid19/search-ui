@@ -155,11 +155,11 @@ const FoamTreeSearchPage = () => {
 
   return (
     <>
-      {loading ? <LinearProgress /> : null}
+      {/* {loading ? <LinearProgress /> : null} */}
       <Box p={3} height="100vh">
         <CssBaseline />
         <Box my={2}>
-          <Typography component="h1" variant="h4">
+          <Typography component="h1" onClick={() => {window.location = '/'}} variant="h4">
             BREATHE
           </Typography>
         </Box>

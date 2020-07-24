@@ -77,20 +77,20 @@ export default function App() {
                     <Facet field='source' label='Source' isFilterable={true} />
                   </div>
                 }
-                bodyContent={
-                  <Results
-                    resultView={
-                      ({ result }) => {
-                        const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
-                        return <Result
-                          titleField="title"
-                          urlField={linkField}
-                          result={result}
-                        />
-                      }
-                    }
-                  />
-                }
+                // bodyContent={
+                //   <Results
+                //     resultView={
+                //       ({ result }) => {
+                //         const linkField = result.link && result.link.raw ? 'link' : 'pdf_link';
+                //         return <Result
+                //           titleField="title"
+                //           urlField={linkField}
+                //           result={result}
+                //         />
+                //       }
+                //     }
+                //   />
+                // }
                 bodyHeader={
                   <React.Fragment>
                     {wasSearched && <PagingInfo />}
