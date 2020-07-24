@@ -16,6 +16,7 @@ import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { pretifyT5Score } from '../../helpers/score';
+import Spinner from '../helpers/LoadingSpiner';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -84,7 +85,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount }) => {
             </Box>
           </Paper>
         </Box>
-        <Box  flex="100%" className={classes.searchResults} style={{margin: "auto"}} maxWidth="85%">
+        <Box  flex="100%" className={classes.searchResults} style={{margin: "auto"}} maxWidth="80%">
           {data.map((d, i) => (
             <Box key={i} mb={2}>
               <Paper variant="outlined" square>
@@ -165,7 +166,7 @@ const FoamTreeSearchPage = () => {
         </Box>
 
         <SearchBox initialValue={params.search} onSearch={setSearch} />
-        {!loading ? <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} /> : null}
+        {loading ? <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle"/> : <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} /> }
       </Box>
     </>
   );
