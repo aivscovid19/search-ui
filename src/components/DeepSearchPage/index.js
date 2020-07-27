@@ -1,165 +1,46 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Stepper from '@material-ui/core/Stepper';
+import React, {useState} from 'react'
+import DeepSearchForm from './DeepSearchForm';
+import SearchBox from '../FoamTreeSearchPage/SearchBox';
+import { useParams } from 'react-router-dom';
+import { Box, Typography, Container } from '@material-ui/core';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
-import InformationForm from './InformationForm';
-import InformationReview from './InformationReview';
-import FormCompleted from './FormCompleted';
-import { CustomStepIcon, CustomStepConnector } from './CustomFormStepper';
-
-import { fetchDeepSearch } from '../../controllers/dataFetch';
-
-const useStyles = makeStyles((theme) => ({
-  layout: {
-    width: 'auto',
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
-  },
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
-    },
-  },
-  stepper: {
-    padding: theme.spacing(3, 0, 5),
-  },
-  buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  }
-}));
-
-const DeepSearchForm = () => {
-  const classes = useStyles();
-  const [loading, setLoading] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [formFields, setFormFields] = useState([{
-    $$title: 'Information',
-    email: { $$title: 'Email', value: '' },
-    firstName: { $$title: 'First Name', value: '' },
-    lastName: { $$title: 'Last Name', value: '' },
-    size: { $$title: 'Size', value: '' },
-    query: { $$title: 'Query', value: '' }
-  }]);
-
-  const handleNext = () => setActiveStep(activeStep + 1);
-  const handleBack = () => setActiveStep(activeStep - 1);
-  const reset = () => setActiveStep(0);
-
-  const handleSubmit = async () => {
-    setLoading(true);
-
-    const { email, firstName, lastName, size, query } = Object.keys(formFields[0]).reduce((fields, field) => ({
-      ...fields, [field]: formFields[0][field].value 
-    }), {});
-
-    try {
-      const name = `${firstName} ${lastName}`;
-
-      const data = await fetchDeepSearch({
-        query, email,
-        name: name.trim(),
-        type: size
-      });
-      
-      console.log(data);
-    } catch (err) {
-      // HANDLE ERRORS correctly
-      console.log(err.response);
-      console.dir(err);
-    }
-
-    setLoading(false);
-    handleNext();
-  };
-
-  const setField = (step) => (field, value) => {
-    const newFormFields = [...formFields];
-    newFormFields[step][field].value = value;
-    setFormFields(newFormFields);
-  };
-
-  return (
-    <main className={classes.layout}>
-      <Paper className={classes.paper}>
-        <Typography component="h1" variant="h4" align="center">
-          Deep Search Query
-        </Typography>
-
-        <Stepper alternativeLabel activeStep={activeStep} className={classes.stepper} connector={<CustomStepConnector />}>
-          {[ ...formFields.map(({ $$title }) => $$title), 'Review' ].map(title => (
-            <Step key={title}>
-              <StepLabel StepIconComponent={CustomStepIcon}>{title}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-          <>
-            {activeStep === 0 && <InformationForm initialValues={formFields[0]} setField={setField(0)} />}
-            {activeStep === 1 && <InformationReview fields={formFields[0]} />}
-            {activeStep > formFields.length && <FormCompleted />}
-
-            <div className={classes.buttons}>
-              {activeStep <= formFields.length && activeStep !== 0 && (
-                <Button
-                  disabled={loading}
-                  className={classes.button}
-                  onClick={handleBack}
-                >
-                  Back
-                </Button>
-              )}
-
-              {activeStep <= formFields.length && (
-                <Button
-                  disabled={loading}
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={() => {
-                    if (activeStep === formFields.length)
-                      return handleSubmit()
-                    handleNext()
-                  }}
-                >
-                  {activeStep === formFields.length ? 'Submit' : 'Next'}
-                </Button>
-              )}
-
-              {(activeStep > formFields.length) && (
-                <Button
-                  disabled={loading}
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  onClick={reset}
-                >
-                  Reset
-                </Button>
-              )}
-            </div>
-          </>
-      </Paper>
-    </main>
-  );
+const DeepSearch = () =>{
+    const params = useParams();
+    const [search, setSearch] = useState();
+    return (
+        <div>
+            <Box p={3} height="100vh">
+        <Box my={2}>
+          <Typography component="h1" onClick={() => {window.location = '/'}} variant="h4">
+            BREATHE
+          </Typography>
+        </Box>
+                <SearchBox initialValue={params.search} onSearch={setSearch} />
+                <Container style={{display: "flex"}}>
+                        <Container>
+                            <Container style={{justifyContent:"flex-start"}} style={{padding: '0px', margin: "30px 0px"}}>
+                                <Typography fontWeight="fontWeightBold" variant="h5" component="h2">Thanks for using deep search.</Typography>
+                                <Typography fontWeight="fontWeightBold" component="h2" variant="h5">Please submit form bellow, to recive results.</Typography>
+                            </Container>
+                            <DeepSearchForm style={{margin: "0px", padding: "0px"}}/>
+                        </Container>
+                    <Container>
+                        <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
+                            <ArrowBackIosIcon style={{color: "grey"}}/>
+                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/#/' + params.search}>Switch to Shallow Search</a>
+                        </Container>
+                        <Container style={{ justifyContent: "center", marginTop: "40px" }}>
+                        <h4>More detailed explanation of how search works and its value</h4>
+                            <Typography>
+                            sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in dictum non consectetur a erat nam at lectus urna duis convallis convallis tellus id interdum velit laoreet id donec ultrices tincidunt arcu non sodales neque sodales ut etiam sit amet nisl purus in mollis nunc sed id semper risus in hendrerit gravida rutrum quisque non tellus orci ac auctor augue mauris augue neque gravida in fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium
+                            </Typography>
+                        </Container>
+                    </Container>
+                </Container>
+      </Box>
+        </div>
+    );
 }
 
-export default DeepSearchForm;
+export default DeepSearch;

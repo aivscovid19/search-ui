@@ -1,15 +1,19 @@
 import axios from 'axios';
+import { CLOUD_URL, CLOUD_DEEP_URL } from '../config';
 
 export const fetchDeepSearch = async ({ query, email, name, type }) => {
-  const CLOUD_URL = "https://us-central1-for-web-search.cloudfunctions.net/job-organizer";
-  const { data } = await axios.post(CLOUD_URL, { query, email, name, type });
+  const { data } = await axios.post(CLOUD_DEEP_URL, { query, email, name, type });
   return data;
 };
 
 export const fetchData = async search_term => {
-  const CLOUD_URL = "https://us-central1-for-web-search.cloudfunctions.net/search";
-  const { data } = await axios.post(CLOUD_URL, { search_term, group: true });
-  return data;
+  const res  = await axios.get(CLOUD_URL, { search_term, group: true, timeout: 15000 }).catch(err => {
+    console.log(err)
+  });
+  if (res === undefined)
+    return "error";
+  else
+    return res.data;
 };
 
 export const findDocs = ({ groups = [], _docs = [] }) => {

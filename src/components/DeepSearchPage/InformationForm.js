@@ -6,13 +6,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
+import { Container } from '@material-ui/core';
 
 const InformationForm = ({
   initialValues,
   setField
 }) => {
   return (
-    <>
+    <Container style={{margin: "0px !important"}}>
       <Typography variant="h6" gutterBottom>
         Your Information
       </Typography>
@@ -72,7 +73,7 @@ const InformationForm = ({
           />
         </Grid>
       </Grid>
-    </>
+    </Container>
   );
 };
 
