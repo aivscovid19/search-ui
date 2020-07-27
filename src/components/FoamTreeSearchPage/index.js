@@ -17,6 +17,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { pretifyT5Score } from '../../helpers/score';
 import Spinner from '../helpers/LoadingSpiner';
+import ServerError from '../helpers/SereverError';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -138,12 +139,16 @@ const FoamTreeSearchPage = () => {
 
   const [search, setSearch] = useState(params.search);
   const [loading, setLoading] = useState(true);
-
+  const [serverError, setError] = useState(false);
+  
   useEffect(() => {
     const fetch = async () => {
       const data = await fetchData(search);
+      if (data === "error") {
+        setError(true);
+        return;
+      }
       const docs = findDocs({ groups: data });
-      
       setResultCount([docs.length, data.length]);
       setData(data);
       setDocs(docs);
@@ -166,7 +171,9 @@ const FoamTreeSearchPage = () => {
         </Box>
 
         <SearchBox initialValue={params.search} onSearch={setSearch} />
-        {loading ? <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle"/> : <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} /> }
+        {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
+          <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
+          <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}
       </Box>
     </>
   );

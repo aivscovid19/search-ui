@@ -7,8 +7,13 @@ export const fetchDeepSearch = async ({ query, email, name, type }) => {
 };
 
 export const fetchData = async search_term => {
-  const { data } = await axios.get(CLOUD_URL, { search_term, group: true });
-  return data;
+  const res  = await axios.get(CLOUD_URL, { search_term, group: true, timeout: 15000 }).catch(err => {
+    console.log(err)
+  });
+  if (res === undefined)
+    return "error";
+  else
+    return res.data;
 };
 
 export const findDocs = ({ groups = [], _docs = [] }) => {
