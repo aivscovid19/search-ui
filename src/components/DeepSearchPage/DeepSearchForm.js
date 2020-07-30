@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import { useParams } from 'react-router-dom';
 import Stepper from '@material-ui/core/Stepper';
 
 import InformationForm from './InformationForm';
@@ -59,13 +60,14 @@ const DeepSearchForm = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const params = useParams();
   const [formFields, setFormFields] = useState([{
     $$title: 'Information',
     firstName: { $$title: 'First Name', value: '' },
     lastName: { $$title: 'Last Name', value: '' },
     email: { $$title: 'Email', value: '' },
-    size: { $$title: 'Size', value: '' },
-    query: { $$title: 'Query', value: '' }
+    dSize: { $$title: 'Data Size', value: '' },
+    mSize: { $$title: 'Model Size', value: '' }
   }]);
 
   const handleNext = () => setActiveStep(activeStep + 1);
@@ -75,7 +77,7 @@ const DeepSearchForm = () => {
   const handleSubmit = async () => {
     setLoading(true);
 
-    const { email, firstName, lastName, size, query } = Object.keys(formFields[0]).reduce((fields, field) => ({
+    const { email, firstName, lastName, dSize, mSize } = Object.keys(formFields[0]).reduce((fields, field) => ({
       ...fields, [field]: formFields[0][field].value 
     }), {});
 
@@ -83,9 +85,10 @@ const DeepSearchForm = () => {
       const name = `${firstName} ${lastName}`;
 
       const data = await fetchDeepSearch({
-        query, email,
+        mSize, email,
         name: name.trim(),
-        type: size
+        type: dSize,
+        query: params.search
       });
       
       console.log(data);
