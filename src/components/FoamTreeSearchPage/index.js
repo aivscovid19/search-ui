@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import {Grid} from '@material-ui/core'
+import {Grid, Container} from '@material-ui/core'
 
 import { useParams } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
@@ -18,6 +18,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { pretifyT5Score } from '../../helpers/score';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -171,6 +172,12 @@ const FoamTreeSearchPage = () => {
         </Box>
 
         <SearchBox initialValue={params.search} onSearch={setSearch} />
+        <Container>
+            <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px", width: "95%"}}>
+                            <ArrowBackIosIcon style={{color: "grey"}}/>
+            <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }} href={'/#/deepsearch/' + params.search}>Switch to Deep Search</a>
+          </Container>
+        </Container>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
           <Results count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}

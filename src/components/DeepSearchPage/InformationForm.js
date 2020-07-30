@@ -53,8 +53,8 @@ const InformationForm = ({
           <FormControl fullWidth required>
             <InputLabel>Data Size</InputLabel>
             <Select
-              value={initialValues['size'].value}
-              onChange={({ target: { value } }) => setField('size', value)}
+              value={initialValues['dSize'].value}
+              onChange={({ target: { value } }) => setField('dSize', value)}
             >
               <MenuItem value="small">Small</MenuItem>
               <MenuItem value="medium">Medium</MenuItem>
@@ -64,13 +64,17 @@ const InformationForm = ({
         </Grid>
 
         <Grid item xs={12} md={6}>
-          <TextField
-            required
-            fullWidth
-            label={initialValues['query']['$$title']}
-            value={initialValues['query'].value}
-            onChange={({ target: { value } }) => setField('query', value)}
-          />
+        <FormControl fullWidth required>
+            <InputLabel>Model Size</InputLabel>
+            <Select
+              value={initialValues['mSize'].value}
+              onChange={({ target: { value } }) => setField('mSize', value)}
+            >
+              <MenuItem value="small">Small</MenuItem>
+              <MenuItem value="medium">Medium</MenuItem>
+              <MenuItem value="large">Large</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
       </Grid>
     </Container>
