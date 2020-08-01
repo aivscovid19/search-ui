@@ -166,7 +166,7 @@ const FoamTreeSearchPage = () => {
       <Box p={3} height="100vh">
         <CssBaseline />
         <Box my={2}>
-          <Typography component="h1" onClick={() => {window.location = '/'}} variant="h4">
+          <Typography component="h1" onClick={() => {window.location = '/search-ui'}} variant="h4">
             BREATHE
           </Typography>
         </Box>
@@ -175,7 +175,7 @@ const FoamTreeSearchPage = () => {
         <Container>
             <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px", width: "95%"}}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
-            <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }} href={'/#/deepsearch/' + params.search}>Switch to Deep Search</a>
+            <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }} href={'/search-ui/#/deepsearch/' + params.search}>Switch to Deep Search</a>
           </Container>
         </Container>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
