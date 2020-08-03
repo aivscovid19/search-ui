@@ -2,6 +2,7 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Check from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 import StepConnector from '@material-ui/core/StepConnector';
 
 export const CustomStepConnector = withStyles({
@@ -48,18 +49,22 @@ const customStepIconStyles = makeStyles({
     zIndex: 1,
     fontSize: 18,
   },
+  error: {
+    color: '#ff3333',
+    zIndex: 1,
+    fontSize: 18
+  }
 });
 
-export const CustomStepIcon = ({ active, completed }) => {
+export const CustomStepIcon = ({ active, completed, error }) => {
   const classes = customStepIconStyles();
 
   return (
-    <div
-      className={clsx(classes.root, {
-        [classes.active]: active,
-      })}
-    >
+    (error ? 
+      <CloseIcon className={classes.completed} />
+       :
+    <div className={clsx(classes.root, { [classes.active]: active })}>
       {completed ? <Check className={classes.completed} /> : <div className={classes.circle} />}
-    </div>
+    </div > )
   );
 };

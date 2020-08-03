@@ -11,6 +11,7 @@ import Stepper from '@material-ui/core/Stepper';
 import InformationForm from './InformationForm';
 import InformationReview from './InformationReview';
 import FormCompleted from './FormCompleted';
+import FormError from './FormError';
 import { CustomStepIcon, CustomStepConnector } from './CustomFormStepper';
 
 import { fetchDeepSearch } from '../../controllers/dataFetch';
@@ -20,11 +21,6 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-    //   width: 500,
-    //   marginLeft: 'auto',
-    //   marginRight: 'auto',
-    // },
     width: "90%",
     display: "flex",
     justifyContent: "flex-start"
@@ -60,6 +56,7 @@ const DeepSearchForm = () => {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const [serverError, setError] = useState(false);
   const params = useParams();
   const [formFields, setFormFields] = useState([{
     $$title: 'Information',
@@ -72,7 +69,7 @@ const DeepSearchForm = () => {
 
   const handleNext = () => setActiveStep(activeStep + 1);
   const handleBack = () => setActiveStep(activeStep - 1);
-  const reset = () => setActiveStep(0);
+  const reset = () => { setActiveStep(0); setError(false)}
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -90,14 +87,11 @@ const DeepSearchForm = () => {
         type: dSize,
         query: params.search
       });
-      
-      console.log(data);
     } catch (err) {
       // HANDLE ERRORS correctly
+      setError(true);
       console.log(err.response);
-      console.dir(err);
     }
-
     setLoading(false);
     handleNext();
   };
@@ -118,14 +112,14 @@ const DeepSearchForm = () => {
         <Stepper alternativeLabel activeStep={activeStep} className={classes.stepper} connector={<CustomStepConnector />}>
           {[ ...formFields.map(({ $$title }) => $$title), 'Review' ].map(title => (
             <Step key={title}>
-              <StepLabel StepIconComponent={CustomStepIcon}>{title}</StepLabel>
+              <StepLabel error={serverError} StepIconComponent={CustomStepIcon}>{title}</StepLabel>
             </Step>
           ))}
         </Stepper>
           <>
             {activeStep === 0 && <InformationForm initialValues={formFields[0]} setField={setField(0)} />}
             {activeStep === 1 && <InformationReview fields={formFields[0]} />}
-            {activeStep > formFields.length && <FormCompleted />}
+            {activeStep > formFields.length && (serverError ? <FormError/>  : <FormCompleted />)}
 
             <div className={classes.buttons}>
               {activeStep <= formFields.length && activeStep !== 0 && (
