@@ -20,7 +20,7 @@ const DeepSearch = () =>{
                 <Container style={{display: "flex"}}>
                         <Container>
                             <Container style={{justifyContent:"flex-start"}} style={{padding: '0px', margin: "30px 0px"}}>
-                                <Typography fontWeight="fontWeightBold" variant="h5" component="h2">Thanks for using deep search.</Typography>
+                                <Typography fontWeight="fontWeightBold" variant="h5" component="h2">Thanks for using deep literature search.</Typography>
                                 <Typography fontWeight="fontWeightBold" component="h2" variant="h5">Please submit form bellow, to recive results.</Typography>
                             </Container>
                             <DeepSearchForm style={{margin: "0px", padding: "0px"}}/>
@@ -28,7 +28,7 @@ const DeepSearch = () =>{
                     <Container>
                         <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
-                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/search-ui/#/' + params.search}>Switch to Shallow Search</a>
+                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/search-ui/#/' + params.search}>Switch to Quick Search</a>
                         </Container>
                         <Container style={{ justifyContent: "center", marginTop: "40px" }}>
                         <h4>More detailed explanation of how search works and its value</h4>

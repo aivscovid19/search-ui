@@ -106,7 +106,7 @@ const DeepSearchForm = () => {
     <div className={classes.layout} style={{margin: "0px"}}>
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h4" align="center">
-          Deep Search Query
+          Deep Literature Search Query
         </Typography>
 
         <Stepper alternativeLabel activeStep={activeStep} className={classes.stepper} connector={<CustomStepConnector />}>

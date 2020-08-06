@@ -184,7 +184,7 @@ const FoamTreeSearchPage = () => {
           </Container>
             <Container style={{display:"flex", justifyContent: "flex-end", marginTop: "23px", width: "50%", paddingRight: "50px"}}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
-            <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }} href={'/search-ui/#/deepsearch/' + params.search}>Switch to Deep Search</a>
+            <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }} href={'/search-ui/#/deepsearch/' + params.search}>Switch to Deep Literature Search</a>
           </Container>
         </Container>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :

@@ -76,11 +76,11 @@ const Landing = () => {
         <Container style={{marginTop: "20px", maxWidth: "800px"}} className={classes.main}>
           <div style={{display:"flex", width: "50%", justifyContent: "flex-end", paddingRight: "20px"}}>
           <input checked={checkBox1} onChange={handleCheckBox} name="checkbox-1" type="checkbox"></input>
-            <label htmlFor="checkbox-1">Shallow Search</label>
+            <label htmlFor="checkbox-1">Quick Search</label>
           </div>
           <div style={{ display:"flex", width: "50%"}}> 
             <input checked={checkBox2}  onChange={handleCheckBox} style={{ borderRadius: "50%" }} name="checkbox-2" type="checkbox"></input>
-            <label htmlFor="checkbox-2">Deep Search</label>
+            <label htmlFor="checkbox-2">Deep Literature Search</label>
             </div>
         </Container>
         <Container style={{ maxWidth: "800px", marginTop: "20px" }}  >
