@@ -28,7 +28,7 @@ const DeepSearch = () =>{
                     <Container>
                         <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
-                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/#/' + params.search}>Switch to Shallow Search</a>
+                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/search-ui/#/' + params.search}>Switch to Shallow Search</a>
                         </Container>
                         <Container style={{ justifyContent: "center", marginTop: "40px" }}>
                         <h4>More detailed explanation of how search works and its value</h4>
