@@ -19,7 +19,6 @@ import { pretifyT5Score } from '../../helpers/score';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { render } from 'react-dom';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -45,11 +44,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-class Results extends React.Component{
-  render(){
-    const { count, data, docs, setDocs, setResultCount, switched } = this.props
-    console.log(this.props)
-    console.log(switched)
+const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
     const MAX_ABSTRACT = 250;
 
     const [currentCount, totalCount] = count;
@@ -134,7 +129,6 @@ class Results extends React.Component{
         </Box>
       </Box>
     );
-  }
 };
 
 const FoamTreeSearchPage = () => {
