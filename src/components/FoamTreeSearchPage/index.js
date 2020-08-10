@@ -18,6 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { FoamTreeDataSort } from '../../helpers/FoamTreeSort';
+import { example } from '../../helpers/virusSearch';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -144,11 +146,14 @@ const FoamTreeSearchPage = () => {
   
   useEffect(() => {
     const fetch = async () => {
-      const data = await fetchData(search);
-      if (data === "error") {
-        setError(true);
-        return;
-      }
+      // const data = await fetchData(search);
+      // if (data === "error") {
+      //   setError(true);
+      //   return;
+      // }
+      let data = example; 
+      data = FoamTreeDataSort(data);
+      console.log(data);
       const docs = findDocs({ groups: data });
       setResultCount([docs.length, data.length]);
       setData(data);
