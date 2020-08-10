@@ -19,16 +19,12 @@ export default class SearchScore extends React.Component{
                     </Typography>
                 </Grid>
                 <Grid item >
-              <Typography  component="p"  gutterBottom variant="subtitle2">
-                        Score:
-                    </Typography>
-                    </Grid>
-                    <Grid item >
-                    <Typography component="p" gutterBottom>
-                        {score}
-                    </Typography>
+                    <Typography  component="p"  gutterBottom variant="subtitle2"> Score: </Typography>
                 </Grid>
-              </Grid>
+                <Grid item >
+                    <Typography component="p" gutterBottom>{score}</Typography>
+                </Grid>
+            </Grid>
         );
     }
 }
