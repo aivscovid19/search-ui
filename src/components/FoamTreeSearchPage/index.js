@@ -92,7 +92,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                 <Paper variant="outlined" square>
                   <Grid container >
                     <Grid container item xs alignContent="center">
-                      <SeacrhScore placement={d.score} rating={"+" + fakeRating--} />
+                      <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
                       <Box p={2}>
