@@ -15,7 +15,6 @@ import { useParams } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { pretifyT5Score } from '../../helpers/score';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
@@ -93,7 +92,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                 <Paper variant="outlined" square>
                   <Grid container >
                     <Grid container item xs alignContent="center">
-                      <SeacrhScore placement={pretifyT5Score(d.score)} rating={"+" + fakeRating--} />
+                      <SeacrhScore placement={d.score} rating={"+" + fakeRating--} />
                     </Grid>
                     <Grid item xs={11}>
                       <Box p={2}>
