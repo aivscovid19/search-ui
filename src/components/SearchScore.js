@@ -5,29 +5,26 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 export default class SearchScore extends React.Component{
     render() {
-        const { placement, rating } = this.props;
+        const { score, placement } = this.props;
         return (
             <Grid container justify="center" alignItems="center" direction="column">
                 <Grid item>
-                    {parseInt(rating) > 0 ? <KeyboardArrowUpIcon/>
-                        : <KeyboardArrowDownIcon/>}
+                    {placement > 0
+                        ? <KeyboardArrowUpIcon htmlColor="#99ff99" />
+                        : <KeyboardArrowDownIcon color="error" />}
                 </Grid>
                 <Grid item >
                     <Typography component="p" gutterBottom variant="subtitle2">
-                        {rating}
+                        {placement > 0 ? '+' : ''}{placement}
                     </Typography>
                 </Grid>
                 <Grid item >
-              <Typography  component="p"  gutterBottom variant="subtitle2">
-                        Score:
-                    </Typography>
-                    </Grid>
-                    <Grid item >
-                    <Typography component="p" gutterBottom>
-                        {placement}
-                    </Typography>
+                    <Typography  component="p"  gutterBottom variant="subtitle2"> Score: </Typography>
                 </Grid>
-              </Grid>
+                <Grid item >
+                    <Typography component="p" gutterBottom>{score}</Typography>
+                </Grid>
+            </Grid>
         );
     }
 }
