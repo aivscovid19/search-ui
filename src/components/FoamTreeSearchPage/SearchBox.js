@@ -8,8 +8,8 @@ import QUESTIONS from '../../questionSuggestions.json';
 const SearchBox = ({ initialValue, onSearch }) => {
   const [value, setValue] = useState(initialValue);
   const [inputValue, setInputValue] = useState('');
-
   return (
+    <form onSubmit={onSearch(value)}>
     <Autocomplete
       freeSolo
       fullWidth
@@ -19,15 +19,12 @@ const SearchBox = ({ initialValue, onSearch }) => {
       options={QUESTIONS}
       value={value}
       inputValue={inputValue}
-      onChange={(_, newValue) => {
-        setValue(newValue);
-        if (newValue) onSearch(newValue);
-      }}
-      onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
+      onChange={(e) => {setValue(e.target.value);}}
       renderInput={params => (
         <TextField {...params} placeholder="search" variant="outlined" />
       )}
-    />
+      />
+      </form>
   );
 };
 

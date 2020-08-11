@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import SearchBox from './SearchBox';
 import FoamTree from './FoamTree';
 import SeacrhScore from '../SearchScore';
 
@@ -8,10 +7,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import {Grid, Container, Switch} from '@material-ui/core'
+import {Grid, Container, Switch, TextField} from '@material-ui/core'
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { fetchData, findDocs } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -132,33 +130,38 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
 
 const FoamTreeSearchPage = () => {
   const params = useParams();
+  const history = useHistory();
 
   const [resultCount, setResultCount] = useState([0,0]);
   const [data, setData] = useState({});
   const [docs, setDocs] = useState([]);
 
   const [search, setSearch] = useState(params.search);
+  const [query, setQuery] = useState(params.search);
   const [loading, setLoading] = useState(true);
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
-  
-  useEffect(() => {
-    const fetch = async () => {
-      const data = await fetchData(search);
-      if (data === "error") {
-        setError(true);
-        return;
-      }
-      const docs = findDocs({ groups: data });
-      setResultCount([docs.length, data.length]);
-      setData(data);
-      setDocs(docs);
-      setLoading(false);
-    };
 
+  const fetch = async (search) => {
     setLoading(true);
+    const data = await fetchData(search);
+    if (data === "error") {
+      setError(true);
+      return;
+    }
+    const docs = findDocs({ groups: data });
+    setResultCount([docs.length, data.length]);
+    setData(data);
+    setDocs(docs);
+    setLoading(false);
+  };
+  useEffect(() => {
     fetch();
   }, [search]);
+  const quickSearch = () => {
+    fetch(query);
+    history.push(decodeURI(query));
+  }
   return (
     <>
       <Box p={3} height="100vh">
@@ -168,8 +171,9 @@ const FoamTreeSearchPage = () => {
             BREATHE
           </Typography>
         </Box>
-
-        <SearchBox initialValue={params.search} onSearch={setSearch} />
+        <form onSubmit={quickSearch} style={{display: "flex", justifyContent: "center"}}>
+          <TextField placeholder="search" variant="outlined" size="small" style={{ width: "100%" }} onChange={(e) => setQuery(e.target.value)} value={query} />
+        </form>
         <Container style={{ display: "flex", flexDerection: "row", alignItems: "center", width: "100%", height: "20px" }}>
           
           <Container style={{display:"flex", justifyContent: "flex-start", marginTop: "10px", width: "50%" }}>
