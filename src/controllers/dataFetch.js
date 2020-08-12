@@ -16,8 +16,8 @@ export const fetchData = async search_term => {
     return res.data;
 };
 
-export const findDocs = ({ groups = [], _docs = [] }) => {
-  let docs = [ ..._docs ];
+export const findDocs = ({ groups = [], _doc = null }) => {
+  let docs = _doc === null ? [] : [_doc];
   groups.forEach(g => docs = [ ...docs, ...findDocs(g) ]);
   return docs;
 };
