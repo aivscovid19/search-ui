@@ -36,7 +36,9 @@ const FoamTree = ({
   }, [setDocs, setResultCount, totalCount]);
 
   useEffect(() => {
-    if (foamtree) foamtree.set({ dataObject: { groups }});
+    if (foamtree) {
+      foamtree.set({ dataObject: groups });
+    }
   }, [foamtree, groups]);
 
   useEffect(() => {

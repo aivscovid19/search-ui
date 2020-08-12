@@ -89,7 +89,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
             </Paper>
           </Box>
           <Box flex="100%" className={classes.searchResults} style={{ margin: "auto" }} maxWidth="80%">
-            {data.map((d, i) => (
+            {docs.map((d, i) => (
               <Box key={i} mb={2}>
                 <Paper variant="outlined" square>
                   <Grid container >
@@ -153,8 +153,7 @@ const FoamTreeSearchPage = () => {
       // }
       let data = example; 
       data = FoamTreeDataSort(data);
-      console.log(data);
-      const docs = findDocs({ groups: data });
+      const docs = findDocs(data);
       setResultCount([docs.length, data.length]);
       setData(data);
       setDocs(docs);
