@@ -64,7 +64,7 @@ const createInnerData = (id, data) => {
     let article = findArticle(id, data);
     if (article) {
         format.label = article.title;
-        format._docs = article;
+        format._doc = article;
         return format;
     }
 }
@@ -78,8 +78,7 @@ const checkForDoubles = (arr, id) => {
         // console.log(arr[k])
         while (i < arr.length) {
             for (let j in arr[i]["groups"]) {
-                // console.log("___________",arr[i]["groups"][j]["_docs"].pmid)
-                if (arr[i]["groups"][j]["_docs"].pmid === id)
+                if (arr[i]["groups"][j]["_doc"].pmid === id)
                     return false;
             }
             i++;
@@ -133,7 +132,7 @@ const OtherFormatedData = (word, res, data, id, other) => {
     let article = findArticle(id, data);
     if (doub && checkOther) {
             format.label = article.title;
-            format._docs = article;
+            format._doc = article;
             return format;
         }
     return null;
