@@ -24,6 +24,9 @@ const useStyles = makeStyles(() => ({
     marginBottom: '1.5rem',
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
   },
+  searchResultsTop: {
+    margin: '0 auto 0.5em auto'
+  },
   searchResults: {
     height: '100%',
     overflow: 'scroll'
@@ -74,11 +77,11 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
         /> : null}
 
         <Box px={2} flex="100%" display="flex" flexDirection="column">
-          <Box mb={1}>
+          <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
               <Box p={1}>
                 <Typography component="p">
-                  Top {currentCount} of {totalCount} papers
+                  Top {currentCount} papers
               </Typography>
               </Box>
             </Paper>
