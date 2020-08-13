@@ -17,11 +17,15 @@ import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
+import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 
 const useStyles = makeStyles(() => ({
   divider: {
     marginBottom: '1.5rem',
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
+  },
+  searchResultsTop: {
+    margin: '0 auto 0.5em auto'
   },
   searchResults: {
     height: '100%',
@@ -47,9 +51,6 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
 
     const [currentCount, totalCount] = count;
     const classes = useStyles();
-    //Delete below 2 fake after top score chart will be ready
-    let fakeRating = data.length - 1;
-    // Two above
     if (data.length === 0) {
       return (
         <Box
@@ -68,7 +69,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
     return (
       <Box mt={2} display="flex" minHeight="85%" maxHeight="85%" >
         {switched ? <FoamTree
-          style={{ flex: '50%' }}
+          style={{ flex: '90%' }}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
@@ -76,11 +77,11 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
         /> : null}
 
         <Box px={2} flex="100%" display="flex" flexDirection="column">
-          <Box mb={1}>
+          <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
               <Box p={1}>
                 <Typography component="p">
-                  Top {currentCount} of {totalCount} papers
+                  Top {currentCount} papers
               </Typography>
               </Box>
             </Paper>
@@ -107,7 +108,13 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                             </Typography>
                           </a>
                         </Box>
-                  
+
+                        <Box>
+                          <Typography component="p" color="secondary">
+                            {d.keywords ? d.keywords.join('; ') : ''}
+                          </Typography>
+                        </Box>
+
                         <Box mt={1}>
                           <Typography component="p" variant="subtitle1" color="primary">
                             {d.journal}
@@ -145,13 +152,15 @@ const FoamTreeSearchPage = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      let data = await fetchData(search);
-      if (data === "error") {
+      let data;
+      try {
+        data = await fetchData(search);
+      } catch {
         setError(true);
         return;
       }
-      data = buildFoamtreeDataObject(data);
-      const docs = findDocs(data);
+      const docs = data;
+      data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
       setResultCount([docs.length, data.length]);
       setData(data);
       setDocs(docs);
