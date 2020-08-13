@@ -16,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -85,7 +86,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
             </Paper>
           </Box>
           <Box flex="100%" className={classes.searchResults} style={{ margin: "auto" }} maxWidth="80%">
-            {data.map((d, i) => (
+            {docs.map((d, i) => (
               <Box key={i} mb={2}>
                 <Paper variant="outlined" square>
                   <Grid container >
@@ -142,20 +143,22 @@ const FoamTreeSearchPage = () => {
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
 
-  const fetch = async (search) => {
-    setLoading(true);
-    const data = await fetchData(search);
-    if (data === "error") {
-      setError(true);
-      return;
-    }
-    const docs = findDocs({ groups: data });
-    setResultCount([docs.length, data.length]);
-    setData(data);
-    setDocs(docs);
-    setLoading(false);
-  };
   useEffect(() => {
+    const fetch = async () => {
+      let data = await fetchData(search);
+      if (data === "error") {
+        setError(true);
+        return;
+      }
+      data = buildFoamtreeDataObject(data);
+      const docs = findDocs(data);
+      setResultCount([docs.length, data.length]);
+      setData(data);
+      setDocs(docs);
+      setLoading(false);
+    };
+
+    setLoading(true);
     fetch();
   }, [search]);
   const quickSearch = () => {

@@ -26,7 +26,7 @@ const FoamTree = ({
       if (group && group.unselectable) {
         event.preventDefault();
       } else if (group) {
-        const docs = (group.groups) ? findDocs(group) : group._docs;
+        const docs = findDocs(group);
         setResultCount([docs.length, totalCount]);
         setDocs(docs);
       }
@@ -36,7 +36,9 @@ const FoamTree = ({
   }, [setDocs, setResultCount, totalCount]);
 
   useEffect(() => {
-    if (foamtree) foamtree.set({ dataObject: { groups }});
+    if (foamtree) {
+      foamtree.set({ dataObject: groups });
+    }
   }, [foamtree, groups]);
 
   useEffect(() => {
