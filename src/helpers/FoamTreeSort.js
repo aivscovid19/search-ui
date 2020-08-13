@@ -111,10 +111,10 @@ const FormatedData = (word, res, data) => {
     // finding array of all ids with current keyword
     let ids = findIds(word[0]);
     while (ids[i]) {
-        if (checkForDoubles(res, ids[i])) {
+        // if (checkForDoubles(res, ids[i])) {
             // adding inside elements to keyword
             format.groups.push(createInnerData(ids[i], data))
-        }
+        // }
         weight--;
         i++;
     }
@@ -127,7 +127,7 @@ const FormatedData = (word, res, data) => {
 const OtherFormatedData = (word, res, data, id, other) => {
     let format = {};
     let doub = checkForDoubles(res, id);
-    let checkOther = checkOtherForDoubles(other, id)
+    let checkOther = checkOtherForDoubles(other, id);
     // taking direct article
     let article = findArticle(id, data);
     if (doub && checkOther) {
@@ -167,8 +167,7 @@ const makeGroups = (sorted, data) => {
         j = 0;
         i++;
     }
-    console.log(groups);
-    // console.log(other.length)
+    console.log(groups)
     groups.push({ label: "Others", groups: other });
     return groups
 }
@@ -176,6 +175,7 @@ const makeGroups = (sorted, data) => {
 // Function main
 // Data in all functions is json from search
 export const FoamTreeDataSort = (data) => {
+    data = data.filter(doc => doc.keywords !== "");
     if (data) {
         let i = 1;
         for (let k of data) {

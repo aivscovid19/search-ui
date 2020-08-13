@@ -116,10 +116,10 @@ const FormatedData = (word, res, data) => {
     // finding array of all ids with current keyword
     let ids = findIds(word[0]);
     while (ids[i]) {
-        if (checkForDoubles(res, ids[i])) {
+        // if (checkForDoubles(res, ids[i])) {
             // adding inside elements to keyword
             format.groups.push(createInnerData(ids[i], data))
-        }
+        // }
         weight--;
         i++;
     }
@@ -172,7 +172,6 @@ const makeGroups = (sorted, data) => {
         j = 0;
         i++;
     }
-    console.log(groups);
     // console.log(other.length)
     groups.push({ label: "Others", groups: other });
     return groups
@@ -180,7 +179,7 @@ const makeGroups = (sorted, data) => {
 
 // Function main
 // Data in all functions is json from search
-const FoamTreeData = (data) => {
+export const FoamTreeDataSort = (data) => {
     let i = 1;
     for (let k of data) {
         parseKeywords((k["keywords"]).toLowerCase(), i, k["pmid"]);
@@ -188,9 +187,10 @@ const FoamTreeData = (data) => {
     }
     Sort(counter);
     res.groups = makeGroups(sorted, data);
+    return res;
 }
 
-FoamTreeData(example);
+// FoamTreeData(example);
 
 // fs.writeFile('./te1.json', JSON.stringify(res), err => {
 //         if (err) {
