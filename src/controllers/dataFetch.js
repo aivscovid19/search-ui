@@ -19,5 +19,5 @@ export const fetchData = async (query, size = DEFAULT_QUERY_SIZE) => {
 export const findDocs = ({ groups = [], _doc = null }) => {
   let docs = _doc === null ? [] : [_doc];
   groups.forEach(g => docs = [ ...docs, ...findDocs(g) ]);
-  return docs;
+  return docs.sort((a, b) => b.score - a.score);
 };
