@@ -69,7 +69,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
     return (
       <Box mt={2} display="flex" minHeight="85%" maxHeight="85%" >
         {switched ? <FoamTree
-          style={{ flex: '50%' }}
+          style={{ flex: '90%' }}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
