@@ -105,7 +105,13 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                             </Typography>
                           </a>
                         </Box>
-                  
+
+                        <Box>
+                          <Typography component="p" color="secondary">
+                            {d.keywords ? d.keywords.join('; ') : ''}
+                          </Typography>
+                        </Box>
+
                         <Box mt={1}>
                           <Typography component="p" variant="subtitle1" color="primary">
                             {d.journal}
