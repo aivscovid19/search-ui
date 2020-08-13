@@ -17,6 +17,7 @@ import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
+import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -150,7 +151,7 @@ const FoamTreeSearchPage = () => {
         setError(true);
         return;
       }
-      data = buildFoamtreeDataObject(data);
+      data = buildFoamtreeDataObject(decodeUnicodeFields(data));
       const docs = findDocs(data);
       setResultCount([docs.length, data.length]);
       setData(data);
