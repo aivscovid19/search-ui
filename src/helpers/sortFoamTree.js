@@ -1,9 +1,8 @@
 
-
 /*
     Function looking in data list and taking all documents where appears keyword
     in: word - array of 2 element, 1: keyword, 2: counter(how many appears). data: authentic search data with formated keywords
-    out: arrray of articles where appears keyword
+    out: arrray of articles where appears keyword`
 */
 const findArticle = (word, data) => {
     let article = [];
@@ -37,6 +36,22 @@ const createInnerData = (word, data) => {
     return group;
 }
 /*
+    Function formating groups under "Others" label for specific FoamTree library format
+    in: array of articles
+    out: foramted array of articles
+*/
+const otherFormated = (others) => {
+    let tmp = {};
+    let format = [];
+    for (let key of others) {
+        tmp.label = key["title"];
+        tmp._doc = key;
+        format.push(tmp);
+        tmp = {};
+    }
+    return format;
+}
+/*
     Function creating specific format for FoamTree library
     in: keywords - sorted array of all keywords, data: authentic search data with formated keywords
     out: array of all keyword with groups attached to it
@@ -44,16 +59,18 @@ const createInnerData = (word, data) => {
 const makeGroups = (keywords, data) => {
     let groups = [];
     let others = [];
-    const top30 = keywords.filter((element, index) => index < 30);
+    let tmp = [];
+    let top30 = keywords.filter((element, index) => index < 30);
     for (let i = 0; top30[i]; i++) {
         if (top30[i][0] === "")
             i++;
         groups.push({groups: createInnerData(top30[i], data), weight: top30[i][1], label: top30[i][0]});
     }
-    // const f1 = (x) => x.keywords.filter(el => top30.has(x)).length === 0)
-    // others = data.filter(f1);
+    for (let k in top30) { tmp.push(top30[k][0]); }
+    const f1 = (x) => x.keywords.filter(el => tmp.includes(el)).length !== 0;
+    others = data.filter(f1);
+    others = otherFormated(others);
     groups.push({ label: "Others", groups: others });
-    console.log(groups)
     return groups;
 }
 /*

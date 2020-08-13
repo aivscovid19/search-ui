@@ -17,8 +17,6 @@ import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { FoamTreeDataSort } from '../../helpers/sortFoamTree';
-import { example } from '../../helpers/virusSearch';
-// import { example, FoamTreeDataSort } from '../../helpers/virusSearch';
 
 const useStyles = makeStyles(() => ({
   divider: {
