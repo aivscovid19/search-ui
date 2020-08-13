@@ -151,8 +151,8 @@ const FoamTreeSearchPage = () => {
         setError(true);
         return;
       }
-      data = buildFoamtreeDataObject(decodeUnicodeFields(data));
-      const docs = findDocs(data);
+      const docs = data;
+      data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
       setResultCount([docs.length, data.length]);
       setData(data);
       setDocs(docs);
