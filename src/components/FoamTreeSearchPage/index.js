@@ -16,7 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import { FoamTreeDataSort } from '../../helpers/sortFoamTree';
+import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 
 const useStyles = makeStyles(() => ({
   divider: {

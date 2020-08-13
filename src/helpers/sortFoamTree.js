@@ -103,10 +103,14 @@ const parseKeywords = (data) => {
     return data;
 }
 
-/*
-    Main function
-*/
-export const FoamTreeDataSort = (data) => {
+/**
+ *  Builds foamtree data object from an array of documents.
+ *  For more information refer to foamtree documentation:
+ *  https://get.carrotsearch.com/foamtree/latest/api/
+ *  @param {Array<Object>} data
+ *  @return {Object}
+ */
+export const buildFoamtreeDataObject = (data) => {
     let keywords = [];
     let result = {};
     data = data.filter(doc => doc.keywords !== "");
