@@ -149,8 +149,10 @@ const FoamTreeSearchPage = () => {
 
   useEffect(() => {
     const fetch = async () => {
-      let data = await fetchData(search);
-      if (data === "error") {
+      let data;
+      try {
+        data = await fetchData(search);
+      } catch {
         setError(true);
         return;
       }
