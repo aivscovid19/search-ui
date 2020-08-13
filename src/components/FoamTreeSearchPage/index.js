@@ -144,7 +144,6 @@ const FoamTreeSearchPage = () => {
   const [data, setData] = useState({});
   const [docs, setDocs] = useState([]);
 
-  const [search, setSearch] = useState(params.search);
   const [query, setQuery] = useState(params.search);
   const [loading, setLoading] = useState(true);
   const [serverError, setError] = useState(false);
@@ -168,7 +167,7 @@ const FoamTreeSearchPage = () => {
   };
 
   useEffect(() => {
-    fetch(search);
+    fetch(query);
   }, []);
   const quickSearch = () => {
     fetch(query);
