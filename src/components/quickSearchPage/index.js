@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import FoamTree from './FoamTree';
-import SeacrhScore from '../SearchScore';
+import FoamTree from './foamTree';
+import SeacrhScore from '../helpers/SearchScore';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {Grid, Container, Switch, TextField} from '@material-ui/core'
 
 import { useParams, useHistory } from 'react-router-dom';
-import { fetchData, findDocs } from '../../controllers/dataFetch';
+import { fetchData } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Spinner from '../helpers/LoadingSpiner';

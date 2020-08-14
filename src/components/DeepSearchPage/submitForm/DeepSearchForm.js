@@ -14,11 +14,10 @@ import FormCompleted from './FormCompleted';
 import FormError from './FormError';
 import { CustomStepIcon, CustomStepConnector } from './CustomFormStepper';
 
-import { fetchDeepSearch } from '../../controllers/dataFetch';
+import { fetchDeepSearch } from '../../../controllers/dataFetch';
 
 const useStyles = makeStyles((theme) => ({
   layout: {
-    width: 'auto',
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     width: "90%",
@@ -28,7 +27,6 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: 0,
       marginBottom: 0,
@@ -90,7 +88,6 @@ const DeepSearchForm = () => {
     } catch (err) {
       // HANDLE ERRORS correctly
       setError(true);
-      console.log(err.response);
     }
     setLoading(false);
     handleNext();
