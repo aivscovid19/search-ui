@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import {Grid, Container, Switch, TextField} from '@material-ui/core'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchData } from '../../controllers/dataFetch';
@@ -188,7 +189,17 @@ const FoamTreeSearchPage = () => {
         <Container style={{ display: "flex", flexDerection: "row", alignItems: "center", width: "100%", height: "20px" }}>
           
           <Container style={{display:"flex", justifyContent: "flex-start", marginTop: "10px", width: "50%" }}>
-            {!loading ? <Switch onChange={() => { setSwitch(!switchTree) }} inputProps={{ 'aria-label': 'primary checkbox' }} /> :null}
+            {!loading ?
+              <FormControlLabel
+                control={
+                  <Switch
+                    onChange={() => { setSwitch(!switchTree) }}
+                    inputProps={{ 'aria-label': 'primary checkbox' }
+                  }/>
+                }
+                label="Toggle FoamTree"
+              />
+              : null }
           </Container>
             <Container style={{display:"flex", justifyContent: "flex-end", marginTop: "23px", width: "50%", paddingRight: "50px"}}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
