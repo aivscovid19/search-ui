@@ -144,32 +144,31 @@ const FoamTreeSearchPage = () => {
   const [data, setData] = useState({});
   const [docs, setDocs] = useState([]);
 
-  const [search, setSearch] = useState(params.search);
   const [query, setQuery] = useState(params.search);
   const [loading, setLoading] = useState(true);
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
 
-  useEffect(() => {
-    const fetch = async () => {
-      let data;
-      try {
-        data = await fetchData(search);
-      } catch {
-        setError(true);
-        return;
-      }
-      const docs = data;
-      data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
-      setResultCount([docs.length, data.length]);
-      setData(data);
-      setDocs(docs);
-      setLoading(false);
-    };
-
+  const fetch = async (search) => {
     setLoading(true);
-    fetch();
-  }, [search]);
+    let data;
+    try {
+      data = await fetchData(search);
+    } catch {
+      setError(true);
+      return;
+    }
+    const docs = data;
+    data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
+    setResultCount([docs.length, data.length]);
+    setData(data);
+    setDocs(docs);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetch(query);
+  }, []);
   const quickSearch = () => {
     fetch(query);
     history.push(decodeURI(query));
