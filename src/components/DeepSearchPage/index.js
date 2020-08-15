@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
-import DeepSearchForm from './DeepSearchForm';
-import SearchBox from '../FoamTreeSearchPage/SearchBox';
+import DeepSearchForm from './submitForm/DeepSearchForm';
 import { useParams } from 'react-router-dom';
-import { Box, Typography, Container } from '@material-ui/core';
+import { Box, Typography, Container, TextField } from '@material-ui/core'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 const DeepSearch = () =>{
     const params = useParams();
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState(params.search);
     return (
         <div>
             <Box p={3} height="100vh">
@@ -16,10 +15,10 @@ const DeepSearch = () =>{
             BREATHE
           </Typography>
         </Box>
-                <SearchBox initialValue={params.search} onSearch={setSearch} />
+        <TextField placeholder="search" variant="outlined" size="small" style={{ width: "100%" }} onChange={(e) => setSearch(e.target.value)} value={search} />
                 <Container style={{display: "flex"}}>
                         <Container>
-                            <Container style={{justifyContent:"flex-start"}} style={{padding: '0px', margin: "30px 0px"}}>
+                            <Container style={{padding: '0px', margin: "30px 0px", justifyContent:"flex-start"}}>
                                 <Typography fontWeight="fontWeightBold" variant="h5" component="h2">Thanks for using deep literature search.</Typography>
                                 <Typography fontWeight="fontWeightBold" component="h2" variant="h5">Please submit form bellow, to recive results.</Typography>
                             </Container>
