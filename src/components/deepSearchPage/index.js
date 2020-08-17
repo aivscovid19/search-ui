@@ -31,6 +31,7 @@ const DeepSearch = () =>{
                         </Container>
                         <Container style={{ justifyContent: "center", marginTop: "40px" }}>
                         <h4>More detailed explanation of how search works and its value</h4>
+                        <h5>Please, note, that Deep Literature Search functionality is disabled temporarily. The form can be submitted but no results will be send to the email.</h5>
                             <Typography>
                             sed vulputate odio ut enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit scelerisque in dictum non consectetur a erat nam at lectus urna duis convallis convallis tellus id interdum velit laoreet id donec ultrices tincidunt arcu non sodales neque sodales ut etiam sit amet nisl purus in mollis nunc sed id semper risus in hendrerit gravida rutrum quisque non tellus orci ac auctor augue mauris augue neque gravida in fermentum et sollicitudin ac orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu feugiat pretium nibh ipsum consequat nisl vel pretium
                             </Typography>
