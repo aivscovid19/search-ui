@@ -52,7 +52,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
 
     const [currentCount, totalCount] = count;
     const classes = useStyles();
-    if (data.length === 0) {
+    if (docs.length === 0) {
       return (
         <Box
           display="flex"
