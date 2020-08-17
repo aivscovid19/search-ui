@@ -96,12 +96,12 @@ const sortKeywords = (data) => {
 /*
     Split string of keywords and normalize each keyword
 */
-const parseKeywords = (data) => {
-    for (let k in data) {
-        data[k].keywords = data[k].keywords.toLowerCase().split(';');
-    }
-    return data;
-}
+const parseKeywords = docList => docList.map((doc) => {
+        doc.keywords = doc.keywords
+            ? doc.keywords.toLowerCase().split(';')
+            : [];
+        return doc;
+    });
 
 /**
  *  Builds foamtree data object from an array of documents.
