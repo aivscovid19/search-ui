@@ -1,8 +1,8 @@
 
-/*
-    Function looking in data list and taking all documents where appears keyword
-    in: word - array of 2 element, 1: keyword, 2: counter(how many appears). data: authentic search data with formated keywords
-    out: arrray of articles where appears keyword`
+/**
+  *  Function looking in data list and taking all documents where appears keyword
+  * @param {Array} word , data: authentic search data with formated keywords
+  * @return: arrray of articles where appears keyword`
 */
 const findArticle = (word, data) => {
     let article = [];
@@ -96,12 +96,12 @@ const sortKeywords = (data) => {
 /*
     Split string of keywords and normalize each keyword
 */
-const parseKeywords = (data) => {
-    for (let k in data) {
-        data[k].keywords = data[k].keywords.toLowerCase().split(';');
-    }
-    return data;
-}
+const parseKeywords = docList => docList.map((doc) => {
+        doc.keywords = doc.keywords
+            ? doc.keywords.toLowerCase().split(';')
+            : [];
+        return doc;
+    });
 
 /**
  *  Builds foamtree data object from an array of documents.

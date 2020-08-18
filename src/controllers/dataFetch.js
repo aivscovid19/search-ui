@@ -2,7 +2,7 @@ import axios from 'axios';
 import { CLOUD_URL, CLOUD_DEEP_URL } from '../config';
 
 const DEFAULT_QUERY_SIZE = 50;
-const DOCUMENT_PROCESS_SPEED_MS = 200
+const DOCUMENT_PROCESS_SPEED_MS = 500
 const TIMEOUT = DEFAULT_QUERY_SIZE * DOCUMENT_PROCESS_SPEED_MS;
 
 export const fetchDeepSearch = async ({ query, email, name, type }) => {

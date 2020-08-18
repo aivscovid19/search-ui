@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import debounce from '../../helpers/debounce';
-import { findDocs } from '../../controllers/dataFetch';
+import debounce from '../../../helpers/debounce';
+import { findDocs } from '../../../controllers/dataFetch';
 
 const FoamTree = ({
   style = {},

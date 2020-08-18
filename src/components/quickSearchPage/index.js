@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import FoamTree from './FoamTree';
-import SeacrhScore from '../SearchScore';
+import FoamTree from './foamTree';
+import SeacrhScore from '../helpers/SearchScore';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import {Grid, Container, Switch, TextField} from '@material-ui/core'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import { useParams, useHistory } from 'react-router-dom';
-import { fetchData, findDocs } from '../../controllers/dataFetch';
+import { fetchData } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Spinner from '../helpers/LoadingSpiner';
@@ -51,7 +52,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
 
     const [currentCount, totalCount] = count;
     const classes = useStyles();
-    if (data.length === 0) {
+    if (docs.length === 0) {
       return (
         <Box
           display="flex"
@@ -188,7 +189,17 @@ const FoamTreeSearchPage = () => {
         <Container style={{ display: "flex", flexDerection: "row", alignItems: "center", width: "100%", height: "20px" }}>
           
           <Container style={{display:"flex", justifyContent: "flex-start", marginTop: "10px", width: "50%" }}>
-            {!loading ? <Switch onChange={() => { setSwitch(!switchTree) }} inputProps={{ 'aria-label': 'primary checkbox' }} /> :null}
+            {!loading ?
+              <FormControlLabel
+                control={
+                  <Switch
+                    onChange={() => { setSwitch(!switchTree) }}
+                    inputProps={{ 'aria-label': 'primary checkbox' }
+                  }/>
+                }
+                label="Toggle FoamTree"
+              />
+              : null }
           </Container>
             <Container style={{display:"flex", justifyContent: "flex-end", marginTop: "23px", width: "50%", paddingRight: "50px"}}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
