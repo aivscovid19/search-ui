@@ -104,7 +104,7 @@ export const buildFoamtreeDataObject = (data) => {
     let keywords = [];
     let result = {};
     data = data.filter(doc => doc.keywords !== "");
-    data.forEach((doc) => doc.keywords.forEach((keyword, index, keywords) => { keywords[index] = keyword.trim() }));
+    data.forEach(doc => doc.keywords = doc.keywords.map(k => k.trim()))
     if (data) {
         keywords = sortKeywords(data);
         result.groups = makeGroups(keywords, data);

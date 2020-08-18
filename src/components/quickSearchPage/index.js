@@ -160,7 +160,8 @@ const FoamTreeSearchPage = () => {
     }
     const docs = data.map((doc) => {
       const newDoc = Object.assign({}, doc);
-      newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword => keyword.split(',')).reduce((semicolon, coma) => [...semicolon, ...coma], []);
+      newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
+        keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], []);
       return newDoc;
     });
     data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
