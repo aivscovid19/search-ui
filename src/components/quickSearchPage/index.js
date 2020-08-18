@@ -48,8 +48,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
-    const MAX_ABSTRACT = 250;
-
+  const MAX_ABSTRACT = 250;
     const [currentCount, totalCount] = count;
     const classes = useStyles();
     if (docs.length === 0) {
@@ -68,16 +67,16 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
     }
 
     return (
-      <Box mt={2} display="flex" minHeight="85%" maxHeight="85%" >
+      <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
         {switched ? <FoamTree
-          style={{ flex: '90%' }}
+          style={{ flex: '90%', zIndex: "1" }}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
           resultCount={count}
         /> : null}
 
-        <Box px={2} flex="100%" display="flex" flexDirection="column">
+        <Box px={2} flex="100%" display="flex" flexDirection="column" zIndex="1">
           <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
               <Box p={1}>
@@ -159,7 +158,12 @@ const FoamTreeSearchPage = () => {
       setError(true);
       return;
     }
-    const docs = data;
+    const docs = data.map((doc) => {
+      const newDoc = Object.assign({}, doc);
+      newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
+        keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], []);
+      return newDoc;
+    });
     data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
     setResultCount([docs.length, data.length]);
     setData(data);
@@ -172,12 +176,12 @@ const FoamTreeSearchPage = () => {
   }, []);
   const quickSearch = () => {
     fetch(query);
+    setSwitch(!switchTree);
     history.push(decodeURI(query));
   }
   return (
     <>
       <Box p={3} height="100vh">
-        <CssBaseline />
         <Box my={2}>
           <Typography component="h1" onClick={() => {window.location = '/search-ui'}} variant="h4">
             BREATHE
@@ -208,7 +212,7 @@ const FoamTreeSearchPage = () => {
         </Container>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
-          <Results switched={switchTree} count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}
+            <Results switched={switchTree} count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}
       </Box>
     </>
   );

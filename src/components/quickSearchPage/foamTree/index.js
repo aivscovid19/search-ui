@@ -26,9 +26,9 @@ const FoamTree = ({
       if (group && group.unselectable) {
         event.preventDefault();
       } else if (group) {
-        const docs = findDocs(group);
-        setResultCount([docs.length, totalCount]);
-        setDocs(docs);
+        const docsList = findDocs(group);
+        setResultCount([docsList.length, totalCount]);
+        setDocs(docsList);
       }
     });
 
