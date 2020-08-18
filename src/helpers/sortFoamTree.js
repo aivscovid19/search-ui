@@ -13,8 +13,9 @@ const findArticle = (word, data) => {
             }
         }
     }
-    if (article) return article
-    return;
+    article = [... new Set(article)];
+    if (article === undefined || article.length === 0) return;
+    return article;
 }
 /*
     Function creating groups for each keyword
@@ -24,15 +25,13 @@ const findArticle = (word, data) => {
 const createInnerData = (word, data) => {
     let format = {};
     let group = [];
-    let weight = word[1];
     let article = findArticle(word, data);
-    while (weight) {
-        format.label = article[weight - 1].title;
-        format._doc = article[weight - 1];
+    article.forEach((art) => {
+        format.label = art.title;
+        format._doc = art;
         group.push(format);
         format = {};
-        weight--;
-    }
+    });
     return group;
 }
 /*
@@ -67,7 +66,7 @@ const makeGroups = (keywords, data) => {
         groups.push({groups: createInnerData(top30[i], data), weight: top30[i][1], label: top30[i][0]});
     }
     for (let k in top30) { tmp.push(top30[k][0]); }
-    const f1 = (x) => x.keywords.filter(el => tmp.includes(el)).length !== 0;
+    const f1 = (x) => x.keywords.filter(el => tmp.includes(el)).length === 0;
     others = data.filter(f1);
     others = otherFormated(others);
     groups.push({ label: "Others", groups: others });
@@ -93,16 +92,6 @@ const sortKeywords = (data) => {
     return top;
 }
 
-/*
-    Split string of keywords and normalize each keyword
-*/
-const parseKeywords = docList => docList.map((doc) => {
-        doc.keywords = doc.keywords
-            ? doc.keywords.toLowerCase().split(';')
-            : [];
-        return doc;
-    });
-
 /**
  *  Builds foamtree data object from an array of documents.
  *  For more information refer to foamtree documentation:
@@ -115,7 +104,6 @@ export const buildFoamtreeDataObject = (data) => {
     let result = {};
     data = data.filter(doc => doc.keywords !== "");
     if (data) {
-        data = parseKeywords(data);
         keywords = sortKeywords(data);
         result.groups = makeGroups(keywords, data);
         return result;
