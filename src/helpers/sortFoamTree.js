@@ -69,6 +69,7 @@ const makeGroups = (keywords, data) => {
     const f1 = (x) => x.keywords.filter(el => tmp.includes(el)).length === 0;
     others = data.filter(f1);
     others = otherFormated(others);
+    if (others.length === 0 || others === undefined) return groups;
     groups.push({ label: "Others", groups: others });
     return groups;
 }
@@ -103,6 +104,7 @@ export const buildFoamtreeDataObject = (data) => {
     let keywords = [];
     let result = {};
     data = data.filter(doc => doc.keywords !== "");
+    data.forEach((doc) => doc.keywords.forEach((keyword, index, keywords) => { keywords[index] = keyword.trim() }));
     if (data) {
         keywords = sortKeywords(data);
         result.groups = makeGroups(keywords, data);
