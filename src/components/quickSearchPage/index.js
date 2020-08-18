@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
 
+import KeywordsDisplay from '../KeywordsDisplay';
+
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -111,9 +113,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                         </Box>
 
                         <Box>
-                          <Typography component="p" color="secondary">
-                            {d.keywords ? d.keywords.join('; ') : ''}
-                          </Typography>
+                          <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
                         </Box>
 
                         <Box mt={1}>

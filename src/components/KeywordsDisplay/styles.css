@@ -1,0 +1,36 @@
+.keywords-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 5px;
+}
+
+.keywords {
+    display: flex;
+    flex-direction: row;
+}
+
+.individual-keywords {
+    display:inline-block;
+    overflow: hidden;
+    max-height: 32px;
+
+    box-sizing: border-box;
+    max-width: 100%;
+  
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    border: solid 1px #0c3877;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    color: #0c3877;
+    transition: background-color 0.2s;
+    transition: color 0.2s;
+}
+
+.individual-keywords:hover {
+    background-color: #0D4585;
+    color: #A4FCFB;
+    cursor: pointer;
+}
