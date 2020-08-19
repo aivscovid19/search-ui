@@ -168,7 +168,7 @@ const FoamTreeSearchPage = () => {
       const newDoc = Object.assign({}, doc);
       // just verifying if keywords exist and returning an empty array if not
       newDoc.keywords = newDoc.keywords
-        ? newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
+        ? doc.keywords.toLowerCase().split(';').map(keyword =>
         keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], [])
         : [];
       return newDoc;
