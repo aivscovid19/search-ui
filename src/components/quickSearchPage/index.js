@@ -48,12 +48,14 @@ const useStyles = makeStyles(() => ({
 
 const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
+  const GOOGLE_FORMS_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
   const [reportArticle, setReport] = useState(false);
-  const [articleId, setArtcileId] = useState();
+  const [articleReference, setArticleReference] = useState();
   const closeMessage = () => {
     setReport(!reportArticle);
-    setArtcileId(null);
+    setArticleReference(null);
   }
     const classes = useStyles();
     if (docs.length === 0) {
@@ -81,8 +83,8 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
           resultCount={count}
         /> : null}
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
-          footer="By clicking on id of article,it will be saved in your clipboard and you will be redirected to google forms."
-          id={articleId} href="https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true"/>
+          footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
+          href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
         <Box px={2} flex="100%" display="flex" flexDirection="column" zIndex="1">
           <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
@@ -133,7 +135,11 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                           <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
                             <div style={{width: "50%"}}></div>
                             <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
-                            <Typography component="p" variant="subtitle1" onClick={() => { setReport(true); setArtcileId(d.pmid) }}>
+                              <Typography component="p" variant="subtitle1" onClick={() => {
+                                setReport(true); setArticleReference({
+                                  Authors: d.authors, Journal_Title: d.journal_title, Date: d.date, Title: d.title
+                                })
+                              }}>
                                 Report Article
                           </Typography>
                           </div>

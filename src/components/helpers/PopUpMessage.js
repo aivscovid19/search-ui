@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Typography, Modal, Backdrop, Fade, Divider } from '@material-ui/core';
+import {CreateReferences} from './CreateReferences.js'
 
 
 /**
@@ -18,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
     paper: {
-        width: "450px",
+        width: "500px",
         fontFamily: "Lato,sans-serif",
         fontWeight: "350",
-        height: "270px",
+        height: "auto",
         backgroundColor: "#f4f4f4",
         borderRadius: "12px",
         padding: "20px",
@@ -39,21 +40,28 @@ const useStyles = makeStyles((theme) => ({
  * @param title String title of message
  * @param onClose CallBack Function update state in parent
  * @param content String body text
- * @param id String special case for id of article
+ * @param article Object article
  * @param footer String text at bottom seperated with divider from content
  * @param href String link
+ * @param copy Boolean allow apply copy method to body text(content)
  */
-export const PopUpMessage = ({ visibility, title, onClose, content, id, footer, href}) => {
-    const classes = useStyles();
-    const [copied, setCopy] = useState(false);
-    const handleRedirect = (copy) => {
+export const PopUpMessage = ({ visibility, title, onClose, content, article, footer,
+  href, copy }) => {
+  const classes = useStyles();
+  const [copied, setCopy] = useState(false);
+  let clipboard;
+  if (article) {
+    clipboard = CreateReferences.toStr(article);
+    content = CreateReferences.toJSX(article);
+  }
+    const handleRedirect = () => {
         if (!href) return;
         /**
          * Copy article id in to user clipboard and show message about it
          */
         if (copy) {
             setCopy(true);
-            navigator.clipboard.writeText(id);
+            navigator.clipboard.writeText(clipboard);
             setTimeout(() => setCopy(false), 3000);
         }
         setTimeout(() => {
@@ -78,12 +86,13 @@ export const PopUpMessage = ({ visibility, title, onClose, content, id, footer, 
         <Fade in={visibility}>
                   <div className={classes.paper}>
                       <HighlightOffIcon style={{ alignSelf: "flex-end", color: "grey", cursor: "pointer"}} onClick={onClose}/>
-                      <h1 style={{fontSize: "1.8rem", margin: "0px", fontWeight: "450"}}>{title}</h1>
-                      {id ? <h3 style={{ fontSize: "2rem", fontWeight: "520", cursor: "pointer", marginBottom: "10px" }}
-                          onClick={() => handleRedirect(true)}>Article id: <span style={{ color: "#0d47a1" }}>{id}</span></h3>
-                          : null}
-                          <Typography style={{ fontWeight: "500" }} onClick={handleRedirect}>{content}</Typography>
-                      {copied ? <Typography style={{ backgroundColor: "darkgrey", color: "#fff", borderRadius: "12px", width: "100px",alignSelf: "center", marginTop: "2px" }}>
+                      <h1 style={{fontSize: "1.8rem", margin: "0px", fontWeight: "480"}}>{title}</h1>
+            <Typography style={{ fontWeight: "420", fontSize: "1.2rem", cursor: "pointer", marginTop: "5px" }}
+              onClick={handleRedirect}>{content}</Typography>
+            {copied ? <Typography style={{
+              backgroundColor: "darkgrey", color: "#fff", borderRadius: "12px",
+              width: "100px", alignSelf: "center", marginTop: "2px"
+            }}>
                           Copied!</Typography> : null}
                       {footer ? <Divider variant="middle" style={{marginTop: "12px"}} /> : null}
                       <Typography style={{fontWeight: "400", marginTop: "15px"}}>{footer}</Typography>
@@ -95,11 +104,12 @@ export const PopUpMessage = ({ visibility, title, onClose, content, id, footer, 
 }
 
 PopUpMessage.propTypes = {
-    visibility: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    content: PropTypes.string,
-    id: PropTypes.string,
-    footer: PropTypes.string,
-    href: PropTypes.string,
+  visibility: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  content: PropTypes.string,
+  article: PropTypes.object,
+  footer: PropTypes.string,
+  href: PropTypes.string,
+  copy: PropTypes.bool
 }
