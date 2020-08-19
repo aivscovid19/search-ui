@@ -39,14 +39,19 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center'
   },
   searchResultsLink: {
-    textDecorationColor: '#000'
+    textDecorationColor: '#000',
+    textDecoration: 'none',
+    "&:hover": {
+      textDecoration: 'underline',
+      textDecorationColor: '#000',
+    }
   },
   searchResultsTitle: {
     marginTop: 0,
     marginBottom: 0,
     fontSize: '1.5rem',
     fontWeight: 'bold',
-  }
+  },
 }));
 
 const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
