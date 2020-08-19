@@ -4,6 +4,7 @@ import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
 
 import KeywordsDisplay from '../KeywordsDisplay';
+import JournalDateDisplay from '../JournalDateDisplay';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -103,6 +104,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
+                      <JournalDateDisplay journal={d.journal} date={d.date} />
                       <Box p={2}>
                         <Box className={classes.searchResultsHeader}>
                           <a
@@ -166,9 +168,9 @@ const FoamTreeSearchPage = () => {
     }
     const docs = data.map((doc) => {
       const newDoc = Object.assign({}, doc);
-      // just verifying if keywords exist and returning an empty array if not
+      // verifying if keywords exist and returning an empty array if not
       newDoc.keywords = newDoc.keywords
-        ? newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
+        ? doc.keywords.toLowerCase().split(';').map(keyword =>
         keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], [])
         : [];
       return newDoc;
