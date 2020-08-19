@@ -3,11 +3,8 @@ import React, { useState, useEffect } from 'react';
 import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import {Grid, Container, Switch, TextField} from '@material-ui/core'
+import {Grid, Container, Switch, TextField, Box, Typography} from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import { useParams, useHistory } from 'react-router-dom';
@@ -17,8 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
+import {PopUpMessage} from '../helpers/PopUpMessage.js'
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -49,7 +48,13 @@ const useStyles = makeStyles(() => ({
 
 const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
-    const [currentCount, totalCount] = count;
+  const [currentCount, totalCount] = count;
+  const [reportArticle, setReport] = useState(false);
+  const [articleId, setArtcileId] = useState();
+  const closeMessage = () => {
+    setReport(!reportArticle);
+    setArtcileId(null);
+  }
     const classes = useStyles();
     if (docs.length === 0) {
       return (
@@ -75,7 +80,9 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
           setResultCount={setResultCount}
           resultCount={count}
         /> : null}
-
+        <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
+          footer="By clicking on id of article,it will be saved in your clipboard and you will be redirected to google forms."
+          id={articleId} href="https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true"/>
         <Box px={2} flex="100%" display="flex" flexDirection="column" zIndex="1">
           <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
@@ -88,14 +95,14 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
           </Box>
           <Box flex="100%" className={classes.searchResults} style={{ margin: "auto" }} maxWidth="80%">
             {docs.map((d, i) => (
-              <Box key={i} mb={2}>
+              <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
                   <Grid container >
                     <Grid container item xs alignContent="center">
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
-                      <Box p={2}>
+                      <Box p={2} style={{paddingBottom: "10px"}}>
                         <Box className={classes.searchResultsHeader}>
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
@@ -123,6 +130,14 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
                           <Typography component="p" variant="subtitle1" color="textPrimary">
                             {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
                           </Typography>
+                          <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
+                            <div style={{width: "50%"}}></div>
+                            <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
+                            <Typography component="p" variant="subtitle1" onClick={() => { setReport(true); setArtcileId(d.pmid) }}>
+                                Report Article
+                          </Typography>
+                          </div>
+                          </Box>
                         </Box>
                       </Box>
                     </Grid>
