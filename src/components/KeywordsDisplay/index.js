@@ -8,8 +8,8 @@ import shuffleArray from '../helpers/shuffleArray'
 export const KeywordsDisplay = ({ keywords }) => {
     // currently receiving a single-item list and spliting
     // keyword area shortened by randomizing and then slicing list
-    const keywordsArray = keywords[0] ? keywords[0].split(', ') : [];
-    const keywordsToMap = shuffleArray(keywordsArray).slice(0,8)
+    console.log(keywords)
+    const keywordsToMap = shuffleArray(keywords).slice(0,6)
 
     return (
         <div className="keywords-container">
