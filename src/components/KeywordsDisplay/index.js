@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import { Tooltip } from '@material-ui/core';
 import shuffleArray from '../helpers/shuffleArray'
-import * as icons from '../../icons';
+// import * as icons from '../../icons';
 
 // The keyword component takes a list as an argument
 
