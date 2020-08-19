@@ -44,6 +44,7 @@ const useStyles = makeStyles(() => ({
     "&:hover": {
       textDecoration: 'underline',
       textDecorationColor: '#000',
+      opacity: '0.9',
     }
   },
   searchResultsTitle: {
@@ -165,7 +166,9 @@ const FoamTreeSearchPage = () => {
     }
     const docs = data.map((doc) => {
       const newDoc = Object.assign({}, doc);
-      newDoc.keywords = newDoc.keywords ? newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
+      // just verifying if keywords exist and returning an empty array if not
+      newDoc.keywords = newDoc.keywords
+        ? newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
         keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], [])
         : [];
       return newDoc;

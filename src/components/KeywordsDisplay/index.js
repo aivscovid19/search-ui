@@ -2,6 +2,7 @@ import React from 'react';
 import './styles.css';
 import { Tooltip } from '@material-ui/core';
 import shuffleArray from '../helpers/shuffleArray'
+import * as icons from '../../icons';
 
 // The keyword component takes a list as an argument
 
@@ -15,6 +16,8 @@ export const KeywordsDisplay = ({ keywords }) => {
         <div className="keywords-container">
             {keywordsToMap && (
                 <div className="keywords">
+                    {/* could add an icon infront */}
+                    {/* <icons.Key width="1rem" height="1rem"/> */}
                     {keywordsToMap.map((keyword, index) => {
                         return (
                             <Tooltip title={keyword}>
