@@ -12,7 +12,8 @@
 .individual-keywords {
     display:inline-block;
     overflow: hidden;
-    max-height: 32px;
+    max-height: 20px;
+    text-decoration: none;
 
     box-sizing: border-box;
     max-width: 100%;
@@ -20,17 +21,18 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 
-    border: solid 1px #0c3877;
+    font-size: 0.4rem;
     border-radius: 5px;
-    padding: 5px;
-    margin: 5px;
+    padding: 2px;
+    margin: 2px;
     color: #0c3877;
+    background-color: #e7effa;
     transition: background-color 0.2s;
     transition: color 0.2s;
 }
 
 .individual-keywords:hover {
-    background-color: #0D4585;
-    color: #A4FCFB;
-    cursor: pointer;
+    cursor: none;
+    /* background-color: #0D4585;
+    color: #A4FCFB; */
 }

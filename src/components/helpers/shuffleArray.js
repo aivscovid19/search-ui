@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Randomizing array taken as parameter
+
 function shuffleArray (array){
     if (array){
         for (var i = array.length - 1; i > 0; i--) {
