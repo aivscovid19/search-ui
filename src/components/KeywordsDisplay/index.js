@@ -4,7 +4,6 @@ import { Tooltip } from '@material-ui/core';
 import shuffleArray from '../helpers/shuffleArray'
 
 export const KeywordsDisplay = ({ keywords }) => {
-    console.log(keywords)
     const keywordsToMap = shuffleArray(keywords).slice(0,6)
 
     return (
