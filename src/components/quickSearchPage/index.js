@@ -18,6 +18,7 @@ import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 import {PopUpMessage} from '../helpers/PopUpMessage.js'
+import {preventRerender} from '../helpers/preventRerender.js'
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
+const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
@@ -155,7 +156,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
         </Box>
       </Box>
     );
-};
+}, preventRerender("docs", "data"));
 
 const FoamTreeSearchPage = () => {
   const params = useParams();
