@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
-
 import KeywordsDisplay from '../KeywordsDisplay';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
@@ -21,6 +19,7 @@ import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
+import {preventRerender} from '../helpers/preventRerender.js'
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -55,7 +54,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
+const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
     const [currentCount, totalCount] = count;
     const classes = useStyles();
@@ -140,7 +139,7 @@ const Results = ({ count, data, docs, setDocs, setResultCount, switched }) =>{
         </Box>
       </Box>
     );
-};
+}, preventRerender("docs", "data"));
 
 const FoamTreeSearchPage = () => {
   const params = useParams();
