@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
+import KeywordsDisplay from '../KeywordsDisplay';
 
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
@@ -37,14 +38,20 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center'
   },
   searchResultsLink: {
-    textDecorationColor: '#000'
+    textDecorationColor: '#000',
+    textDecoration: 'none',
+    "&:hover": {
+      textDecoration: 'underline',
+      textDecorationColor: '#000',
+      opacity: '0.9',
+    }
   },
   searchResultsTitle: {
     marginTop: 0,
     marginBottom: 0,
     fontSize: '1.5rem',
     fontWeight: 'bold',
-  }
+  },
 }));
 
 const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
@@ -110,9 +117,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                         </Box>
 
                         <Box>
-                          <Typography component="p" color="secondary">
-                            {d.keywords ? d.keywords.join('; ') : ''}
-                          </Typography>
+                          <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
                         </Box>
 
                         <Box mt={1}>
@@ -160,8 +165,11 @@ const FoamTreeSearchPage = () => {
     }
     const docs = data.map((doc) => {
       const newDoc = Object.assign({}, doc);
-      newDoc.keywords = doc.keywords.toLowerCase().split(';').map(keyword =>
-        keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], []);
+      // just verifying if keywords exist and returning an empty array if not
+      newDoc.keywords = newDoc.keywords
+        ? doc.keywords.toLowerCase().split(';').map(keyword =>
+        keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], [])
+        : [];
       return newDoc;
     });
     data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
