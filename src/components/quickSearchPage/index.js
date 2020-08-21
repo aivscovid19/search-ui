@@ -142,9 +142,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                             <div style={{width: "50%"}}></div>
                             <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
                               <Typography component="p" variant="subtitle1" onClick={() => {
-                                setReport(true); setArticleReference({
-                                  Authors: d.authors, Journal_Title: d.journal_title, Date: d.date, Title: d.title
-                                })
+                                setReport(true); setArticleReference(d);
                               }}>
                                 Report Article
                           </Typography>

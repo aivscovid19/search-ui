@@ -57,7 +57,7 @@ export const PopUpMessage = ({ visibility, title, onClose, content, article, foo
     const handleRedirect = () => {
         if (!href) return;
         /**
-         * Copy article id in to user clipboard and show message about it
+         * Copy content in to user clipboard and show message about it
          */
         if (copy) {
             setCopy(true);
