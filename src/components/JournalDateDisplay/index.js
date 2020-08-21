@@ -4,9 +4,11 @@ import './styles.css';
 export const JournalDateDisplay = ({ journal, date }) => {
     return (
         <div className="description-container">
-            <span className="journal-styles">
-                {journal}
-            </span>
+            {journal && (
+                <span className="journal-styles">
+                    {journal}
+                </span>
+            )}
             {date && (
                 <span className="date-styles">
                     {date}
