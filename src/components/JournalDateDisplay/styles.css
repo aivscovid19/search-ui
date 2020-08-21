@@ -2,14 +2,20 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-top: 5px;
-    margin-right: 15px;
+    max-width: 900px;
+    margin-right: 10px;
     color: #444444;
 }
 
 .journal-styles {
     font-size: 0.8rem;
+    font-weight: 500;
     padding: 3px;
+    margin: 3px;
+    display: block;
+    white-space: nowrap; /* forces text to single line */
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 
