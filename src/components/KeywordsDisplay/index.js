@@ -3,7 +3,7 @@ import './styles.css';
 import { Tooltip } from '@material-ui/core';
 import shuffleArray from '../helpers/shuffleArray'
 
-export const KeywordsDisplay = ({ keywords }) => {
+export const KeywordsDisplay = React.memo(({ keywords }) => {
     const keywordsToMap = shuffleArray(keywords).slice(0,6)
 
     return (
@@ -27,6 +27,6 @@ export const KeywordsDisplay = ({ keywords }) => {
             )}
         </div>
     );
-}
+}, (prevProps, nextProps) => {return prevProps.keywords === nextProps.keywords})
 
 export default KeywordsDisplay;
