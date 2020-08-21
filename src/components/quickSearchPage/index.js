@@ -113,6 +113,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
+                      <JournalDateDisplay journal={d.journal} date={d.date} />
                       <Box p={2} style={{paddingBottom: "10px"}}>
                         <Box className={classes.searchResultsHeader}>
                           <a
