@@ -57,6 +57,7 @@ const useStyles = makeStyles(() => ({
 
 const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
+  console.log(docs)
     const [currentCount, totalCount] = count;
     const classes = useStyles();
     if (docs.length === 0) {
@@ -103,7 +104,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
-                      <JournalDateDisplay journal={d.journal} date={d.date} />
+                      <JournalDateDisplay journal={d.journal} date={d} />
                       <Box p={2}>
                         <Box className={classes.searchResultsHeader}>
                           <a
