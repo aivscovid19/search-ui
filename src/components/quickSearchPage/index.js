@@ -14,11 +14,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
+import { PopUpMessage } from '../helpers/PopUpMessage';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
-import {PopUpMessage} from '../helpers/PopUpMessage.js'
+import { splitDocumentKeywords } from '../../helpers/article';
 import {preventRerender} from '../helpers/preventRerender.js'
 
 const useStyles = makeStyles(() => ({
@@ -166,45 +167,41 @@ const FoamTreeSearchPage = () => {
   const history = useHistory();
 
   const [resultCount, setResultCount] = useState([0,0]);
-  const [data, setData] = useState({});
+  const [foamTreeData, setFoamTreeData] = useState({});
   const [docs, setDocs] = useState([]);
 
   const [query, setQuery] = useState(params.search);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
+  const [suggestion, setSuggestion] = useState(null);
 
-  const fetch = async (search) => {
-    setLoading(true);
-    let data;
-    try {
-      data = await fetchData(search);
-    } catch {
-      setError(true);
+  const fetch = async (search, shouldSuggest = true) => {
+    if (loading) {
       return;
     }
-    const docs = data.map((doc) => {
-      const newDoc = Object.assign({}, doc);
-      // just verifying if keywords exist and returning an empty array if not
-      newDoc.keywords = newDoc.keywords
-        ? doc.keywords.toLowerCase().split(';').map(keyword =>
-        keyword.split(',')).reduce((currnetItem, aggrregation) => [...currnetItem, ...aggrregation], [])
-        : [];
-      return newDoc;
-    });
-    data = buildFoamtreeDataObject(decodeUnicodeFields(docs));
-    setResultCount([docs.length, data.length]);
-    setData(data);
-    setDocs(docs);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const { data } = await fetchData(search, { suggestion: shouldSuggest });
+      const docs = data.docs.map(splitDocumentKeywords);
+      const foamTreeData = buildFoamtreeDataObject(decodeUnicodeFields(docs));
+      setResultCount([docs.length, data.length]);
+      setFoamTreeData(foamTreeData);
+      setDocs(docs);
+      setSuggestion(data.suggestion);
+    } catch {
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    fetch(query);
+    fetch(params.search);
   }, []);
-  const quickSearch = () => {
-    fetch(query);
-    setSwitch(!switchTree);
+  const quickSearch = (query, shouldSuggest) => {
+    fetch(query, shouldSuggest);
+    setSwitch(false);
     history.push(decodeURI(query));
   }
   return (
@@ -240,7 +237,7 @@ const FoamTreeSearchPage = () => {
         </Container>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
-            <Results switched={switchTree} count={resultCount} data={data} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}
+            <Results switched={switchTree} count={resultCount} data={foamTreeData} docs={docs} setDocs={setDocs} setResultCount={setResultCount} />}
       </Box>
     </>
   );

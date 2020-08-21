@@ -10,8 +10,12 @@ export const fetchDeepSearch = async ({ query, email, name, type }) => {
   return data;
 };
 
-export const fetchData = async (query, size = DEFAULT_QUERY_SIZE) => {
-  const params = { query, size };
+export const fetchData = async (
+  query, {
+    suggestion = false,
+    size = DEFAULT_QUERY_SIZE,
+}) => {
+  const params = { query, size, suggestion };
   const res = await axios.get(CLOUD_URL, { params, timeout: TIMEOUT });
   return res.data;
 };
