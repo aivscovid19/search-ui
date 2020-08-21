@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { parse } from "query-string"
+
 import FoamTree from './foamTree';
 import SeacrhScore from '../helpers/SearchScore';
 import KeywordsDisplay from '../KeywordsDisplay';
@@ -8,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import {Grid, Container, Switch, TextField, Box, Typography} from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { fetchData } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -21,6 +23,8 @@ import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 import { splitDocumentKeywords } from '../../helpers/article';
 import {preventRerender} from '../helpers/preventRerender.js'
+
+import { SearchInput } from './searchInput/';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -165,6 +169,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
 const FoamTreeSearchPage = () => {
   const params = useParams();
   const history = useHistory();
+  const location = useLocation();
 
   const [resultCount, setResultCount] = useState([0,0]);
   const [foamTreeData, setFoamTreeData] = useState({});
@@ -212,11 +217,12 @@ const FoamTreeSearchPage = () => {
             BREATHE
           </Typography>
         </Box>
-        <form onSubmit={quickSearch} style={{display: "flex", justifyContent: "center"}}>
-          <TextField placeholder="search" variant="outlined" size="small" style={{ width: "100%" }} onChange={(e) => setQuery(e.target.value)} value={query} />
-        </form>
+        <SearchInput
+          onSubmit={quickSearch}
+          search={params.search}
+          suggestion={suggestion}
+          loading={loading} />
         <Container style={{ display: "flex", flexDerection: "row", alignItems: "center", width: "100%", height: "20px" }}>
-          
           <Container style={{display:"flex", justifyContent: "flex-start", marginTop: "10px", width: "50%" }}>
             {!loading ?
               <FormControlLabel

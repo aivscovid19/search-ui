@@ -1,0 +1,7 @@
+.search-input-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  flex-direction: column;
+}
