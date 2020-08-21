@@ -5,10 +5,8 @@ import SeacrhScore from '../helpers/SearchScore';
 import KeywordsDisplay from '../KeywordsDisplay';
 import JournalDateDisplay from '../JournalDateDisplay';
 
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import {Grid, Container, Switch, TextField} from '@material-ui/core'
+import {Grid, Container, Switch, TextField, Box, Typography} from '@material-ui/core'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import { useParams, useHistory } from 'react-router-dom';
@@ -18,8 +16,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
+import {PopUpMessage} from '../helpers/PopUpMessage.js'
 import {preventRerender} from '../helpers/preventRerender.js'
 
 const useStyles = makeStyles(() => ({
@@ -57,8 +57,15 @@ const useStyles = makeStyles(() => ({
 
 const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const MAX_ABSTRACT = 250;
-  console.log(docs)
-    const [currentCount, totalCount] = count;
+  const GOOGLE_FORMS_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
+  const [currentCount, totalCount] = count;
+  const [reportArticle, setReport] = useState(false);
+  const [articleReference, setArticleReference] = useState();
+  const closeMessage = () => {
+    setReport(!reportArticle);
+    setArticleReference(null);
+  }
     const classes = useStyles();
     if (docs.length === 0) {
       return (
@@ -84,7 +91,9 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
           setResultCount={setResultCount}
           resultCount={count}
         /> : null}
-
+        <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
+          footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
+          href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
         <Box px={2} flex="100%" display="flex" flexDirection="column" zIndex="1">
           <Box className={classes.searchResultsTop} width="80%">
             <Paper variant="outlined" square>
@@ -97,15 +106,14 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
           </Box>
           <Box flex="100%" className={classes.searchResults} style={{ margin: "auto" }} maxWidth="80%">
             {docs.map((d, i) => (
-              <Box key={i} mb={2}>
+              <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
                   <Grid container >
                     <Grid container item xs alignContent="center">
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
-                      <JournalDateDisplay journal={d.journal} date={d} />
-                      <Box p={2}>
+                      <Box p={2} style={{paddingBottom: "10px"}}>
                         <Box className={classes.searchResultsHeader}>
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
@@ -131,6 +139,16 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                           <Typography component="p" variant="subtitle1" color="textPrimary">
                             {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
                           </Typography>
+                          <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
+                            <div style={{width: "50%"}}></div>
+                            <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
+                              <Typography component="p" variant="subtitle1" onClick={() => {
+                                setReport(true); setArticleReference(d);
+                              }}>
+                                Report Article
+                          </Typography>
+                          </div>
+                          </Box>
                         </Box>
                       </Box>
                     </Grid>
