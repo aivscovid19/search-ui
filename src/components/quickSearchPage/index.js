@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from 'react';
-
-import { parse } from "query-string"
-
-import FoamTree from './foamTree';
-import SeacrhScore from '../helpers/SearchScore';
-import KeywordsDisplay from '../KeywordsDisplay';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Paper from '@material-ui/core/Paper';
-import {Grid, Container, Switch, TextField, Box, Typography} from '@material-ui/core'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
-import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { fetchData } from '../../controllers/dataFetch';
 import { makeStyles } from '@material-ui/core/styles';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { Grid, Container, Switch, Box, Typography } from '@material-ui/core';
 
+import FoamTree from './foamTree';
+import SearchInput from './searchInput';
+import KeywordsDisplay from '../KeywordsDisplay';
+import SeacrhScore from '../helpers/SearchScore';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
 import { PopUpMessage } from '../helpers/PopUpMessage';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import PictureAsPdfIcon from '@material-ui/icons/PictureAsPdf';
+import {preventRerender} from '../helpers/preventRerender';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 import { splitDocumentKeywords } from '../../helpers/article';
-import {preventRerender} from '../helpers/preventRerender.js'
+import { fetchData } from '../../controllers/dataFetch';
 
-import { SearchInput } from './searchInput/';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -169,13 +164,11 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
 const FoamTreeSearchPage = () => {
   const params = useParams();
   const history = useHistory();
-  const location = useLocation();
 
   const [resultCount, setResultCount] = useState([0,0]);
   const [foamTreeData, setFoamTreeData] = useState({});
   const [docs, setDocs] = useState([]);
 
-  const [query, setQuery] = useState(params.search);
   const [loading, setLoading] = useState(false);
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
@@ -203,7 +196,7 @@ const FoamTreeSearchPage = () => {
 
   useEffect(() => {
     fetch(params.search);
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const quickSearch = (query, shouldSuggest) => {
     fetch(query, shouldSuggest);
     setSwitch(false);
