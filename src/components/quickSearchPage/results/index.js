@@ -16,7 +16,8 @@ const useStyles = makeStyles(() => ({
     boxShadow: '0px 1px 3px 1px rgba(0,0,0,0.025)'
   },
   searchResultsTop: {
-    margin: '0 auto 0.5em auto'
+    margin: '0 auto 0.5em auto',
+    borderRadius: "10px"
   },
   searchResults: {
     height: '100%',
@@ -75,9 +76,9 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
           footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
           href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
-        <Box px={2} display="flex" flexDirection="column" zIndex="1" width="80%">
+        <Box px={2} display="flex" flexDirection="column" zIndex="1" width="835px">
           <Box className={classes.searchResultsTop} width="100%">
-            <Paper variant="outlined" square>
+            <Paper variant="outlined" square style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
               <Box p={1}>
                 <Typography component="p">
                   Top {currentCount} papers
@@ -140,7 +141,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
           </Box>
         </Box>
         {switched ? <FoamTree
-          style={{ flex: '80%'}}
+          style={{ width: "48%"}}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
