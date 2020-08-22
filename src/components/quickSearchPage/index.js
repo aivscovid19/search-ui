@@ -46,7 +46,6 @@ const FoamTreeSearchPage = () => {
   };
   const setFoamTree = () => {
     setSwitch(!switchTree);
-    console.log(switchTree)
   }
   useEffect(() => {
     fetch(params.search);
@@ -69,9 +68,8 @@ const FoamTreeSearchPage = () => {
           onSubmit={quickSearch}
           search={params.search}
           suggestion={suggestion}
-            loading={loading}
-            setSwitch={setFoamTree}
-          />
+          loading={loading}
+          setSwitch={setFoamTree}/>
           </Box>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :

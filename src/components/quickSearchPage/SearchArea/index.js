@@ -7,6 +7,7 @@ import './index.css';
 /**
  * Search input component
  * @author[Ivan Kozlov](https://github.com/ivankozlovcodes)
+ * @author[Danila Kurgan](https://github.com/dkurgan)
  */
 
 /**
