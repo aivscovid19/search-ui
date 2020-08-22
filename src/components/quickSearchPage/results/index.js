@@ -70,20 +70,13 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
       );
     }
 
-    return (
-      <Box mt={2} display="flex" minHeight="85%" maxHeight="85%">
-        {switched ? <FoamTree
-          style={{ flex: '90%', zIndex: "1" }}
-          groups={data}
-          setDocs={setDocs}
-          setResultCount={setResultCount}
-          resultCount={count}
-        /> : null}
+  return (
+      <Box mt={0} display="flex" height="90%" paddingLeft="138px">
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
           footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
           href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
-        <Box px={2} flex="100%" display="flex" flexDirection="column" zIndex="1">
-          <Box className={classes.searchResultsTop} width="80%">
+        <Box px={2} display="flex" flexDirection="column" zIndex="1" width="80%">
+          <Box className={classes.searchResultsTop} width="100%">
             <Paper variant="outlined" square>
               <Box p={1}>
                 <Typography component="p">
@@ -92,7 +85,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
               </Box>
             </Paper>
           </Box>
-          <Box flex="100%" className={classes.searchResults} style={{ margin: "auto" }} maxWidth="80%">
+          <Box className={classes.searchResults} style={{ margin: "auto" }}>
             {docs.map((d, i) => (
               <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
@@ -146,6 +139,13 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
             ))}
           </Box>
         </Box>
+        {switched ? <FoamTree
+          style={{ flex: '80%'}}
+          groups={data}
+          setDocs={setDocs}
+          setResultCount={setResultCount}
+          resultCount={count}
+        /> : null}
       </Box>
     );
 }, preventRerender("docs", "data"));
