@@ -1,0 +1,6 @@
+.search-input-container {
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+  margin-bottom: 0px;
+}

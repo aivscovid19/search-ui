@@ -2,17 +2,20 @@ import axios from 'axios';
 import { CLOUD_URL, CLOUD_DEEP_URL } from '../config';
 
 const DEFAULT_QUERY_SIZE = 50;
-const DOCUMENT_PROCESS_SPEED_MS = 500
-const TIMEOUT = DEFAULT_QUERY_SIZE * DOCUMENT_PROCESS_SPEED_MS;
+const TIMEOUT_SEC = 60;
 
 export const fetchDeepSearch = async ({ query, email, name, type }) => {
   const { data } = await axios.post(CLOUD_DEEP_URL, { query, email, name, type });
   return data;
 };
 
-export const fetchData = async (query, size = DEFAULT_QUERY_SIZE) => {
-  const params = { query, size };
-  const res = await axios.get(CLOUD_URL, { params, timeout: TIMEOUT });
+export const fetchData = async (
+  query, {
+    suggestion = false,
+    size = DEFAULT_QUERY_SIZE,
+}) => {
+  const params = { query, size, suggestion };
+  const res = await axios.get(CLOUD_URL, { params, timeout: TIMEOUT_SEC * 1000 });
   return res.data;
 };
 
