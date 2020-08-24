@@ -1,17 +1,17 @@
 import React from 'react';
 import './styles.css';
 
-export const JournalDateDisplay = ({ journal, date }) => {
+export const JournalDateDisplay = ({ journal, journalTitle, date }) => {
     return (
         <div className="description-container">
-            {journal && (
+            {(journal || journalTitle) && (
                 <span className="journal-styles">
-                    {journal}
+                    {journal ? journal : journalTitle}
                 </span>
             )}
             {date && (
                 <span
-                 className={journal
+                 className={journal || journalTitle
                   ? "date-styles"
                   : "date-styles-no-journal"}
                 >
