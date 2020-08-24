@@ -9,6 +9,7 @@ import KeywordsDisplay from '../../KeywordsDisplay';
 import SeacrhScore from '../../helpers/SearchScore';
 import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
+import JournalDateDisplay from '../../JournalDateDisplay';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -95,6 +96,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                     </Grid>
                     <Grid item xs={11}>
                       <Box p={2} style={{paddingBottom: "10px"}}>
+                        <JournalDateDisplay journal={d.journal} date={d.date}></JournalDateDisplay>
                         <Box className={classes.searchResultsHeader}>
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
