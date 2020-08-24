@@ -10,7 +10,11 @@ export const JournalDateDisplay = ({ journal, date }) => {
                 </span>
             )}
             {date && (
-                <span className="date-styles">
+                <span
+                 className={journal
+                  ? "date-styles"
+                  : "date-styles-no-journal"}
+                >
                     {date}
                 </span>
             )}

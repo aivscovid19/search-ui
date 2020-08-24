@@ -24,3 +24,8 @@
     padding: 3px;
     border-left: solid 1px #d3d3d3;
 }
+
+.date-styles-no-journal {
+    font-size: 0.8rem;
+    padding: 3px;
+}
