@@ -116,10 +116,6 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                         </Box>
 
                         <Box mt={1}>
-                          <Typography component="p" variant="subtitle1" color="primary">
-                            {d.journal}
-                          </Typography>
-
                           <Typography component="p" variant="subtitle1" color="textPrimary">
                             {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
                           </Typography>
