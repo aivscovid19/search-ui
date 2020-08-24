@@ -27,7 +27,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
   }
   return (
     <Box className="search-input-container">
-      <form onSubmit={() => onSubmit(query, true)} style={{width: "550px"}}>
+      <form onSubmit={() => onSubmit(query, true)} style={{width: "800px"}}>
         <TextField
           placeholder="search"
           variant="outlined"
@@ -39,7 +39,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
           <Box>
             <Box pt={1} pb={1}>
           <Box style={{ display: "flex", flexDirection: "row" }}>
-            <Box style={{width: "300px"}}>
+            <Box style={{width: "550px"}}>
             {suggestion && !loading ? (<Typography component="h2">
               Showing results for: <em>{suggestion}</em>
             </Typography>) : (!loading ? <FormControlLabel control={
@@ -61,7 +61,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
             Search instead for: <Link href="#" onClick={noSuggestionSearch}>{originalQuery}</Link>
               </Typography>) : null}
             </Box>
-            <Box style={{ display: "flex", justifyContent: "flex-end", width: "250px" }}>
+            <Box style={{ display: "flex", justifyContent: "flex-end", width: "550px" }}>
               {suggestion && !loading ? <FormControlLabel control={
                   <Switch onChange={setSwitch}
                 inputProps={{ 'aria-label': 'primary checkbox',}}/>}
