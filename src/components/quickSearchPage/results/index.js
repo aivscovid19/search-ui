@@ -97,7 +97,9 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                     </Grid>
                     <Grid item xs={11}>
                       <Box p={2} style={{paddingBottom: "10px"}}>
-                        <JournalDateDisplay journal={d.journal} date={d.date}></JournalDateDisplay>
+
+                        <JournalDateDisplay journal={d.journal} date={d.date} />
+
                         <Box className={classes.searchResultsHeader}>
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
