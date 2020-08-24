@@ -9,6 +9,7 @@ import KeywordsDisplay from '../../KeywordsDisplay';
 import SeacrhScore from '../../helpers/SearchScore';
 import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
+import JournalDateDisplay from '../../JournalDateDisplay';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -86,7 +87,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
               </Box>
             </Paper>
           </Box>
-          <Box className={classes.searchResults} style={{ margin: "auto" }}>
+          <Box className={classes.searchResults} >
             {docs.map((d, i) => (
               <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
@@ -96,6 +97,9 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                     </Grid>
                     <Grid item xs={11}>
                       <Box p={2} style={{paddingBottom: "10px"}}>
+
+                        <JournalDateDisplay journal={d.journal} journalTitle={d.journal_title} date={d.date} />
+
                         <Box className={classes.searchResultsHeader}>
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
@@ -108,16 +112,11 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                             </Typography>
                           </a>
                         </Box>
-
                         <Box>
                           <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
                         </Box>
 
                         <Box mt={1}>
-                          <Typography component="p" variant="subtitle1" color="primary">
-                            {d.journal}
-                          </Typography>
-
                           <Typography component="p" variant="subtitle1" color="textPrimary">
                             {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
                           </Typography>
