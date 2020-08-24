@@ -7,7 +7,7 @@ export const JournalDateDisplay = ({ journal, journalTitle, date }) => {
         <div className="description-container">
             {hasJournalTitle && (
                 <span className="journal-styles">
-                    {journal ? journal : journalTitle}
+                    {journal ? journal.split(':')[0] : journalTitle.split(':')[0]}
                 </span>
             )}
             {date && (
