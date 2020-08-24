@@ -98,7 +98,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                     <Grid item xs={11}>
                       <Box p={2} style={{paddingBottom: "10px"}}>
 
-                        <JournalDateDisplay journal={d.journal} date={d.date} />
+                        <JournalDateDisplay journal={d.journal} journalTitle={d.journal_title} date={d.date} />
 
                         <Box className={classes.searchResultsHeader}>
                           <a
