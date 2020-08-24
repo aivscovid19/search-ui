@@ -87,7 +87,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
               </Box>
             </Paper>
           </Box>
-          <Box className={classes.searchResults} style={{ margin: "auto" }}>
+          <Box className={classes.searchResults} >
             {docs.map((d, i) => (
               <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
@@ -112,7 +112,6 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                             </Typography>
                           </a>
                         </Box>
-
                         <Box>
                           <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
                         </Box>
