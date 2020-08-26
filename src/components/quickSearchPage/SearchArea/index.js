@@ -37,12 +37,12 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
           value={query} />
       </form>
           <Box>
-            <Box pt={1} pb={1}>
-          <Box style={{ display: "flex", flexDirection: "row" }}>
-            <Box style={{width: "550px"}}>
+            <Box pt={1} pb={1} className="qs-under-search">
+          <Box style={{ display: "flex", flexDirection: "row" }} className="qs-deep-link">
+            <Box style={{width: "550px"}} className="hidden">
             {suggestion && !loading ? (<Typography component="h2">
               Showing results for: <em>{suggestion}</em>
-            </Typography>) : (!loading ? <FormControlLabel control={
+            </Typography>) : (!loading ? <FormControlLabel className="hidden" control={
                   <Switch onChange={setSwitch}
                 inputProps={{ 'aria-label': 'primary checkbox',}}/>}
             label="FoamTree" labelPlacement="start"
@@ -56,13 +56,13 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
             </Box>
           </Box>
           <Box display="flex" flexDirection="row">
-            <Box width="300px">
+            <Box width="300px" className="hidden">
           {suggestion && !loading ? (<Typography component="h5">
             Search instead for: <Link href="#" onClick={noSuggestionSearch}>{originalQuery}</Link>
               </Typography>) : null}
             </Box>
-            <Box style={{ display: "flex", justifyContent: "flex-end", width: "550px" }}>
-              {suggestion && !loading ? <FormControlLabel control={
+            <Box style={{ display: "flex", justifyContent: "flex-end", width: "550px" }} className="hidden">
+              {suggestion && !loading ? <FormControlLabel className="hidden" control={
                   <Switch onChange={setSwitch}
                 inputProps={{ 'aria-label': 'primary checkbox',}}/>}
             label="FoamTree" labelPlacement="start"

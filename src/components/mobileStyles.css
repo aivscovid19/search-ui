@@ -1,0 +1,108 @@
+@media (max-width: 780px) {
+    .hidden{
+        display: none !important;
+    }
+    .p-0{
+        padding: 0px !important;
+    }
+    .p-1{
+        padding: 0.5rem !important;
+    }
+    .mb-0{
+        margin-bottom: 0px !important;
+    }
+    .mb-1{
+        margin-bottom: 1rem !important;
+    }
+    /* Landing Page */
+    .lp-header{
+        width: 100% !important;
+        margin-top: 40px!important;
+    }
+    .lp-main{
+        display: flex !important;
+        width: 100% !important;
+        padding: 0px !important;
+        margin: auto !important;
+    }
+    .lp-search-input{
+        width: 100% !important;
+        padding: 0px !important;
+    }
+    .lp-checkbox #deepsearch{
+        width: 100% !important;
+        align-self: flex-end !important;
+    }
+    .lp-container{
+        display: flex !important;
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: center !important;
+
+    }
+    .lp-container div{
+        max-width: 100% !important;
+        margin-top: 10px !important;
+    }
+    .lp-container .text{
+        width: 100% !important;
+    }
+    /* Quick Search Page */
+    .qs-container{
+        width: 100% !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    .qs-search-area{
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+    .qs-search-area .search-input-container{
+        margin-top: 10px !important;
+        width: 95vw !important;
+    }
+    .qs-search-area .search-input-container form{
+        width: 100% !important;
+    }
+    .brand-title{
+        width: 100% !important;
+    }
+    .brand-title .title{
+        font-size: 3rem !important;
+    }
+    .qs-result-container{
+        width: 100% !important;
+        padding: 0px !important;
+    }
+    .result-title h4{
+        font-size: 1.2rem !important;
+        font-weight: 400 !important;
+        line-height: 1.4rem !important;
+    }
+    .result-abstract p{
+        font-size: 0.9rem !important;
+        line-height: 1.1rem !important;
+    }
+    /* Deep Search Page */
+    .deep-logo{
+        text-align: center !important;
+        margin-top: 6px !important;
+        margin-bottom: 13px !important;
+    }
+    .deep-container{
+        display: flex !important;
+        width: 100%;
+        flex-direction: column;
+    }
+    .deep-header h2{
+        font-size: 1.2rem !important;
+    }
+    .deep-description h4, h5{
+        margin-bottom: 5px !important;
+    }
+    .deep-description p{
+        font-size: 0.9rem !important;
+        line-height: 1.1rem !important;
+    }
+}
