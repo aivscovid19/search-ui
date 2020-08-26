@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactHtmlParser from 'react-html-parser'; 
 
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
@@ -43,8 +44,63 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
+const Result = ({ d, setReport, setArticleReference }) => {
   const MAX_ABSTRACT = 250;
+
+  const shortAbstract = (d.abstract.length >= MAX_ABSTRACT)
+    ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract;
+  const displayAbstract = d.highlight && d.highlight.abstract
+    ? ReactHtmlParser(d.highlight.abstract[0]) : shortAbstract;
+
+  const classes = useStyles();
+  return (
+    <Paper variant="outlined" square>
+      <Grid container >
+        <Grid container item xs alignContent="center" className="hidden p-0">
+          <SeacrhScore score={d.score} placement={d.placement} />
+        </Grid>
+        <Grid item xs={11}>
+          <Box p={2} style={{paddingBottom: "10px", width: "100%"}} className="p-1">
+            <JournalDateDisplay journal={d.journal} journalTitle={d.journal_title} date={d.date} />
+            <Box style={{display: 'flex', alignItems: 'center'}} className="result-title">
+              <a
+                href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.searchResultsLink}
+              >
+                <Typography component="h4" variant="h5" color="textPrimary">
+                  {d.title}
+                </Typography>
+              </a>
+            </Box>
+            <Box>
+              <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
+            </Box>
+
+            <Box mt={1} className="result-abstract">
+              <Typography component="p" variant="subtitle1" color="textPrimary">
+                {displayAbstract}
+              </Typography>
+              <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
+                <div style={{width: "50%"}}></div>
+                <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
+                  <Typography component="p" variant="subtitle1" onClick={() => {
+                    setReport(true); setArticleReference(d);
+                  }}>
+                    Report Article
+              </Typography>
+              </div>
+              </Box>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+    </Paper>
+  )
+};
+
+const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
@@ -88,49 +144,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
         <Box className={classes.searchResults} >
             {docs.map((d, i) => (
               <Box key={i} mb={2}>
-                <Paper variant="outlined" square>
-                  <Grid container >
-                    <Grid container item xs alignContent="center" className="hidden p-0">
-                      <SeacrhScore score={d.score} placement={d.placement} />
-                    </Grid>
-                    <Grid item xs={11}>
-                      <Box p={2} style={{paddingBottom: "10px", width: "100%"}} className="p-1">
-                        <JournalDateDisplay journal={d.journal} journalTitle={d.journal_title} date={d.date} />
-                        <Box style={{display: 'flex', alignItems: 'center'}} className="result-title">
-                          <a
-                            href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={classes.searchResultsLink}
-                          >
-                            <Typography component="h4" variant="h5" color="textPrimary">
-                              {d.title}
-                            </Typography>
-                          </a>
-                        </Box>
-                        <Box>
-                          <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
-                        </Box>
-
-                        <Box mt={1} className="result-abstract">
-                          <Typography component="p" variant="subtitle1" color="textPrimary">
-                            {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
-                          </Typography>
-                          <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
-                            <div style={{width: "50%"}}></div>
-                            <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
-                              <Typography component="p" variant="subtitle1" onClick={() => {
-                                setReport(true); setArticleReference(d);
-                              }}>
-                                Report Article
-                          </Typography>
-                          </div>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  </Grid>
-                </Paper>
+                <Result d={d} setReport={setReport} setArticleReference={setArticleReference} />
               </Box>
             ))}
           </Box>
