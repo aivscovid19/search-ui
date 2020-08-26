@@ -22,11 +22,9 @@ const useStyles = makeStyles(() => ({
   },
   searchResults: {
     height: '100%',
-    overflow: 'scroll'
-  },
-  searchResultsHeader: {
-    display: 'flex',
-    alignItems: 'center'
+    overflow: 'scroll',
+    width: "100%",
+    padding: "0px",
   },
   searchResultsLink: {
     textDecorationColor: '#000',
@@ -73,11 +71,11 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
     }
 
   return (
-      <Box mt={0} display="flex" height="90%" paddingLeft="138px">
+      <Box mt={0} display="flex" height="90%" paddingLeft="138px" className="qs-result-container">
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
           footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
           href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
-        <Box px={2} display="flex" flexDirection="column" zIndex="1" width="835px">
+        <Box px={2} display="flex" flexDirection="column" zIndex="1" width="835px" className="qs-result-container" >
           <Box className={classes.searchResultsTop} width="100%">
             <Paper variant="outlined" square style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
               <Box p={1}>
@@ -87,20 +85,18 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
               </Box>
             </Paper>
           </Box>
-          <Box className={classes.searchResults} >
+        <Box className={classes.searchResults} >
             {docs.map((d, i) => (
-              <Box key={i} mb={2} >
+              <Box key={i} mb={2}>
                 <Paper variant="outlined" square>
                   <Grid container >
-                    <Grid container item xs alignContent="center">
+                    <Grid container item xs alignContent="center" className="hidden p-0">
                       <SeacrhScore score={d.score} placement={d.placement} />
                     </Grid>
                     <Grid item xs={11}>
-                      <Box p={2} style={{paddingBottom: "10px"}}>
-
+                      <Box p={2} style={{paddingBottom: "10px", width: "100%"}} className="p-1">
                         <JournalDateDisplay journal={d.journal} journalTitle={d.journal_title} date={d.date} />
-
-                        <Box className={classes.searchResultsHeader}>
+                        <Box style={{display: 'flex', alignItems: 'center'}} className="result-title">
                           <a
                             href={`https://pubmed.ncbi.nlm.nih.gov/${d.pmid}`}
                             target="_blank"
@@ -116,7 +112,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                           <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
                         </Box>
 
-                        <Box mt={1}>
+                        <Box mt={1} className="result-abstract">
                           <Typography component="p" variant="subtitle1" color="textPrimary">
                             {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
                           </Typography>

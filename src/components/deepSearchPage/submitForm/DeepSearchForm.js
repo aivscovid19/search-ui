@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   layout: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
-    width: "90%",
+    width: "100%",
     display: "flex",
     justifyContent: "flex-start"
   },
@@ -101,7 +101,7 @@ const DeepSearchForm = () => {
 
   return (
     <div className={classes.layout} style={{margin: "0px"}}>
-      <Paper className={classes.paper}>
+      <Paper className={`${classes.paper} p-1`}>
         <Typography component="h1" variant="h4" align="center">
           Deep Literature Search Query
         </Typography>

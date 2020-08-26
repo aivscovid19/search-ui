@@ -18,6 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+
 const Landing = () => {
   const classes = useStyles();
   const [searchValue, setSearchValue] = useState('');
@@ -40,14 +41,14 @@ const Landing = () => {
     <div>
     <Container style={{minHeight: '70vh', flexDirection: 'column'}} className={classes.main} component="main" maxWidth="xl">
       <CssBaseline />
-      <Typography align="center" component="h1" variant="h3">
+      <Typography align="center" component="h1" variant="h3" className="lp-header">
         BREATHE
       </Typography>
 
-      <Typography align="center" component="h2" variant="h6">
+      <Typography align="center" component="h2" variant="h6" className="description">
         Biomedical Research Extensive Archive To Help Everyone
       </Typography>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" className="lp-search-input">
         <form onSubmit={search}>
           <TextField
             autoFocus
@@ -73,29 +74,29 @@ const Landing = () => {
           />
         </form>
         </Container>
-        <Container style={{marginTop: "20px", maxWidth: "800px"}} className={classes.main}>
-          <div style={{display:"flex", width: "50%", justifyContent: "flex-end", paddingRight: "20px"}}>
+        <Container style={{marginTop: "20px", maxWidth: "800px", display: 'flex',justifyContent: 'center'}} className="lp-main">
+          <div style={{display:"flex", width: "50%", justifyContent: "flex-end", paddingRight: "20px"}} className="lp-checkbox">
           <input checked={checkBox1} onChange={handleCheckBox} name="checkbox-1" type="checkbox"></input>
             <label htmlFor="checkbox-1">Quick Search</label>
           </div>
-          <div style={{ display:"flex", width: "50%"}}> 
-            <input checked={checkBox2}  onChange={handleCheckBox} style={{ borderRadius: "50%" }} name="checkbox-2" type="checkbox"></input>
+          <div style={{ display:"flex", width: "50%"}} className="lp-checkbox" id="deepsearch"> 
+            <input checked={checkBox2}  onChange={handleCheckBox} style={{ borderRadius: "50%" }} name="checkbox-2"  type="checkbox"></input>
             <label htmlFor="checkbox-2">Deep Literature Search</label>
             </div>
         </Container>
-        <Container style={{ maxWidth: "800px", marginTop: "20px" }}  >
-          <div style={{float: "left", maxWidth:"50%"}}>
-            <Typography>commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
+        <Container style={{ maxWidth: "800px", marginTop: "20px" }}  className="lp-container">
+          <div style={{float: "left", maxWidth:"50%"}} >
+            <Typography className="text">commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
           </div>
           <div style={{maxWidth:"50%", float: "right"}} >
-            <Typography>commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
+            <Typography className="text">commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
             </div>
         </Container>
-        <Container style={{ maxWidth: "800px", marginTop: "20px" }}  >
-          <div style={{float: "left", maxWidth:"50%"}}>
+        <Container style={{ maxWidth: "800px", marginTop: "20px" }}  className="lp-container">
+          <div style={{float: "left", maxWidth:"50%"}} className="text">
             <Typography>commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
           </div>
-          <div style={{maxWidth:"50%", float: "right"}} >
+          <div style={{maxWidth:"50%", float: "right"}} className="text">
             <Typography>commodo <span style={{fontWeight: "bold"}}>odio</span> aenean sed adiTypographyiscing diam donec adipiscing tristique risus nec</Typography>
             </div>
         </Container>
