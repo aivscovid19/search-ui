@@ -6,6 +6,7 @@ import { Grid, Box, Typography } from '@material-ui/core';
 
 import FoamTree from '../foamTree';
 import KeywordsDisplay from '../../KeywordsDisplay';
+import AbstractDisplay from '../../AbstractDisplay';
 import SeacrhScore from '../../helpers/SearchScore';
 import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
@@ -89,6 +90,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
           </Box>
           <Box className={classes.searchResults} >
             {docs.map((d, i) => (
+              <div className="search-result-container" >
               <Box key={i} mb={2} >
                 <Paper variant="outlined" square>
                   <Grid container >
@@ -117,9 +119,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                         </Box>
 
                         <Box mt={1}>
-                          <Typography component="p" variant="subtitle1" color="textPrimary">
-                            {(d.abstract.length >= MAX_ABSTRACT) ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract}
-                          </Typography>
+                          <AbstractDisplay abstract={d.abstract} />
                           <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
                             <div style={{width: "50%"}}></div>
                             <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
@@ -136,6 +136,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                   </Grid>
                 </Paper>
               </Box>
+              </div>
             ))}
           </Box>
         </Box>

@@ -13,7 +13,7 @@
     margin: 3px;
     color: #0c3877;
     display: block;
-    white-space: nowrap; /* forces text to single line */
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
