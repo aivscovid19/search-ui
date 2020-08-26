@@ -57,10 +57,10 @@ const FoamTreeSearchPage = () => {
   }
   return (
     <>
-      <Box p={3} height="100vh">
-        <Box style={{display: "flex", flexDirection: "row"}}>
-        <Box style={{width: "155px"}}>
-          <Typography component="h1" onClick={() => {window.location = '/search-ui'}} style={{fontSize: "2rem", fontWeight: "380"}}>
+      <Box p={3} height="100vh" className="qs-container">
+        <Box style={{display: "flex", flexDirection: "row"}} className="qs-search-area">
+        <Box style={{width: "155px"}} className="brand-title">
+          <Typography component="h1" onClick={() => {window.location = '/search-ui'}} style={{fontSize: "2rem", fontWeight: "380"}} className="title">
             BREATHE
           </Typography>
         </Box>
