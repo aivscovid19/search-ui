@@ -11,17 +11,22 @@ export const KeywordsDisplay = React.memo(({ keywords }) => {
             {keywordsToMap && (
                 <div className="keywords">
                     {keywordsToMap.map((keyword, index) => {
-                        return (
-                            <Tooltip title={keyword}>
-                                <a key={index} className="individual-keywords">
-                                    {
-                                        keyword.length > 20
-                                            ? keyword.slice(0, 20).trim() + "..."
-                                            : keyword
-                                    }
-                                </a>
-                            </Tooltip>
-                        );
+                        const isKeywordTruncated = keyword.length > 20;
+                        if (isKeywordTruncated){
+                            return (
+                                <Tooltip key={index} title={keyword}>
+                                    <span className="individual-keywords">
+                                        { keyword.slice(0, 20).trim() + "..." }
+                                    </span>
+                                </Tooltip>
+                        )
+                        } else {
+                            return (
+                                <span key={index} className="individual-keywords">
+                                    { keyword }
+                                </span>
+                            )
+                        }
                     })}
                 </div>
             )}
