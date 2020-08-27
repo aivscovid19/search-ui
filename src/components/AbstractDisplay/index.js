@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser'; 
 
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import { Typography } from '@material-ui/core';
 
-import { Typography, IconButton } from '@material-ui/core';
-
-import * as icons from '../../icons';
 import './styles.css';
 
 export const AbstractDisplay = ({ abstract, highlight }) => {
@@ -19,8 +16,8 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
     }
 
     return (
-        <>
             <Typography
+            onClick={() => { handleToggleText() }}
              className={
               isFullTextToggled
               ? "abstract-text-toggled"
@@ -32,13 +29,6 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
              >
                 {displayAbstract}
             </Typography>
-            <IconButton
-                 onClick={() => { handleToggleText() }}
-                 size="small"
-            >
-                <VisibilityIcon />
-            </IconButton>
-        </>
     );
 }
 
