@@ -19,6 +19,16 @@ export const fetchData = async (
   return res.data;
 };
 
+export const fetchPage = async (
+  query, page,{
+    suggestion = false,
+    size = DEFAULT_QUERY_SIZE,
+}) => {
+  const params = { query, size, suggestion };
+  const res = await axios.get(CLOUD_URL+`/page/${page}`, { params, timeout: TIMEOUT_SEC * 1000 });
+  return res.data;
+};
+
 export const findDocs = ({ groups = [], _doc = null }) => {
   let docs = _doc === null ? [] : [_doc];
   groups.forEach(g => docs = [ ...docs, ...findDocs(g) ]);

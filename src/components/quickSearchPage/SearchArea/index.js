@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextField, Typography, Box, Link, Container,FormControlLabel, Switch } from '@material-ui/core'
 
@@ -20,7 +20,11 @@ import './index.css';
 const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
   const originalQuery = search;
   const [query, setQuery] = useState(search);
-
+  useEffect(() => {
+    if (suggestion) {
+      setQuery(search);
+    }
+  }, [search])
   const noSuggestionSearch = (e) => {
     e.preventDefault();
     onSubmit(originalQuery, false);

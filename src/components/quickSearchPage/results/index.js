@@ -11,6 +11,7 @@ import SeacrhScore from '../../helpers/SearchScore';
 import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
 import JournalDateDisplay from '../../JournalDateDisplay';
+import { PagesBar } from '../pagination/pagesBar.js';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -57,7 +58,7 @@ const Result = ({ d, setReport, setArticleReference }) => {
     <Paper variant="outlined" square>
       <Grid container >
         <Grid container item xs alignContent="center" className="hidden p-0">
-          <SeacrhScore score={d.score} placement={d.placement} />
+         {(d.score && d.placement) ? <SeacrhScore score={d.score} placement={d.placement} /> : null}
         </Grid>
         <Grid item xs={11}>
           <Box p={2} style={{paddingBottom: "10px", width: "100%"}} className="p-1">
@@ -100,7 +101,7 @@ const Result = ({ d, setReport, setArticleReference }) => {
   )
 };
 
-const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
+const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber,search }) => {
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
@@ -138,8 +139,9 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
                 <Typography component="p">
                   Top {currentCount} papers
               </Typography>
-              </Box>
-            </Paper>
+            </Box>
+          </Paper>
+          <PagesBar pageNumber={pageNumber} fetchPage={fetchPage} search={search}/>
           </Box>
         <Box className={classes.searchResults} >
             {docs.map((d, i) => (
