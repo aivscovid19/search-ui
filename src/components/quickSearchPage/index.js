@@ -10,7 +10,7 @@ import ServerError from '../helpers/SereverError';
 import { buildFoamtreeDataObject } from '../../helpers/sortFoamTree';
 import { decodeUnicodeFields } from '../../helpers/htmlDecode';
 import { splitDocumentKeywords } from '../../helpers/article';
-import { fetchData } from '../../controllers/dataFetch';
+import { fetchData, fetchPage } from '../../controllers/dataFetch';
 
 const FoamTreeSearchPage = () => {
   const params = useParams();
@@ -20,18 +20,28 @@ const FoamTreeSearchPage = () => {
   const [foamTreeData, setFoamTreeData] = useState({});
   const [docs, setDocs] = useState([]);
 
+  const [querySearch, setQuerySearch] = useState(null);
   const [loading, setLoading] = useState(false);
   const [serverError, setError] = useState(false);
   const [switchTree, setSwitch] = useState(false);
   const [suggestion, setSuggestion] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
-  const fetch = async (search, shouldSuggest = true) => {
+  const fetch = async (search, shouldSuggest = true, page) => {
     if (loading) {
       return;
     }
     try {
       setLoading(true);
-      const { data } = await fetchData(search, { suggestion: shouldSuggest });
+      let response;
+      if (page) {
+        setPageNumber(page);
+        response = await fetchPage(search, page, { suggestion: true });
+      } else {
+        response = await fetchData(search, { suggestion: shouldSuggest });
+        setPageNumber(1);
+      }
+      const { data } = response;
       const docs = data.docs.map(splitDocumentKeywords);
       const foamTreeData = buildFoamtreeDataObject(decodeUnicodeFields(docs));
       setResultCount([docs.length, data.length]);
@@ -48,10 +58,13 @@ const FoamTreeSearchPage = () => {
     setSwitch(!switchTree);
   }
   useEffect(() => {
+    setQuerySearch(params.search);
     fetch(params.search);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  const quickSearch = (query, shouldSuggest) => {
-    fetch(query, shouldSuggest);
+  const quickSearch = (query, shouldSuggest, page) => {
+    setQuerySearch(query);
+    if (page) { fetch(query, shouldSuggest, page); }
+    else {fetch(query, shouldSuggest);}
     setSwitch(false);
     history.push(decodeURI(query));
   }
@@ -66,14 +79,15 @@ const FoamTreeSearchPage = () => {
         </Box>
         <SearchArea
           onSubmit={quickSearch}
-          search={params.search}
+          search={querySearch ? querySearch : params.search}
           suggestion={suggestion}
           loading={loading}
           setSwitch={setFoamTree}/>
           </Box>
         {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
-            <Results switched={switchTree} count={resultCount} data={foamTreeData} docs={docs} setDocs={setDocs} setResultCount={setResultCount} /> }
+          <Results switched={switchTree} count={resultCount} data={foamTreeData} docs={docs} setDocs={setDocs} fetchPage={quickSearch}
+            setResultCount={setResultCount} pageNumber={pageNumber} search={suggestion ? suggestion : querySearch}/>}
       </Box>
     </>
   );
