@@ -4,13 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import { Typography, Modal, Backdrop, Fade, Divider } from '@material-ui/core';
 import {CreateReferences} from './CreateReferences.js'
-
+import { copyToClipBoard } from '../../helpers/clipboard';
 
 /**
  *  Showing pop up message in the middle of page with faded background
  *  @author[Danila Kurgan](https://github.com/dkurgan)
  */
-
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -61,7 +60,7 @@ export const PopUpMessage = ({ visibility, title, onClose, content, article, foo
          */
         if (copy) {
             setCopy(true);
-            navigator.clipboard.writeText(clipboard);
+            copyToClipBoard(clipboard);
             setTimeout(() => setCopy(false), 3000);
         }
         setTimeout(() => {
