@@ -4,9 +4,11 @@
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    cursor: pointer;
 }
 
 .abstract-text-toggled {
     display: -webkit-box;
     -webkit-box-orient: vertical;
+    cursor: pointer;
 }
