@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import { Typography, Container, TextField, InputAdornment } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
-import MicIcon from '@material-ui/icons/Mic';
-import TextField from '@material-ui/core/TextField';
+import { Autocomplete } from '@material-ui/lab';
+import QUESTIONS from '../config/questions.js'
 
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles(() => ({
   main: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 }));
 
@@ -26,11 +23,11 @@ const Landing = () => {
   const [checkBox2, setCheckBox2] = useState(false);
   const history = useHistory();
 
-  const search = (e) => {
-    e.preventDefault();
+  const search = () => {
+    if (!searchValue) return;
     if (checkBox2)
-      history.push(encodeURI('/deepsearch/'+searchValue))
-    else
+      history.push(encodeURI('/deepsearch/'+ searchValue))
+    else if (checkBox1)
       history.push(encodeURI(searchValue));
   };
   const handleCheckBox = () => {
@@ -40,7 +37,6 @@ const Landing = () => {
   return (
     <div>
     <Container style={{minHeight: '70vh', flexDirection: 'column'}} className={classes.main} component="main" maxWidth="xl">
-      <CssBaseline />
       <Typography align="center" component="h1" variant="h3" className="lp-header">
         BREATHE
       </Typography>
@@ -49,30 +45,34 @@ const Landing = () => {
         Biomedical Research Extensive Archive To Help Everyone
       </Typography>
       <Container maxWidth="sm" className="lp-search-input">
-        <form onSubmit={search}>
-          <TextField
-            autoFocus
+          <form onSubmit={search}>
+          <Autocomplete
+            freeSolo
             fullWidth
+            style={{margin: "10px"}}
             placeholder="search"
             variant="outlined"
-            margin="normal"
-            size="small"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            InputProps={{
-              startAdornment: (
+              size="small"
+              disableClearable
+            options={QUESTIONS.map((qeust)=> qeust)}
+              value={searchValue}
+              inputValue={searchValue}
+              onInputChange={(_, newInputValue) => setSearchValue(newInputValue)}
+              onChange={(_, newValue) => {
+                setSearchValue(newValue);
+                if (newValue) search(newValue);
+              }}
+            renderInput={params => {
+              params.InputProps.startAdornment = (
                 <InputAdornment position="start">
                   <SearchIcon />
                 </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <MicIcon />
-                </InputAdornment>
-              )
+              );
+              return <TextField {...params} placeholder="search" InputProps={{ ...params.InputProps, type: 'search' }}
+                variant="outlined" />
             }}
-          />
-        </form>
+            />
+            </form>
         </Container>
         <Container style={{marginTop: "20px", maxWidth: "800px", display: 'flex',justifyContent: 'center'}} className="lp-main">
           <div style={{display:"flex", width: "50%", justifyContent: "flex-end", paddingRight: "20px"}} className="lp-checkbox">

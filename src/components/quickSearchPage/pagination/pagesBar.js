@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 /**
  * @params pageNumber
  * @params fetchPage function callback
+ * @params seach qeury
  * @author[Danila Kurgan](https://github.com/dkurgan)
  */
 
@@ -71,5 +72,6 @@ export const PagesBar = ({pageNumber, fetchPage, search}) => {
 
 PagesBar.propTypes = {
     pageNumber: PropTypes.number.isRequired,
-    fetchPage: PropTypes.func.isRequired
+    fetchPage: PropTypes.func.isRequired,
+    search: PropTypes.string
 }
