@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser'; 
 
-import { Typography } from '@material-ui/core';
+import { Typography, Button, createMuiTheme } from '@material-ui/core';
 
 import './styles.css';
 
 export const AbstractDisplay = ({ abstract, highlight }) => {
-    const [isFullTextToggled, setFullTextToggled] = useState(false);
+    const theme = createMuiTheme({
+            button: {
+              textTransform: 'none'
+            }
+        });
 
+    const [isFullTextToggled, setFullTextToggled] = useState(false);
+    
     const displayAbstract = highlight && highlight.abstract
-      ? ReactHtmlParser(highlight.abstract[0]) : abstract;
+      ? `...${ReactHtmlParser(highlight.abstract[0])}...` : abstract;
 
     function handleToggleText(){
         setFullTextToggled(isFullTextToggled === false ? true : false)
     }
 
     return (
+        <Button theme={theme}>
             <Typography
-            onClick={() => { handleToggleText() }}
+             onClick={() => { handleToggleText() }}
              className={
               isFullTextToggled
               ? "abstract-text-toggled"
@@ -27,8 +34,12 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
              variant="subtitle1"
              color="textPrimary"
              >
-                {displayAbstract}
+                { isFullTextToggled
+                    ? abstract
+                    : displayAbstract
+                }
             </Typography>
+            </Button>
     );
 }
 
