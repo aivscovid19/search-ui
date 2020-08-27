@@ -10,10 +10,7 @@ import './styles.css';
 
 export const AbstractDisplay = ({ abstract, highlight }) => {
     const [isFullTextToggled, setFullTextToggled] = useState(false);
-    // const MAX_ABSTRACT = 250;
 
-    // const shortAbstract = (abstract.length >= MAX_ABSTRACT)
-    //   ? `${abstract.slice(0, MAX_ABSTRACT).trim()}...` : abstract;
     const displayAbstract = highlight && highlight.abstract
       ? ReactHtmlParser(highlight.abstract[0]) : abstract;
 
