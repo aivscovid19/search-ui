@@ -46,12 +46,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Result = ({ d, setReport, setArticleReference }) => {
-  const MAX_ABSTRACT = 250;
+  // const MAX_ABSTRACT = 250;
 
-  const shortAbstract = (d.abstract.length >= MAX_ABSTRACT)
-    ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract;
-  const displayAbstract = d.highlight && d.highlight.abstract
-    ? ReactHtmlParser(d.highlight.abstract[0]) : shortAbstract;
+  // const shortAbstract = (d.abstract.length >= MAX_ABSTRACT)
+  //   ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract;
+  // const displayAbstract = d.highlight && d.highlight.abstract
+  //   ? ReactHtmlParser(d.highlight.abstract[0]) : shortAbstract;
 
   const classes = useStyles();
   return (
@@ -80,9 +80,7 @@ const Result = ({ d, setReport, setArticleReference }) => {
             </Box>
 
             <Box mt={1} className="result-abstract">
-              <Typography component="p" variant="subtitle1" color="textPrimary">
-                {displayAbstract}
-              </Typography>
+              <AbstractDisplay abstract={d.abstract} highlight={d.highlight} />
               <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
                 <div style={{width: "50%"}}></div>
                 <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
