@@ -1,9 +1,13 @@
 
 .abstract-text {
-    display: block;
-    resize: vertical;
-    overflow-y: scroll;
+    overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.abstract-text-toggled {
+    /* overflow: hidden; */
+    display: -webkit-box;
     -webkit-box-orient: vertical;
 }
