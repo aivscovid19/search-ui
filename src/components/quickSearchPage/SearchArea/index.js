@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextField, Typography, Box, Link, Container,FormControlLabel, Switch } from '@material-ui/core'
+import { TextField, Typography, Box, Link, FormControlLabel, Switch } from '@material-ui/core'
+
+import QUESTIONS from '../../../config/questions.js';
+import { Autocomplete } from '@material-ui/lab';
 
 import './index.css';
 
@@ -32,13 +35,27 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
   return (
     <Box className="search-input-container">
       <form onSubmit={() => onSubmit(query, true)} style={{width: "800px"}}>
-        <TextField
+        <Autocomplete
+            freeSolo
+          fullWidth
           placeholder="search"
-          variant="outlined"
+            style={{width: "100%"}}
+            variant="outlined"
           size="small"
-          style={{ width: "100%" }}
-          onChange={(e) => setQuery(e.target.value)}
-          value={query} />
+          disableClearable
+          inputValue={query}
+          onInputChange={(_, newQuery) => setQuery(newQuery)}
+            options={QUESTIONS.map((qeust)=> qeust)}
+            value={query}
+              onChange={(_, newValue) => {
+                setQuery(newValue);
+                if (newValue) onSubmit(newValue);
+              }}
+            renderInput={params => {
+              return <TextField {...params} placeholder="search"
+                InputProps={{ ...params.InputProps, type: 'search' }} variant="outlined" />
+            }}
+            />
       </form>
           <Box>
             <Box pt={1} pb={1} className="qs-under-search">
