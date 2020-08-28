@@ -6,6 +6,9 @@ import { Typography, Button, withStyles } from '@material-ui/core';
 import './styles.css';
 
 const StyledButton = withStyles({
+    root: {
+        padding: '5px',
+      },
     label: {
       textTransform: 'none',
       textAlign: 'left',
@@ -40,7 +43,7 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
                     : displayAbstract
                 }
             </Typography>
-            </StyledButton>
+        </StyledButton>
     );
 }
 
