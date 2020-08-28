@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser'; 
 
-import { Typography, Button, createMuiTheme } from '@material-ui/core';
+import { Typography, Button, withStyles } from '@material-ui/core';
 
 import './styles.css';
 
-export const AbstractDisplay = ({ abstract, highlight }) => {
-    const theme = createMuiTheme({
-            button: {
-              textTransform: 'none'
-            }
-        });
+const StyledButton = withStyles({
+    label: {
+      textTransform: 'none',
+      textAlign: 'left',
+    },
+  })(Button);
 
+export const AbstractDisplay = ({ abstract, highlight }) => {
     const [isFullTextToggled, setFullTextToggled] = useState(false);
     
     const displayAbstract = highlight && highlight.abstract
@@ -22,7 +23,7 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
     }
 
     return (
-        <Button theme={theme}>
+        <StyledButton>
             <Typography
              onClick={() => { handleToggleText() }}
              className={
@@ -39,7 +40,7 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
                     : displayAbstract
                 }
             </Typography>
-            </Button>
+            </StyledButton>
     );
 }
 
