@@ -12,8 +12,8 @@ export const KeywordsDisplay = React.memo(({ keywords }) => {
                 <div className="keywords">
                     {keywordsToMap.map((keyword, index) => {
                         return (
-                            <Tooltip title={keyword}>
-                                <a key={index} className="individual-keywords">
+                            <Tooltip key={index} title={keyword}>
+                                <a className="individual-keywords">
                                     {
                                         keyword.length > 20
                                             ? keyword.slice(0, 20).trim() + "..."
