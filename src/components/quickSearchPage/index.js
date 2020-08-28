@@ -48,7 +48,8 @@ const FoamTreeSearchPage = () => {
       setFoamTreeData(foamTreeData);
       setDocs(docs);
       setSuggestion(data.suggestion);
-    } catch {
+    } catch (e) {
+      console.log(e);
       setError(true);
     } finally {
       setLoading(false);
