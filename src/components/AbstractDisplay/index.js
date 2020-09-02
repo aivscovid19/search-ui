@@ -8,7 +8,7 @@ import './styles.css';
 const StyledButton = withStyles({
     root: {
         padding: '5px',
-      },
+    },
     label: {
       textTransform: 'none',
       textAlign: 'left',
@@ -19,7 +19,10 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
     const [isFullTextToggled, setFullTextToggled] = useState(false);
     
     const displayAbstract = highlight && highlight.abstract
-      ? `...${ReactHtmlParser(highlight.abstract[0])}...` : abstract;
+      ? `...${highlight.abstract[0]}...` : abstract;
+
+    const displayFullAbstract = highlight && highlight.abstract
+    ? highlight.abstract.join() : abstract;
 
     function handleToggleText(){
         setFullTextToggled(isFullTextToggled === false ? true : false)
@@ -39,8 +42,8 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
              color="textPrimary"
              >
                 { isFullTextToggled
-                    ? abstract
-                    : displayAbstract
+                    ? ReactHtmlParser(displayFullAbstract)
+                    : ReactHtmlParser(displayAbstract)
                 }
             </Typography>
         </StyledButton>
