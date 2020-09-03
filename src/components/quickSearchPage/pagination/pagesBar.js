@@ -44,10 +44,11 @@ export const PagesBar = ({pageNumber, fetchPage, search}) => {
     pageNumberList.push(pageNumber);
     for (let index = 1; index < PAGE_COUNT; index++) { pageNumberList.push(pageNumberList[index - 1] + 1 ); }
     const changePage = (numPage) => {
-        fetchPage(search, false,numPage);
+        if (numPage === pageNumber) return;
+        else {fetchPage(search, false, numPage);}
     }
     const skipPage = (way) => {
-        if (!way) {fetchPage(search, false, (pageNumber - PAGE_COUNT) > 0 ? (pageNumber - PAGE_COUNT) : 1);}
+        if (!way) {fetchPage(search, false, (pageNumber - PAGE_COUNT) > 0 ? (pageNumber - PAGE_COUNT) : 0);}
         else {fetchPage(search, false, (pageNumber + PAGE_COUNT));}
     }
     return (

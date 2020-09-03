@@ -129,7 +129,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
             <Paper variant="outlined" square style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
               <Box p={1}>
                 <Typography component="p">
-                  Top {currentCount} papers
+                  Articles from {currentCount * (pageNumber - 1)} to {currentCount * pageNumber} of {data.total ? data.total : "10000"}
               </Typography>
             </Box>
           </Paper>
