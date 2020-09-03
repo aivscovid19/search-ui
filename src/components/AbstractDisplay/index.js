@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import ReactCSSTransitionGroup from 'react-transition-group';
 
 import { Typography, Button, withStyles } from '@material-ui/core';
 
@@ -15,14 +16,16 @@ const StyledButton = withStyles({
     },
   })(Button);
 
+function FirstChild(props) {
+    const childrenArray = React.Children.toArray(props.children);
+    return childrenArray[0] || null;
+}
+
 export const AbstractDisplay = ({ abstract, highlight }) => {
     const [isFullTextToggled, setFullTextToggled] = useState(false);
     
     const previewAbstract = highlight && highlight.abstract
      ? `...${highlight.abstract[0]}...` : abstract;
-
-    const displayFullAbstract = highlight && highlight.abstract
-     ? highlight.abstract.join(' ') : abstract;
 
     function handleToggleText(){
         setFullTextToggled(isFullTextToggled === false ? true : false)
@@ -42,7 +45,7 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
              color="textPrimary"
              >
                 { isFullTextToggled
-                    ? ReactHtmlParser(displayFullAbstract)
+                    ? abstract
                     : ReactHtmlParser(previewAbstract)
                 }
             </Typography>
