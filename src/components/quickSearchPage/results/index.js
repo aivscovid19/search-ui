@@ -46,13 +46,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Result = ({ d, setReport, setArticleReference }) => {
-  // const MAX_ABSTRACT = 250;
-
-  // const shortAbstract = (d.abstract.length >= MAX_ABSTRACT)
-  //   ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract;
-  // const displayAbstract = d.highlight && d.highlight.abstract
-  //   ? ReactHtmlParser(d.highlight.abstract[0]) : shortAbstract;
-
   const classes = useStyles();
   return (
     <Paper variant="outlined" square>
