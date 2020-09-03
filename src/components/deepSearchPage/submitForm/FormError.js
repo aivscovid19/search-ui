@@ -15,7 +15,7 @@ const FormError = () => {
   }
   return (<Box>
     <Typography variant="h5" gutterBottom>
-      Ops, something wrong.
+    Oops, something is wrong.
     </Typography>
     <Typography variant="subtitle1">
       We are sorry but this email is not valid.
