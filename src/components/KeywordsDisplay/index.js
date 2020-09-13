@@ -7,7 +7,7 @@ export const KeywordsDisplay = React.memo(({ keywords }) => {
     const keywordsToMap = shuffleArray(keywords).slice(0,6)
 
     return (
-        <div className="keywords-container">
+        <div className="keywords-container hidden">
             {keywordsToMap && (
                 <div className="keywords">
                     {keywordsToMap.map((keyword, index) => {

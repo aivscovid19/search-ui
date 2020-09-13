@@ -3,6 +3,7 @@ import { Route, HashRouter, Switch } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import FoamTreeSearchPage from './components/quickSearchPage';
 import DeepSearchPage from './components/deepSearchPage';
+import './components/mobileStyles.css'
 
 export default () => (
   <HashRouter>
