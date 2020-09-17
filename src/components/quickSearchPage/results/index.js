@@ -46,7 +46,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Result = ({ d, setReport, setArticleReference }) => {
+export const Result = ({ d, setReport, setArticleReference, showKeywords, showReport }) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" square>
@@ -70,20 +70,20 @@ const Result = ({ d, setReport, setArticleReference }) => {
               </a>
             </Box>
             <Box>
-              <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
+             {showKeywords ? <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay> : null}
             </Box>
 
             <Box mt={1} className="result-abstract">
               <AbstractDisplay abstract={d.abstract} highlight={d.highlight} />
               <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
                 <div style={{width: "50%"}}></div>
-                <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
+               {showReport ? <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
                   <Typography component="p" variant="subtitle1" onClick={() => {
                     setReport(true); setArticleReference(d);
                   }}>
                     Report Article
               </Typography>
-              </div>
+              </div> : null}
               </Box>
             </Box>
           </Box>
@@ -93,7 +93,7 @@ const Result = ({ d, setReport, setArticleReference }) => {
   )
 };
 
-const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber,search }) => {
+export const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber,search }) => {
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
@@ -138,7 +138,7 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
         <Box className={classes.searchResults} >
             {docs.map((d, i) => (
               <Box key={i} mb={2}>
-                <Result d={d} setReport={setReport} setArticleReference={setArticleReference} />
+                <Result d={d} setReport={setReport} setArticleReference={setArticleReference} showKeywords={true} showReport={true}/>
               </Box>
             ))}
           </Box>
@@ -154,4 +154,3 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
     );
 }, preventRerender("docs", "data"));
 
-export default Results;

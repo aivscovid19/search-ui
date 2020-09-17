@@ -4,7 +4,8 @@ import { Tooltip } from '@material-ui/core';
 import shuffleArray from '../helpers/shuffleArray'
 
 export const KeywordsDisplay = React.memo(({ keywords }) => {
-    const keywordsToMap = shuffleArray(keywords).slice(0,6)
+    if (!keywords && keywords === undefined) return;
+    const keywordsToMap = shuffleArray(keywords).slice(0, 6);
 
     return (
         <div className="keywords-container hidden">

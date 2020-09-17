@@ -78,11 +78,16 @@ const DeepSearchForm = () => {
 
     try {
       const name = `${firstName} ${lastName}`;
-
-      const data = await fetchDeepSearch({
+      console.log({
         mSize, email,
         name: name.trim(),
-        type: dSize,
+        dSize: dSize,
+        query: params.search
+      })
+      await fetchDeepSearch({
+        mSize, email,
+        name: name.trim(),
+        dSize: dSize,
         query: params.search
       });
     } catch (err) {
