@@ -3,7 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import {Box, Typography } from '@material-ui/core';
 
-import Results from './results';
+import {Results} from './results';
 import SearchArea from './SearchArea';
 import Spinner from '../helpers/LoadingSpiner';
 import ServerError from '../helpers/SereverError';
@@ -85,10 +85,11 @@ const FoamTreeSearchPage = () => {
           loading={loading}
           setSwitch={setFoamTree}/>
           </Box>
-        {loading ? (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
-          <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" />) :
+        {loading ?
+          <Spinner mt="150px" height="100px" width="auto" color="lightgrey" type="BallTriangle" /> :
+          (serverError ? <ServerError mt="150px" height="70px" width="70px" color="lightgrey" message={"Looks like server is not responding"}/> :
           <Results switched={switchTree} count={resultCount} data={foamTreeData} docs={docs} setDocs={setDocs} fetchPage={quickSearch}
-            setResultCount={setResultCount} pageNumber={pageNumber} search={suggestion ? suggestion : querySearch}/>}
+          setResultCount={setResultCount} pageNumber={pageNumber} search={suggestion ? suggestion : querySearch} />)}
       </Box>
     </>
   );

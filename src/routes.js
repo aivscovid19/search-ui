@@ -4,10 +4,12 @@ import LandingPage from './components/LandingPage';
 import FoamTreeSearchPage from './components/quickSearchPage';
 import DeepSearchPage from './components/deepSearchPage';
 import './components/mobileStyles.css'
+import { DeepSearchResult } from './components/deepSearchPage/deepSearchReuslts';
 
 export default () => (
   <HashRouter>
     <Switch>
+      <Route path='/deepsearch/result/:id' component={DeepSearchResult} />
       <Route path='/deepsearch/:search' component={DeepSearchPage} />
       <Route path='/:search' component={FoamTreeSearchPage} />
       <Route path='/' component={LandingPage} />
