@@ -14,7 +14,8 @@ const useStyles = makeStyles(() => ({
         marginBottom: "10px"
     },
     headerBody: {
-        textAlign: "center"
+        textAlign: "center",
+        marginBottom: "10px"
     },
     results: {
         height: '100%',
@@ -31,35 +32,37 @@ export const DeepSearchResult = () => {
     const [idError, setIdEror] = useState(false);
     const [pendingMessage, setPendingMessage] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [docs, setDocs] = useState([]);
     const classes = useStyles();
-    let data = [];
     useEffect(async() => {
         setLoading(true);
         try {
-            data = await fetchDeepSearchResult(id);
+            const { data } = await fetchDeepSearchResult(id);
+            if (data) setDocs(data);
             setLoading(false);   
         } catch (error) {
             setLoading(false);
             setIdEror(true);
         }
-        if (data.length === undefined || data.status === null) { setIdEror(true); }
-        else if (data && data.status === 'in progress') {
+        if (docs.length === undefined || docs.status === null) { setIdEror(true); }
+        else if (docs && docs.status === 'in progress') {
                 setPendingMessage(true);}
     }, []);
     return (
         <div>
             {!loading ? (!idError ? (!pendingMessage ?
                 <Box className={classes.main}>
-                    <h2 className={classes.header}>{data.name ? `Hello ${data.name}`: `Hello` }</h2>
-                    <Typography className={classes.headerBody}>Here what we can find on your request</Typography>
+                    <h2 className={classes.header}>{docs.name ? `Hello ${docs.name}`: `Hello` }</h2>
+                    <Typography className={classes.headerBody}>Here what we found on your request</Typography>
                     <Box className={classes.results}>
-                        {data.map((d, index) => {
+                    {console.log(docs)}
+                        { docs.docs ? docs.docs.map((d, index) => {
                             if (index > 19) return;
                             else return (
                                 <Box key={index} mb={2}>
                                     <Result d={d} showKeywords={false} showReport={false}
                                     />
-                                </Box>)})}
+                                </Box>)}) : null}
                     </Box>
                 </Box> :
                 (<div>
