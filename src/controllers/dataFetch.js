@@ -4,8 +4,8 @@ import { CLOUD_URL, CLOUD_DEEP_URL } from '../config';
 const DEFAULT_QUERY_SIZE = 50;
 const TIMEOUT_SEC = 35;
 
-export const fetchDeepSearch = async ({ query, email, name, type }) => {
-  const { data } = await axios.post(CLOUD_DEEP_URL, { query, email, name, type });
+export const fetchDeepSearch = async ({ query, email, name,  modelSize, dataSize }) => {
+  const { data } = await axios.post(CLOUD_DEEP_URL, { query, email, name, modelSize, dataSize });
   return data;
 };
 
