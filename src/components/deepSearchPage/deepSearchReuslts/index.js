@@ -1,16 +1,13 @@
 import React,{useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {Result} from '../../quickSearchPage/results';
-import { Box, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { fetchDeepSearchResult } from '../../../controllers/dataFetch';
+import {Box, Typography} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
+import {fetchDeepSearchResult} from '../../../controllers/dataFetch';
 import Spinner from '../../helpers/LoadingSpiner';
-
-
- /**
-   * @author[Danila Kurgan](https://github.com/dkurgan);
+/**
+ * * @author[Danila Kurgan](https://github.com/dkurgan);
 */
-
 const useStyles = makeStyles(() => ({
     header: {
         textAlign: "center",
@@ -38,8 +35,13 @@ export const DeepSearchResult = () => {
     let data = [];
     useEffect(async() => {
         setLoading(true);
-        data = await fetchDeepSearchResult(id);
-        setLoading(false);
+        try {
+            data = await fetchDeepSearchResult(id);
+            setLoading(false);   
+        } catch (error) {
+            setLoading(false);
+            setIdEror(true);
+        }
         if (data.length === undefined || data.status === null) { setIdEror(true); }
         else if (data && data.status === 'in progress') {
                 setPendingMessage(true);}
