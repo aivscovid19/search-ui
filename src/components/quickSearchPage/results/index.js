@@ -124,6 +124,7 @@ export const Results = React.memo(({ count, data, docs, setDocs, setResultCount,
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
           footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
           href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
+        { switched ? null :
         <Box px={2} display="flex" flexDirection="column" zIndex="1" width="835px" className="qs-result-container" >
           <Box className={classes.searchResultsTop} width="100%">
             <Paper variant="outlined" square style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
@@ -143,8 +144,9 @@ export const Results = React.memo(({ count, data, docs, setDocs, setResultCount,
             ))}
           </Box>
         </Box>
+        }
         {switched ? <FoamTree
-          style={{ width: "48%"}}
+          style={{ width: "100%"}}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
