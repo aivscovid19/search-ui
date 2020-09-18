@@ -29,22 +29,30 @@ const useStyles = makeStyles(() => ({
 export const DeepSearchResult = () => {
     const {id} = useParams();
     const [idError, setIdEror] = useState(false);
+    const [data, setData] = useState({});
+    const [docs, setDocs] = useState([]);
     const [pendingMessage, setPendingMessage] = useState(false);
     const [loading, setLoading] = useState(false);
     const classes = useStyles();
-    let data = [];
-    useEffect(async() => {
-        setLoading(true);
+    useEffect(() => {
+      setLoading(true);
+      const fetchData = async () => {
         try {
-            data = await fetchDeepSearchResult(id);
-            setLoading(false);   
+          const response = await fetchDeepSearchResult(id);
+          setData(response.data);
+          setDocs(response.data.docs);
+          setLoading(false);
         } catch (error) {
-            setLoading(false);
-            setIdEror(true);
+          setLoading(false);
+          setIdEror(true);
         }
-        if (data.length === undefined || data.status === null) { setIdEror(true); }
-        else if (data && data.status === 'in progress') {
-                setPendingMessage(true);}
+        if (data.status === null) {
+          setIdEror(true);
+        } else if (data && data.status === 'in progress') {
+          setPendingMessage(true);
+        }
+      }
+      fetchData();
     }, []);
     return (
         <div>
@@ -53,7 +61,7 @@ export const DeepSearchResult = () => {
                     <h2 className={classes.header}>{data.name ? `Hello ${data.name}`: `Hello` }</h2>
                     <Typography className={classes.headerBody}>Here what we can find on your request</Typography>
                     <Box className={classes.results}>
-                        {data.map((d, index) => {
+                        {docs.map((d, index) => {
                             if (index > 19) return;
                             else return (
                                 <Box key={index} mb={2}>
