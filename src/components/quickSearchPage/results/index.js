@@ -7,10 +7,12 @@ import { Grid, Box, Typography } from '@material-ui/core';
 
 import FoamTree from '../foamTree';
 import KeywordsDisplay from '../../KeywordsDisplay';
+import AbstractDisplay from '../../AbstractDisplay';
 import SeacrhScore from '../../helpers/SearchScore';
 import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
 import JournalDateDisplay from '../../JournalDateDisplay';
+import { PagesBar } from '../pagination/pagesBar.js';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -44,20 +46,13 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Result = ({ d, setReport, setArticleReference }) => {
-  const MAX_ABSTRACT = 250;
-
-  const shortAbstract = (d.abstract.length >= MAX_ABSTRACT)
-    ? `${d.abstract.slice(0, MAX_ABSTRACT).trim()}...` : d.abstract;
-  const displayAbstract = d.highlight && d.highlight.abstract
-    ? ReactHtmlParser(d.highlight.abstract[0]) : shortAbstract;
-
+export const Result = ({ d, setReport, setArticleReference, showKeywords, showReport }) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" square>
       <Grid container >
         <Grid container item xs alignContent="center" className="hidden p-0">
-          <SeacrhScore score={d.score} placement={d.placement} />
+         {(d.score && d.placement) ? <SeacrhScore score={d.score} placement={d.placement} /> : null}
         </Grid>
         <Grid item xs={11}>
           <Box p={2} style={{paddingBottom: "10px", width: "100%"}} className="p-1">
@@ -75,22 +70,20 @@ const Result = ({ d, setReport, setArticleReference }) => {
               </a>
             </Box>
             <Box>
-              <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay>
+             {showKeywords ? <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay> : null}
             </Box>
 
             <Box mt={1} className="result-abstract">
-              <Typography component="p" variant="subtitle1" color="textPrimary">
-                {displayAbstract}
-              </Typography>
+              <AbstractDisplay abstract={d.abstract} highlight={d.highlight} />
               <Box style={{ display: "flex", color: "grey", fontSize: "1.3rem !important"}}>
                 <div style={{width: "50%"}}></div>
-                <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
+               {showReport ? <div style={{display:"flex", width: "50%",justifyContent: "flex-end", cursor: "pointer"}}>
                   <Typography component="p" variant="subtitle1" onClick={() => {
                     setReport(true); setArticleReference(d);
                   }}>
                     Report Article
               </Typography>
-              </div>
+              </div> : null}
               </Box>
             </Box>
           </Box>
@@ -100,7 +93,7 @@ const Result = ({ d, setReport, setArticleReference }) => {
   )
 };
 
-const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched }) =>{
+export const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber,search }) => {
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
@@ -131,26 +124,29 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
         <PopUpMessage visibility={reportArticle} onClose={closeMessage} title="You are about to report article"
           footer="By clicking on information above,it will be saved in your clipboard and you will be redirected to google forms."
           href={GOOGLE_FORMS_URL} copy={true} article={articleReference} />
+        { switched ? null :
         <Box px={2} display="flex" flexDirection="column" zIndex="1" width="835px" className="qs-result-container" >
           <Box className={classes.searchResultsTop} width="100%">
             <Paper variant="outlined" square style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px"}}>
               <Box p={1}>
                 <Typography component="p">
-                  Top {currentCount} papers
+                  Articles from {currentCount * (pageNumber - 1)} to {currentCount * pageNumber} of {data.total ? data.total : "10000"}
               </Typography>
-              </Box>
-            </Paper>
+            </Box>
+          </Paper>
+          <PagesBar pageNumber={pageNumber} fetchPage={fetchPage} search={search}/>
           </Box>
         <Box className={classes.searchResults} >
             {docs.map((d, i) => (
               <Box key={i} mb={2}>
-                <Result d={d} setReport={setReport} setArticleReference={setArticleReference} />
+                <Result d={d} setReport={setReport} setArticleReference={setArticleReference} showKeywords={true} showReport={true}/>
               </Box>
             ))}
           </Box>
         </Box>
+        }
         {switched ? <FoamTree
-          style={{ width: "48%"}}
+          style={{ width: "100%"}}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}
@@ -160,4 +156,3 @@ const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switch
     );
 }, preventRerender("docs", "data"));
 
-export default Results;
