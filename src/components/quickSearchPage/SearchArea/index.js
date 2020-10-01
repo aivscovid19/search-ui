@@ -20,7 +20,7 @@ import './index.css';
  * @param onSubmit callback to be called when new query is submitted
  * @param setSwitch callback to show foamtree
  */
-const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
+const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch, successLoad }) => {
   const originalQuery = search;
   const [query, setQuery] = useState(search);
   useEffect(() => {
@@ -63,7 +63,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
             <Box style={{width: "550px"}} className="hidden">
             {suggestion && !loading ? (<Typography component="h2">
               Showing results for: <em>{suggestion}</em>
-            </Typography>) : (!loading ? <FormControlLabel className="hidden" control={
+            </Typography>) : ((!loading && !successLoad)? <FormControlLabel className="hidden" control={
                   <Switch onChange={setSwitch}
                 inputProps={{ 'aria-label': 'primary checkbox',}}/>}
             label="FoamTree" labelPlacement="start"
@@ -73,7 +73,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
             </Box>
                 <Box style={{display:"flex", justifyContent: "flex-end", width: "250px"}}>
               <a style={{ textDecoration: "none", color: "grey", fontSize: "16px" }}
-                href={'/search-ui/#/deepsearch/' + query}>Switch to Deep Literature Search</a>
+                href={'/#/deepsearch/search/' + query}>Switch to Deep Literature Search</a>
             </Box>
           </Box>
           <Box display="flex" flexDirection="row">
@@ -83,7 +83,7 @@ const SearchArea = ({ search, suggestion, loading, onSubmit, setSwitch}) => {
               </Typography>) : null}
             </Box>
             <Box style={{ display: "flex", justifyContent: "flex-end", width: "550px" }} className="hidden">
-              {suggestion && !loading ? <FormControlLabel className="hidden" control={
+              {(suggestion && !loading && !successLoad) ? <FormControlLabel className="hidden" control={
                   <Switch onChange={setSwitch}
                 inputProps={{ 'aria-label': 'primary checkbox',}}/>}
             label="FoamTree" labelPlacement="start"

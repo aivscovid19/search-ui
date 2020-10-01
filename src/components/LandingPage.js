@@ -26,9 +26,9 @@ const Landing = () => {
   const search = () => {
     if (!searchValue) return;
     if (checkBox2)
-      history.push(encodeURI('/deepsearch/'+ searchValue))
+      history.push(encodeURI('/deepsearch/search/'+ searchValue))
     else if (checkBox1)
-      history.push(encodeURI(searchValue));
+      history.push(encodeURI(`/search/${searchValue}`));
   };
   const handleCheckBox = () => {
       setCheckBox1(!checkBox1);

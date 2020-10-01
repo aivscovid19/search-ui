@@ -146,7 +146,7 @@ export const Results = React.memo(({ count, data, docs, setDocs, setResultCount,
         </Box>
         }
         {switched ? <FoamTree
-          style={{ width: "100%"}}
+          style={{ width: "48%"}}
           groups={data}
           setDocs={setDocs}
           setResultCount={setResultCount}

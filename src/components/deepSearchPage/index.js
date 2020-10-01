@@ -11,14 +11,16 @@ const DeepSearch = () =>{
         <div className="p-1">
         <Box p={3} height="100vh" className="qs-container">
         <Box className="brand-title deep-logo">
-          <Typography component="h1" onClick={() => {window.location = '/'}} variant="h4" className="title">
+          <Typography  component="h1" onClick={() => {window.location = '/'}} variant="h4" className="title mob-wide" style={{marginLeft: "325px"}}>
             BREATHE
           </Typography>
-        </Box>
-                <TextField placeholder="search" variant="outlined" size="small" style={{ width: "100%" }} onChange={(e) => setSearch(e.target.value)} value={search} />
+                </Box>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    <TextField placeholder="search" variant="outlined" size="small" style={{ width: "1220px" }} onChange={(e) => setSearch(e.target.value)} value={search} />
+                    </div>
                 <Container style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
                             <ArrowBackIosIcon style={{color: "grey"}}/>
-                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/search-ui/#/' + params.search}>Switch to Quick Search</a>
+                            <a style={{textDecoration: "none", color: "grey", marginTop: "1.5px"}} href={'/#/search/' + params.search}>Switch to Quick Search</a>
                         </Container>
                 <Container style={{display: "flex"}} className="deep-container p-0">
                         <Container className="p-0">
