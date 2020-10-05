@@ -10,8 +10,8 @@ export default () => (
   <HashRouter>
     <Switch>
       <Route path='/deepsearch/result/:id' component={DeepSearchResult} />
-      <Route path='/deepsearch/:search' component={DeepSearchPage} />
-      <Route path='/:search' component={FoamTreeSearchPage} />
+      <Route path='/deepsearch/search/:search' component={DeepSearchPage} />
+      <Route path='/search/:search' component={FoamTreeSearchPage} />
       <Route path='/' component={LandingPage} />
     </Switch>
   </HashRouter>

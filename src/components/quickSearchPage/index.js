@@ -26,11 +26,10 @@ const FoamTreeSearchPage = () => {
   const [switchTree, setSwitch] = useState(false);
   const [suggestion, setSuggestion] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [successLoad, setSuccessLoad] = useState(false);
 
   const fetch = async (search, shouldSuggest = true, page) => {
-    if (loading) {
-      return;
-    }
+    if (loading) {return;}
     try {
       setLoading(true);
       let response;
@@ -50,9 +49,11 @@ const FoamTreeSearchPage = () => {
       setSuggestion(data.suggestion);
     } catch (e) {
       console.log(e);
+      setSuccessLoad(false)
       setError(true);
     } finally {
       setLoading(false);
+      if (!serverError) { setSuccessLoad(true);}
     }
   };
   const setFoamTree = () => {
@@ -74,7 +75,7 @@ const FoamTreeSearchPage = () => {
       <Box p={3} height="100vh" className="qs-container">
         <Box style={{display: "flex", flexDirection: "row"}} className="qs-search-area">
         <Box style={{width: "155px"}} className="brand-title">
-          <Typography component="h1" onClick={() => {window.location = '/search-ui'}} style={{fontSize: "2rem", fontWeight: "380"}} className="title">
+          <Typography component="h1" onClick={() => {window.location = '/'}} style={{fontSize: "2rem", fontWeight: "380"}} className="title">
             BREATHE
           </Typography>
         </Box>
@@ -83,6 +84,7 @@ const FoamTreeSearchPage = () => {
           search={querySearch ? querySearch : params.search}
           suggestion={suggestion}
           loading={loading}
+          successLoad={successLoad}  
           setSwitch={setFoamTree}/>
           </Box>
         {loading ?
