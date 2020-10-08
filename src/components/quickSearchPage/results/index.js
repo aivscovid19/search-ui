@@ -13,6 +13,7 @@ import { PopUpMessage } from '../../helpers/PopUpMessage';
 import {preventRerender} from '../../helpers/preventRerender';
 import JournalDateDisplay from '../../JournalDateDisplay';
 import { PagesBar } from '../pagination/pagesBar.js';
+import AuthorDisplay from '../../AuthorDisplay';
 
 const useStyles = makeStyles(() => ({
   divider: {
@@ -46,7 +47,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const Result = ({ d, setReport, setArticleReference, showKeywords, showReport }) => {
+export const Result = ({ d, setReport, setArticleReference, showAuthors, showKeywords, showReport }) => {
   const classes = useStyles();
   return (
     <Paper variant="outlined" square>
@@ -71,7 +72,13 @@ export const Result = ({ d, setReport, setArticleReference, showKeywords, showRe
             </Box>
             <Box>
              {showKeywords ? <KeywordsDisplay keywords={d.keywords}></KeywordsDisplay> : null}
+             
             </Box>
+            {showAuthors && d.authors && (
+            <Box>
+              <AuthorDisplay authors={d.authors}/>
+            </Box>
+            )}
 
             <Box mt={1} className="result-abstract">
               <AbstractDisplay abstract={d.abstract} highlight={d.highlight} />
@@ -93,7 +100,7 @@ export const Result = ({ d, setReport, setArticleReference, showKeywords, showRe
   )
 };
 
-export const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber,search }) => {
+export const Results = React.memo(({ count, data, docs, setDocs, setResultCount, switched, fetchPage, pageNumber, search }) => {
   const GOOGLE_FORMS_URL =
     "https://docs.google.com/forms/d/e/1FAIpQLScwHTMbE4oVDgyjPNNAA4D6YG0Y2TEMebZz2OvMq84F5Juezg/viewform?embedded=true";
   const [currentCount, totalCount] = count;
