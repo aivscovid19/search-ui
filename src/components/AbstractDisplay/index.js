@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import ReactHtmlParser from 'react-html-parser';
-import ReactCSSTransitionGroup from 'react-transition-group';
 
 import { Typography, Button, withStyles } from '@material-ui/core';
-
+import ParseToolTip from '../helpers/parseToolTip';
 import './styles.css';
 
 const StyledButton = withStyles({
@@ -23,14 +22,25 @@ function FirstChild(props) {
 
 export const AbstractDisplay = ({ abstract, highlight }) => {
     const [isFullTextToggled, setFullTextToggled] = useState(false);
-    
+    const [loading, setLoading] = useState(false);
+    const [desciprion, setDescription] = useState(null);
+    const stateCallBack = (stateType, value) => {
+        switch (stateType){
+            case 'loading': setLoading(value)
+                break;
+            case 'description': setDescription(value)
+                break;
+            default:
+                return;
+        }
+    }
+    const stateHandler = ((node) => ParseToolTip({node, loading, desciprion, stateCallBack}));
     const previewAbstract = highlight && highlight.abstract
      ? `...${highlight.abstract[0]}...` : abstract;
 
     function handleToggleText(){
         setFullTextToggled(isFullTextToggled === false ? true : false)
     }
-
     return (
         <StyledButton>
             <Typography
@@ -45,8 +55,8 @@ export const AbstractDisplay = ({ abstract, highlight }) => {
              color="textPrimary"
              >
                 { isFullTextToggled
-                    ? abstract
-                    : ReactHtmlParser(previewAbstract)
+                    ? ReactHtmlParser(abstract,{ transform: stateHandler})
+                    : ReactHtmlParser(previewAbstract, { transform: stateHandler })
                 }
             </Typography>
         </StyledButton>
