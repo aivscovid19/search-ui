@@ -20,17 +20,17 @@ const ToolTipWrapper = ({ title, text, onMouse }) => {
  * @param {callBackFunction} stateCallBack update state in parent
  */
 const ParseToolTip = ({ node, loading, desciprion, stateCallBack }) => {
-    const fetchTip = (query = DUMMY_TIP) => {
+    const fetchTip = (query) => {
         stateCallBack("loading", true);
-        // Fetch logic 
+        const res = DUMMY_TIP /** Fetch logic here */
         stateCallBack("loading", false);
-        stateCallBack("description", query);
+        stateCallBack("description", res);
     }
     if (node.type === 'tag' && node.name === 'b') {
         let highlightedText = node.children[0].data;
         return (
             <>
-                {(!loading && !desciprion) ? <ToolTipWrapper onMouse={() => fetchTip()}
+                {(!loading && !desciprion) ? <ToolTipWrapper onMouse={() => fetchTip(highlightedText)}
                     title="loading" text={highlightedText} /> :
                     <ToolTipWrapper title={desciprion} text={highlightedText}
                     />}
